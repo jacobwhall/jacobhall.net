@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>Discrete RV Distributions</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#FFFFFF"/>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:500%7CWork+Sans:400" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="articlestyle.css">
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  			messageStyle: "none",
+				CommonHTML: { linebreaks: { automatic: true } },
+  			"HTML-CSS": { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+			});
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async>
+		</script>
+</head>
+<body>
+	<a href="/">
+		<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+			<div class="flipper">
+				<div class="front">
+					<img class="profilepic" id="backprofilepic" src="images/toothbrush_profile_small.jpg" />
+				</div>
+				<div class="back">
+					<svg id="backarrow" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z"/></svg>
+				</div>
+			</div>
+		</div>
+	</a>
+	<article>
+<h1>Discrete RV Distribution Functions</h1>
+September 19-21, 2018
+<p><i>"Maybe if I force myself to write an article about this math concept, I'll start to understand it"</i></p>
+<p>This is the first of a series of articles I plan to write, for the sole purpose of reviewing the material in
+  my <i>Intro to Probability and Statistics</i> class. Also, I learned how to generate graphs using Mathematica,
+  and think they are very pretty, so there may be more graphs than necessary.</p>
+<p>Discrete RVs (random variables) are RVs that can have any number of discrete values without containing any range of numbers.
+  There are a number of different distributions that can be used to describe the probabilities of RVs taking specific values,
+  some of which I will describe here. First, let's talk a little bit about the different types of functions that are used to
+  describe these distributions, which I will define for each function later on:</p>
+<h2>Types of Functions</h2>
+
+<h3>Expected Value</h3>
+  <p>The expected value is simply the average outcome of a random variable. When I say average, I mean the <i>weighted average</i>,
+    meaning that values are weighted into the average proportional to the probability of their occurance. This can be called the
+    expected value, or expectation of \(X\), given the RV \(X\). It is also sometimes referred to using \(\mu\). Generally speaking, \(E(X)\)
+    is calculated for a set of given outcomes by the sum of every outcome, each first multiplied by its probability of occurance.
+    This is described by the following equation:
+    $$E(X) = \mu_x = \sum_xxp(x)$$</p>
+
+  <p>The real difference between using \(\mu\) and \(E(X)\), is that \(E(X)\) is a more generalized function that can have its input
+    be a function of the random variable. On the other hand, \(\mu\) only ever refers to the mean outcome of a RV. For the rest of
+    this write-up, I will only use \(\mu\) when I just want to refer to the mean, rather than a generalized function for expected
+    values.</p>
+
+<h3>Variance</h3>
+  <p>The variance is a simple way of quantifying how closely the probabilities fall to the mean. This is useful because a data set
+  can look much different depending on how spread out (evenly distributed) the different possibilities are. The variance is
+  calculated by simply finding the expected value of the deviation from the mean, squared:
+  $$V(X) = E(X^2)$$</p>
+
+<h3>PMF (Probability Mass Function)</h3>
+  <p>A PMF is just a function that describes what the probability is that an RV takes any given value. This is probably this
+  simplest way to describe the behavior of a discrete random variable.</p>
+
+<h3>CDF (Cumulative Distribution Functions)</h3>
+  <p>The CDF describes the total probability of any outcomes occuring up to a value. This is represented by the following simple
+    equation:
+    $$F(x) = P(X\leq x) = \sum_{y:y\leq x}p(y)$$</p>
+  <p>That summation looks complex, but it really just means "the sum of the probabilities of every number y such that y is less than x."
+
+<h3>MGF (Moment Generating Function)</h3>
+  <p>Just as the variance is a type of expected value, a moment-generating function is is one of a catergory of expected values,
+    defined by the following equation:
+    $$M_x(t) = E(e^{tx}) = \sum_xe^{tx}p(x)$$</p>
+  <p>A mgf exists if \(t \in (-t_0,t_0)\) where \(t_0 > 0\).</p>
+
+<h2>Types of Distributions</h2>
+  <h3>Bernoulli Distribution</h3>
+    <p>Bernoulli distributions are the simplest and easiest to understand. They can take either of two values: 0 or 1. The only
+      definition necessary is the probability of each of these outcomes, which of course would add up to 1. It's important to
+      understand the concept of the Bernoulli distribution not because of any overwhelming usefulness, but because the another
+      distributions build upon it conceptually.</p>
+    <p>The expected value of a Bernoulli distribution is quite simple, just the probability of an outcome of 1 denoted by \(p\):
+      $$E(X) = p$$</p>
+    <p>The variance is almost as simple, just the probability of a success multiplied by the probability of a failure:
+      $$V(X) = p(1-p)$$</p>
+
+  <h3>Binomial Distribution</h3>
+    <p>A binomial distribution could be seen as an extension of the Bernoulli distribution, because it represents a set of n
+      Bernoulli trials: independent events that could have the outcomes 0 or 1. It is important to remember that even though
+      these trials happen independently, <i>the probability of each outcome is still the same for every trial</i>.</p>
+    <p>The expected value of a binomial distribution is also quite simple, just the probability of a success multiplied by the
+      number of trials \(n\):
+      $$E(X) = np$$</p>
+    <p>The variance of a binomial is also somewhat straightforward, just the probability of a success times the probability of
+      a failure (a Bernoulli variance), once again multiplied by the number of trials performed:
+      $$V(X) = np(1-p)$$</p>
+    <p>The pdf:
+      $$P(X=x) = \binom{n}{x}p^x(1-p)^{n-x}, x = 0,1,2,\dots,n$$</p>
+
+  <h3>Geometric Distribution</h3>
+    <p>According to Wikipedia "geometric distribution" has one of two very similar definitions, but for my purposes I'm going
+      to define them as the probability distribution representing the number of Bernoulli trials that take place before a trial
+      yields a "success." That number could be infinitely large. Given probability of each trial's success \(p\), the expected
+      value is very simple:
+      $$E(X) = \frac{1}{p}$$</p>
+      <p>How cool is that? The mean outcome of a geometric distribution has a simple inverse relationship with the probability
+        of a success. The variance:
+      $$V(X) = \frac{1-p}{p^2}$$</p>
+      <p>The pmf of a geometric distribution for \(k\) trials is the following:
+      $$p(x;p) = p(1-p)^{x-1}$$</p>
+    <p>The cdf is:
+      $$f(x) = 1-(1-p)^k$$</p>
+
+
+  <h3>Hypergeometric Distribution</h3>
+    <p>A hypergeometric distribution applies when you have a population of indiduals/elements. Each element is a success or
+      failure, with \(M\) successes in the population. If a random sample of \(n\) elements are randomly chosen, the
+      hypergeometric distribution represents how many in that sample are successes. The expected value and variance can be
+      calculated like so:
+      $$E(X) = n\frac{M}{N}\\
+      V(X) = \frac{N-n}{N-1}n\frac{M}{N}(1-\frac{M}{N})$$</p>
+    <p>The pmf is:
+      $$p(X=x) = \frac{\binom{M}{x}\binom{N-M}{n-x}}{\binom{N}{n}}$$</p>
+
+  <h3>Poisson Distribution</h3>
+    <p>The idea behind a poisson distribution is unique among those for discrete RVs, because it represents the probability of
+      an event happening <i>over an interval</i> of time or space. This is an incredibly powerful idea because it allows you
+      to calculate the probability of that event happening over any interval. It's important to remember that the events are
+      still independent, and the probability of one happening over an interval must remain constant.<p>
+    <p>The number of times an event is expected to happen over an interval is denoted by \(\lambda\). Note that this by definition means
+      your \(\lambda\) is your mean and your variance. How convenient!
+      $$E(X) = \lambda\\V(X) = \lambda$$</p>
+    <p>The pmf of a poisson distribution is as follows:
+      $$p(x;\lambda) = \frac{\lambda^xe^{-\lambda}}{x!}$$</p>
+    <p>For example, here is a graph of Poisson probabilities given \(\lambda = 5\):</p>
+      <div class="graphboxwrapper">
+      <div class="graphbox">
+        Poisson Probabilities Given \(\lambda = 5\)<br>
+        <img class="graph" src="function-plots/poisson-probabilities.svg" alt="Graph of Poisson Probabilities" />
+      </div>
+    </div>
+    <!-- <p>The cdf of a poisson distribution:
+      $$e^{-\lambda}\sum_{i=0}^{\lfloor k\rfloor}\frac{\lambda^i}{i!}$$</p>-->
+
+  <h2>Basic Functions in R</h2>
+    <p>A number of the functions I have outlined here have functions in R that make it easy to calculate them or check your work:</p>
+    <div class="code"><p># Compute the probability of a binomial distribution:<br>
+dbinom(x, size, prob)</p>
+
+<p># Compute the probability of a geometric distribution:<br>
+dgeom(x, prob)</p>
+
+<p># Compute the probability of a hypergeometric distribution:<br>
+dhyper(x, m, n, k)</p>
+
+<p># Compute the probability of a Poisson distribution:<br>
+dpois(x, lambda)</p></div>
+
+<!--
+    <div class="graphboxwrapper">
+    <div class="graphbox">
+      Normal Distributions<br>
+      <img class="graph" src="function-plots/normal-distributions.svg"></img>
+    </div>
+  </div> -->
+  </article>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+  <title>Blurred Text Experiment</title>
+  <link href="style.css" rel="stylesheet">
+  <script src="verge.min.js"></script>
+  <?php 
+// Redirect if agreement wasn't signed
+//if(!(isset($_POST['agreementcheckbox']) && $_POST['agreementcheckbox'] == "agree"))
+//{
+header("Location: /"); /* Redirect browser */
+exit();
+//}
+
+$session = (string)uniqid("", true); // in createimage.php, I had left a note to make sure this has a max length. not sure what that means.
+$session_insertion_query = "INSERT INTO font_exp.results (session_id) VALUES ('". $session ."')";
+
+// Connect to mySQL
+    $link = mysqli_connect('localhost:3306', 'php_fella', 'hoooh@@@');
+    if ($link === false) {
+        die('Could not connect: ' . mysqli_connect_error());
+    }
+if(!($query_result = mysqli_query($link, $session_insertion_query))) {
+        die("Error establishing session: " . mysqli_error($link));
+}
+mysqli_close($link);
+?>
+</head>
+<body>
+  <div class="centered">
+    <h1>Blurred Text Experiment</h1><strong>Instructions:</strong>
+    <br>Please answer the following questions. Your answers will be kept anonymous.
+	<?php if(isset($_GET['error'])) echo('<p class="error">'.$_GET['error'].'</p>'); ?>
+    <form method="post" action="imagetest">
+	<input type="hidden" name="session_id" value="<?php echo $session; ?>">
+	<input type="hidden" name="window_width" id="width" value="0">
+	<input type="hidden" name="window_height" id="height" value="0">
+      <div class="toleft" style="width:50%">
+        <!-- This is where the form will be for all of the participant's info-->
+        <p>
+          Age?
+            <input type="number" min="5" max="115" name="age" value="" required>
+        </p>
+        <p>
+          Gender?
+	<span class="nowrap">
+              <input type="radio" name="gender" value="0" required>Male
+              <input type="radio" name="gender" value="1">Female
+              <input type="radio" name="gender" value="2">Other
+        </span>
+	</p>
+        <p>
+	  Please choose the category that best describes your ability to read English. Full definitions can be found <a href="definitions" target="_blank">here</a> (see "Reading Definitions" column).
+            <select name="englishlevel" required>
+		<option value="" disabled selected>Select Level</option>
+              <option value="5">5 - Native or Bilingual Proficiency</option>
+              <option value="4">4 - Full Professional Proficiency</option>
+              <option value="3">3 - Minimum Professional Proficiency</option>
+              <option value="2">2 - Limited Working Proficiency</option>
+              <option value="1">1 - Elementary Proficiency</option>
+              <option value="0">0 - No Practical Proficiency</option>
+            </select><br>
+        </p>
+        <p>
+	  Do you wear glasses or contact lenses?
+	<span class="nowrap">
+            <input type="radio" name="glasses" value="1" required>Yes
+            <input type="radio" name="glasses" value="0">No
+	</span>
+	</p>
+	<p>
+	How would you rate your eyesight (with glasses or contact lenses, if you usually wear them)?
+	<span class="nowrap">
+	<select name="eyesightlevel" required>
+	 <option value="" disabled selected>Select Level</option>
+              <option value="5">Excellent</option>
+              <option value="4">Good</option>
+              <option value="3">Fair</option>
+              <option value="2">Poor</option>
+              <option value="1">Very Poor</option>
+              <option value="0">Completely Blind</option>
+	</select>
+	</span>
+</p>
+	<p>
+	Do you drive, at least every once in a while?
+	<span class="nowrap">
+            <input type="radio" name="drives" value="1" required>Yes
+            <input type="radio" name="drives" value="0">No
+	</span>
+	</p>
+	<p>
+        Do you have <strong>ANY</strong> difficulty reading road signs due to inadequate eyesight, in the <strong>daytime</strong>?
+	<span class="nowrap">
+            <input type="radio" name="daytime" value="1" required>Yes
+            <input type="radio" name="daytime" value="0">No
+        </span>
+	</p>
+	<p>
+        Do you have <strong>ANY</strong> difficulty reading road signs due to inadequate eyesight, in the <strong>nighttime</strong>?
+	<span class="nowrap">
+            <input type="radio" name="nighttime" value="1" required>Yes
+            <input type="radio" name="nighttime" value="0">No
+        </span>
+	</p>
+       </div> 
+      <p><input type="submit" value="Continue"></p>
+    </form>
+  </div>
+  <script src="window_dimensions.js"></script>
+</body>
+</html>

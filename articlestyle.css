@@ -1,0 +1,119 @@
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-display: block;
+  font-size: 100%;
+}
+@media (max-aspect-ratio: 1/1) {
+  body {
+    /* if you change this, remember to adjust value for #preinner too! */
+    font-size: 2.5vh;
+  }
+}
+body, h1, h2, h3, h4, h5, h6 {
+  font-size-adjust: 0.5;
+}
+#backprofilepic {
+  border-radius: 50%;
+  height: 4em;
+}
+#backarrow {
+  width: 2.75em;
+  height: 2.75em;
+  padding-top: 1.25em;
+  padding-left: 1.25em;
+  border-radius: 50%;
+}
+/* entire container, keeps perspective */
+.flip-container {
+  position: absolute;
+  left: calc(7.5vw - 2em);
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+	transform: rotateY(180deg);
+}
+.flip-container, .front, .back {
+  border-radius: 50%;
+	width: 4em;
+	height: 4em;
+}
+/* flip speed goes here */
+.flipper {
+	transition: 0.4s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+/* hide back of pane during swap */
+.front, .back {
+  text-align: center;
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+  background-color: lightgrey;
+}
+article {
+	text-align: left;
+	padding-left: 15vw;
+	width: 70vw;
+  padding-bottom: 1em;
+}
+article h1 {
+  margin-top: 1em;
+}
+.centeredtext {
+	text-align: center;
+}
+.code {
+  font-family: courier;
+}
+.graph {
+  object-fit: contain;
+  width: 100%;
+  max-width: 30em;
+}
+.graphboxwrapper {
+  text-align: center;
+}
+.graphbox {
+  display:inline-block;
+  padding: .75em;
+  border: 1px solid lightgrey;
+}
+.slider {
+  object-fit: contain;
+  width: 100%;
+  max-width: 34.5em;
+
+}
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: .5em;
+}
+#scifairimg {
+  object-fit: scale-down;
+  width: 100%;
+  max-width: 40em;
+}

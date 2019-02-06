@@ -1,0 +1,27 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+}
+h1 {
+	font-family: 'Montserrat', sans-serif;
+	text-align: left;
+}
+table {
+	margin: 0 auto;
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+table, th, td {
+	border: 1px solid black;
+}
+th, td {
+	padding: .5em;
+}
+img {
+	height:70vh;
+	max-width: 100vw;
+}
+#openseadragon1 {
+width: 100%;
+height: auto;
+}

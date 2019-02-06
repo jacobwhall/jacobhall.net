@@ -1,0 +1,10 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+h1 {
+	font-family: 'Montserrat', sans-serif;
+}
+#openseadragon {
+	height: 600px;
+	width: 100%;
+}

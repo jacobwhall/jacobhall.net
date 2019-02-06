@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>The Named Houses of Harrisonburg</title>
+		<link rel="stylesheet" type="text/css" href="nhohstyle.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+
+  </head>
+<body>
+  <h1>The Named Houses of Harrisonburg</h1>
+  <p>click on a pin to see a house's info<br><a href="mailto:totallyuneekemail@gmail.com?subject=submit house to named houses of harrisonburg&body=In this email, please include the house's name and address.">add a house</a> &bull; <a href="/named-houses-harrisonburg.html">creating this site</a></p>
+	<div id="intbox">
+		<div id="infobox"><div id="infocontent">click on a pin to view a house's info</div></div>
+		<div id="mapid"></div>
+  	<script>
+  	var housesmap = L.map('mapid').setView([38.446, -78.871], 14);
+
+  	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+  		maxZoom: 18,
+  		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+  			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+  			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  		id: 'mapbox.streets'
+  	}).addTo(housesmap);
+
+		// This is the array of house information
+		// [0]: Name of house
+		// [1]: Lat of house
+		// [2]: Lng of house
+		// [3]: Address of house
+		// [4]: Description (optional)
+		// [5]: Image link (optional, not yet implemented)
+    var houses = [
+      ["Crayola",38.446436,-78.875052,"275 S High St", "Crayola is known as a popular music venue in Harrisonburg."],
+			["Narnia",38.447219,-78.866062,"259 Newman Ave", "Rumor has it the closets have doorways that lead to other rooms"],
+			["The Treasure Chest",38.444539,-78.868176,"455 S Mason St"],
+			["Tree Haus",38.441460,-78.870359,"670 S Mason St"],
+			["The Trap House",38.441689,-78.870133,"650 S Mason St"],
+			["Crayonbox",38.442134,-78.869600,"570 S Mason St"],
+			["Masonette",38.442559,-78.869907,"567 S Mason St"],
+			["The Full House",38.443190,-78.868536,"504 S Mason St","Sign says \"est. 1905\""],
+			["uptown",38.444431,-78.868317,"465 S Mason St"],
+			["Funk House",38.444242,-78.867828,"478 S Mason St"],
+			["Toolbox",38.445041,-78.868316,"135 Campbell St","Secondary sign says \"A Touch of Class.\""],
+			["Camelot",38.443460,-78.872563,"611 S Main St"],
+			["The 625 House",38.443254,-78.872665,"625 S Main St"],
+			["The White House",38.443085,-78.872760,"635 S Main St"],
+			["The Lighthouse",38.442925,-78.873023,"657 S Main St"],
+			["Dude Ranch",38.444910,-78.875941,"382 Old S High St"],
+			["Rainbow Road",38.445757,-78.875631,"309 Old S High St","Stylized as Rainbow<sup>RD</sup>"],
+			["Dream Land",38.445604,-78.875450,"308 Old S High St"],
+			["LONLON",38.445697,-78.875351,"304 Old S High St"],
+			["The Hive",38.445936,-78.875504,"301 Old S High St"],
+			["The Sandlot",38.446274,-78.875212,"285 Old S High St"],
+			["The Jolt",38.443321,-78.878807,"416 S High St"],
+			["The Birdhouse",38.442557, -78.880340,"574 S High St"],
+			["The Sandcastle",38.442028,-78.881390,"642 S High St"],
+			["The Harbor",38.437424,-78.878881,"1125 S Main St"],
+			["Waffle House",38.437585,-78.878729,"1105 S Main St"],
+			["The Firehouse",38.437734,-78.878533,"1101 Lee Hwy"],
+			["Honeycomb",38.437908,-78.878393,"1097 S Main St"],
+			["Seaside",38.451906, -78.872446,"165 N High St"]
+    ];
+
+		// Create variable that will contain info on the most recently-clicked house
+		var info;
+		// Create variable that will contain the form to edit a house's info
+		var editinfo;
+
+		// Create marker on map for each house
+    for (var i = 0; i < houses.length; i++) {
+      	marker = new L.marker([houses[i][1],houses[i][2]])
+      			.bindPopup(houses[i][0])
+            .addTo(housesmap);
+      }
+
+		// When someone clicks on a marker, run this function to show info about that house in the infobox
+		housesmap.on('popupopen', function(e) {
+
+			// Set Marker to represent the latlng property of the source marker object
+	  	var marker = e.popup._source._popup._latlng;
+
+			// Find the member of aray houses that matched the clicked-on marker
+			var mdata = houses.find(function(element) {
+
+  			return (element[1] == marker.lat && element[2] == marker.lng);
+			});
+
+			// Create variable info for what the inner HTML of the infobox should be
+			info = "<h2>" + mdata[0] + "</h2><p>" + mdata[3] + "</p>"
+			if (mdata[4]) info += "<p>" + mdata[4] + "</p>";
+			info += "<a onclick='edithouse()' href='javascript:void(0);'>edit</a>";
+
+			// Push info to infobox
+			document.getElementById("infocontent").innerHTML = info;
+
+			// Make link trigger edithouse()
+			//document.getElementById("linktoedit").onclick = edithouse();
+
+			// Create inner HTML for editing
+			editinfo = "<form method='post' action='sendedits.php'>Name: <input type='text' name='name' value='"+ mdata[0] +"'></input><br>Address: <input type='text' name='address' value='"+ mdata[3] +"'></input><br>Description (or comment): <input type='text' name='description' value='";
+			if (mdata[4]) editinfo += mdata[4];
+			editinfo += "'></input><br><br><button>send in changes</button>";
+			editinfo += "</input>"
+			editinfo += "</form>";
+		});
+
+		// Create function to run if someone clicks on "edit this house"
+		function edithouse() {
+			// Set content of infobox to be the editing form
+			document.getElementById("infocontent").innerHTML = editinfo;
+		}
+
+		//housesmap.openPopup(38.446436,-78.875052);
+
+  </script>
+</div>
+  <footer>
+		<p>
+      Made with <span id="heart">&hearts;</span> by <a href="https://jacobhall.net">Jacob</a>
+		</p>
+  </footer>
+</body>
+</html>

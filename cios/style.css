@@ -1,0 +1,47 @@
+@font-face {
+	font-family: 'Geneva';
+	src: url('geneva.ttf')  format('truetype'), /* Safari, Android, iOS */
+	url('geneva.woff2') format('woff2'),
+        url('geneva.woff') format('woff');
+}
+body {
+	background-color: #FFFAF0;
+	font-family: 'Geneva', 'Times New Roman', sans-serif;
+	font-size: 16px;
+	font-size: calc(.35vw + .35vh + 2vmin);
+}
+a {
+	color: inherit;
+}
+#centerbox {
+	display:block;
+	padding-top: 3vh;
+	padding-bottom: 10vh;
+	width:100vw;
+	/*text-align: center;*/
+}
+#poembox {
+	width: max-content;
+	display: block;
+	text-align: left;
+	white-space: nowrap;
+	margin-left: auto;
+	margin-right: auto;
+}
+#title {
+	text-align:center;
+}
+#centered {
+	text-align: center;
+}
+#footbox {
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+}
+footer {
+        position: fixed;
+        bottom: 5vw;
+        right: 5vw;
+}
+

@@ -1,0 +1,33 @@
+body {
+	background-color: #FFFAF0;
+	font-family: 'Sawarabi Gothic', sans-serif;
+}
+a {
+	color: inherit;
+}
+#centerbox {
+	display:block;
+	padding-top: 3vh;
+	padding-bottom: 3vh;
+	width:100%;
+	/*text-align: center;*/
+}
+#poembox {
+	width: max-content;
+	display: block;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+.fading {
+	background-color: black;
+	-webkit-transition: background-color 2000ms ease;
+	-ms-transition: background-color 2000ms ease;
+	transition: background-color 2000ms ease;
+}
+.whitetext {
+	color: white;
+	-webkit-transition: color 2000ms ease;
+	-ms-transition: color 2000ms ease;
+	transition: color 2000ms ease;
+}

@@ -1,0 +1,53 @@
+body {
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+  font-display: block;
+  font-size: 100%;
+}
+#intbox {
+  display:flex;
+  justify-content: center;
+  width: 100%;
+}
+#infobox {
+  width: 25vw;
+}
+#infocontent {
+  margin-right: 5%;
+}
+#mapid {
+  height: 30vw;
+  width: 45vw;
+}
+#heart {
+	color: red;
+}
+@media (max-aspect-ratio: 1/1) {
+  body {
+    /* if you change this, remember to adjust value for #preinner too! */
+    font-size: 2vh;
+  }
+  #infocontent {
+    margin-right: 0;
+  }
+  #infobox {
+    width: auto;
+  }
+  #intbox {
+    flex-direction: column-reverse;
+  }
+  #mapid {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 3vw;
+    width: 90%;
+    height:100vw;
+  }
+}
+body, h1, h2, h3, h4, h5, h6 {
+  font-size-adjust: 0.5;
+}
+ul {
+  list-style-position: inside;
+  padding-left: 0.5em;
+}

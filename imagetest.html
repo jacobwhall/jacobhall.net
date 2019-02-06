@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<head>
+    <?php
+    // Connect to mySQL
+    $link = mysqli_connect('localhost:3306', 'php_fella', 'hoooh@@@');
+    if ($link === false) {
+        die('Could not connect: ' . mysqli_connect_error());
+    }
+
+// Check for POST values
+    if (isset($_POST['session_id']) &&
+	isset($_POST['age']) &&
+	isset($_POST['gender']) &&
+	isset($_POST['englishlevel']) &&
+	isset($_POST['glasses']) &&
+	isset($_POST['eyesightlevel']) &&
+	isset($_POST['drives']) &&
+	isset($_POST['daytime']) &&
+	isset($_POST['nighttime'])
+	) {
+	
+	//check all inputs to make sure they fit requirments. Otherwise, send user back to questionnaire.
+	$error = "";
+
+	if(is_numeric($_POST['age'])) {
+		if($_POST['age'] < 5 || $_POST['age'] > 115) $error = "Age value must be between 5 and 115, inclusive.";
+	} else {
+		$error ="Age must be a number.";
+	}
+
+	if(!is_numeric($_POST['gender'])) $error = "Please indicate which gender you identify as.";
+	
+	if(is_numeric($_POST['englishlevel'])) {                                                                                              
+                if($_POST['englishlevel'] < 0 || $_POST['englishlevel'] > 5) $error = "Please select an English reading level."; 
+        } else { 
+                $error ="Please select an English reading level.";
+        }
+
+	if(!is_numeric($_POST['glasses'])) $error = "Please complete every question.";
+	if(!is_numeric($_POST['daytime'])) $error = "Please complete every question.";
+	if(!is_numeric($_POST['nighttime'])) $error = "Please complete every question.";
+
+	if(is_numeric($_POST['eyesightlevel'])) {                       
+                if($_POST['eyesightlevel'] < 0 || $_POST['eyesightlevel'] > 5) $error = "Please select an eyesight level.";          
+        } else {
+                $error ="Please select an eyesight level.";                                                                                                                              
+        }
+
+	$session_id = mysqli_real_escape_string($link, $_POST['session_id']);
+
+	// Does that session ID even fucking exist???
+	$session_check_query = "SELECT * FROM font_exp.results WHERE session_id='".$session_id."'";
+	if ($session_check_result = mysqli_query($link, $session_check_query)) {
+		if(mysqli_num_rows($session_check_result) != 1) $error = "Session ID not valid. You may need to restart the survey.";
+	} else {
+		$error = "An error has occured establishing your session.";
+	}
+
+	if(!$error == "") {
+		header("Location: /begin?error=" . rawurlencode($error)); // Redirect browser
+        	exit();
+	}
+
+	if(isset($_POST['window_width'])) {
+		if(is_int((int)$_POST['window_width'])) {
+			$window_width = mysqli_real_escape_string($link, $_POST['window_width']);
+		}
+	}
+	if(isset($_POST['window_height'])) {
+		if(is_int((int)$_POST['window_height'])) {
+			$window_height = mysqli_real_escape_string($link, $_POST['window_height']);
+		}
+	}
+	if(!isset($window_width)) $window_width = 0;
+	if(!isset($window_height)) $window_height = 0;
+	
+	$age = mysqli_real_escape_string($link, $_POST['age']);
+	$gender = mysqli_real_escape_string($link, $_POST['gender']);
+	$englishlevel = mysqli_real_escape_string($link, $_POST['englishlevel']);
+	$glasses = mysqli_real_escape_string($link, $_POST['glasses']);
+	$eyesightlevel = mysqli_real_escape_string($link, $_POST['eyesightlevel']);
+	$drives = mysqli_real_escape_string($link, $_POST['drives']);
+	$daytime = mysqli_real_escape_string($link, $_POST['daytime']);
+	$nighttime = mysqli_real_escape_string($link, $_POST['nighttime']);
+
+	//$insertion_query = "INSERT INTO font_exp.results (session_id, age, gender, englishlevel, glasses, eyesightlevel, drives, daytime, nighttime) VALUES ('".$session_id."', $age, $gender, $englishlevel, $glasses, $eyesightlevel, $drives, $daytime, $nighttime)";
+	$insertion_query = "UPDATE font_exp.results SET window_width=". $window_width .", window_height=". $window_height .", age=". $age .", gender=". $gender .", englishlevel=". $englishlevel .", glasses=". $glasses .", eyesightlevel=". $eyesightlevel .", drives=". $drives .", daytime=". $daytime .", nighttime=". $nighttime ." WHERE session_id='". $session_id  ."'";
+	//echo("NEW INSERTION QUERY: ".$insertion_query);
+	
+	//Let the image selection function know that it's the first image!
+	$image_num = 1;
+
+
+        // If we are handling input from a previous image test
+    } else if(isset($_POST['wordinput']) &&
+	isset($_POST['image_id']) &&
+	isset($_POST['session_id'])) {
+	
+	//SANITIZE THE INPUT!!!!	
+	$session_id = mysqli_real_escape_string($link, $_POST['session_id']);
+	$input_text = mysqli_real_escape_string($link, $_POST['wordinput']);
+	$input_image_id = mysqli_real_escape_string($link, $_POST['image_id']);
+
+	// Does that session ID even fucking exist???
+	$session_check_query = "SELECT * FROM font_exp.results WHERE session_id='".$session_id."'";
+	if ($session_check_result = mysqli_query($link, $session_check_query)) {
+		if(mysqli_num_rows($session_check_result) != 1) $error = "Session ID not valid. You may need to restart the survey.";
+	} else {
+		die("An error occured when checking the validity of your session id. Please try again later.");
+	}
+	
+	// This is the function that figures out which image we are on.
+	$input_query = "SELECT image1_input, image2_input, image3_input, image4_input, image5_input FROM font_exp.results WHERE session_id='".$session_id."'";
+	if ($inputs = mysqli_query($link, $input_query)) {
+            	$input_data = mysqli_fetch_array($inputs, MYSQLI_NUM);
+		for($i = 0; $i < 5; $i++) {
+			if(!$input_data[$i]) {
+			//echo("stopping at ".$i+1);
+			break;
+			}
+		}
+		$image_num = $i+2;
+	} else {
+        	// Some sort of sql error. Should self-report.
+        	die('ERROR, probably a problem with the sql query to retrieve previous inputs: ' . mysqli_error($link));
+    	}	
+	
+	// Does the image id you sent match what's in the database, or did you fuck with it you silly goose?
+	$image_id_check_query = "SELECT * FROM font_exp.results WHERE session_id='". $session_id ."' AND image". ($image_num - 1) ."_id='". $input_image_id ."'";
+	if ($image_id_check_result = mysqli_query($link, $image_id_check_query)) {
+		if(mysqli_num_rows($image_id_check_result) != 1) {
+			$image_num -= 1;
+			$thrown_error = 1;
+		} else if($input_text == "" || strlen($input_text) > 100) {
+			$image_num -= 1;
+			$thrown_error = "Please submit some amount of text, 100 characters in length or less.";
+		}
+	} else {
+		die("An error occured when checking the validity of the image id. Please try again later.");
+	}
+
+	if(!isset($thrown_error))
+        $insertion_query = "UPDATE font_exp.results set image". ($image_num - 1) ."_input='".$input_text."' where session_id='".$session_id."'";
+
+
+        // If this shit isn't in order, redirect user to homepage
+    } else {
+	header("Location: /"); // Redirect browser
+        exit();
+    }
+
+// Write POST information to database
+if(isset($insertion_query)) {
+    if (!mysqli_query($link, $insertion_query)) {
+        die('ERROR, with sql insertion query: ' . mysqli_error($link));
+    }
+}
+if($image_num > 5) {
+	$time_query = "UPDATE font_exp.results set final_time=now() where session_id='".$session_id."'";
+	mysqli_query($link, $time_query);
+	header("Location: /thanks"); // Redirect browser
+	exit();
+}
+	
+// If an image hasn't been set for the current session!
+	$image_check_query = "SELECT * FROM font_exp.results WHERE session_id='". $session_id ."' AND image". $image_num ."_id IS NOT NULL";
+	//echo($image_check_query);
+	if (!$image_check_result = mysqli_query($link, $image_check_query)) die("Unable to query results database for possible image id");
+	//echo("Result of above query: ".mysqli_num_rows($image_check_result));
+	if(mysqli_num_rows($image_check_result) != 0) {
+		//If an image has already been assigned, use that one boi
+		$url = mysqli_fetch_array($image_check_result)["image". $image_num ."_id"];
+	} else {
+	    // Attempting to retieve new image file
+	    $image_query = "SELECT * FROM font_exp.images WHERE used=0 LIMIT 1";
+	    if ($result = mysqli_query($link, $image_query)) {
+	        if (mysqli_num_rows($result) > 0) {
+	            $image_data = mysqli_fetch_array($result);
+	            $url = $image_data['image_id'];
+	            $lock_query = "UPDATE font_exp.images SET used=1 WHERE image_id='" . $url . "'";
+	            if (!$lock_url = mysqli_query($link, $lock_query)) {
+	                // Failed to lock image for current session. Some weird shit is happening, yo.
+	                die('Internal error. Please contact the system administrator.');
+	            }
+	            $image_id_query = "UPDATE font_exp.results SET image". $image_num ."_id='". $url ."', image". $image_num ."_time=now() WHERE session_id='" . $session_id . "'";
+	            if (!$image_id_result = mysqli_query($link, $image_id_query)) {
+	                // Failed to save image id to results database. Some weird shit is happening, yo.
+	                die('Failed to save image id to results. Please contact the system administrator.');
+	            }
+	
+	        } else {
+	            // No images available.
+	            die('Internal error. Please try again in a few minutes.');
+	        }
+	    } else {
+	        // Some sort of sql error. Should self-report.
+	        die('ERROR, probably a problem with the sql query to retrieve image file: ' . mysqli_error($link));
+	    }
+	}
+    mysqli_close($link);
+    ?>
+    <title>Blurred Text Experiment</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="centered"><h1>Blurred Text Experiment</h1>
+        <div style="width:80%;margin: 0 auto">
+	<strong>Instructions:</strong><br>Read the words in the image below to the best of your ability. If you usually wear contacts or glasses, please use them during this survey.  Type the words that you see into the text box below, and click "Submit." If you are not able to confidently read the text, make your best guess.
+        </div>
+	<?php if(isset($thrown_error)){
+		if($thrown_error != 1) echo("<p class='error'>".$thrown_error."</p>"); 
+		} ?>
+	<p>
+            <!--
+                 Hey there! Looks like I'm not the only one who views source :)
+
+                 First of all, thank you for your interest in this project, and
+                 I hope you took the time to complete the survey. I truly
+                 appreciate that!
+
+                 Second off, it looks like you want to get the URL for whatever
+                 image was survey. The thing is, the images used in this survey
+                 are randomly generated, and are automatically deleted after a
+                 certain amount of time. This means that the URL underneath
+                 this message will be broken very shortly. On top of that, I
+                 don't want images from this survey distributed for fear of
+                 any effect that may have on the results of this experiment.
+
+                 Please, if you want an image used for this survey, or just
+                 want to talk, contact me at totallyuneekemail@gmail.com. I'd
+                 love to work whatever it is out with you.
+
+                 Thanks <3
+            -->
+		<img src="/images/<?php echo $url; ?>.png" class="bordered" alt="Test Image"></p>
+        <form method="post" autocomplete="off">
+            <input type="text" size="40" pattern="[a-zA-Z\s]+" name="wordinput"<?php if($image_num > 1) echo("autofocus"); ?>> <input type="submit" value="Submit">
+            <input type="hidden" name="image_id" value="<?php echo $url; ?>">
+            <input type="hidden" name="session_id" value="<?php echo $session_id; ?>">
+        </form>
+    </div>
+</body>
+</html>
+

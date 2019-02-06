@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>print a key</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#FFFFFF"/>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:500%7CWork+Sans:400" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/articlestyle.css">
+</head>
+<body>
+	<a href="/">
+		<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+			<div class="flipper">
+				<div class="front">
+					<img class="profilepic" id="backprofilepic" src="/images/toothbrush_profile_small.jpg" />
+				</div>
+				<div class="back">
+					<svg id="backarrow" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z"/></svg>
+				</div>
+			</div>
+		</div>
+	</a>
+  <article>
+    <h1>print a key</h1>
+    <h2>1.</h2>
+    <p>go <a href="https://cq.cx/key.html">here</a> and follow the instructions</p>
+    <h2>2.</h2>
+    <p>enter your key type and bitting:</p>
+		<p>
+			<div>
+				<input type="radio" id="kw1" name="type" value="0" onclick="makelink()" checked>
+  		 	<label for="kw1">KW1</label>
+			</div>
+			<div>
+				<input type="radio" id="sc1" name="type" value="1" onclick="makelink()">
+  		 	<label for="sc1">SC1</label>
+			</div>
+			<div>
+				<input type="radio" id="sc4" name="type" value="2" onclick="makelink()">
+  		 	<label for="sc4">SC4</label>
+			</div>
+		</p>
+		<div id="bits">
+    <input type="text" size="1" id="bit1" onchange="makelink()">
+    <input type="text" size="1" id="bit2" onchange="makelink()">
+    <input type="text" size="1" id="bit3" onchange="makelink()">
+    <input type="text" size="1" id="bit4" onchange="makelink()">
+    <input type="text" size="1" id="bit5" onchange="makelink()">
+    <input type="text" size="1" id="bit6" onchange="makelink()">
+		</div>
+    <h2>3.</h2>
+    <p><a id="downloadlink" href="#">download</a> your 3d print file (it may take a second to generate)</p>
+		<p>Disclaimer: I've never actually tried a key made using this yet, so I hope it works. It also keeps breaking, so keep that in mind. This tool uses code written <a href="https://eclecti.cc/hardware/physical-keygen-duplicating-house-keys-on-a-3d-printer">by Nirav Patel</a>.</p>
+</article>
+<script src="script.js"></script>
+</html>

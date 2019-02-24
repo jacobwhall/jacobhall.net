@@ -33,9 +33,11 @@ $scadcode .= implode(",",$bit);
 $scadcode .= "]);";
 $temp = tmpfile();
 fwrite($temp, $scadcode);
-shell_exec("openscad -o /tmp/generatedkey.stl ".stream_get_meta_data($temp)['uri']);
+$genedkey = fopen("/tmp/genedkey.stl", "w");
+fclose($genedkey);
 header("Content-Type: application/octet-stream");
 header("Content-Transfer-Encoding: Binary");
 header("Content-disposition: attachment; filename=\"yourkey.stl\"");
-echo readfile("/tmp/generatedkey.stl");
+shell_exec("openscad.AppImage -o /tmp/genedkey.stl ".stream_get_meta_data($temp)['uri']);
+echo readfile("/tmp/genedkey.stl");
 ?>

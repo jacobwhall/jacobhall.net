@@ -2,6 +2,7 @@
     display: none;
 }
 body {
+	text-align: center;
   font-family: 'Work Sans', sans-serif;
   font-display: block;
   font-size: 100%;
@@ -34,7 +35,6 @@ ul {
 }
 #firstbox {
 	width: 100%;
-	height:100%;
   text-align: center;
 }
 .profilepic {
@@ -44,37 +44,27 @@ ul {
   height: 10em;
   max-height: 50vh;
 }
+#contentbox {
+	display: inline-block;
+	width: 50em;
+	max-width: 100%;
+	min-width: 10%
+}
 #subsequentbox {
-	position: absolute;
-	top: 100%;
-  width: 100%;
-  min-height: 30%;
-  left: 0px;
+	width: 100%;
 	padding-bottom: 5%;
 	display: none;
+	flex-flow: row wrap;
+	justify-content: space-between;
 }
-#leftside {
-  position: absolute;
-  left: 10%;
-  width: 40%;
+.list {
+	padding: 1em;
 }
-#rightside {
-  position: absolute;
-  left: 60%;
-}
-@media (max-aspect-ratio: 1/1) {
-  #leftside, #rightside {
-    position: static;
-    width: 100%;
-    padding-left: 1em;
-  }
-}
-#blogcontent {
+.list ul {
 	text-align: left;
-	display: block;
-	padding-right: 5vw;
-	width: 90vw;;
-	margin: 0 auto;
+}
+#blog {
+	text-align: justify;
 }
 .centeredtext {
 	text-align: center;
@@ -83,14 +73,11 @@ ul {
   font-family: courier;
 }
 #top {
-  position: absolute;
-  bottom:50%;
+	padding-top: 1em;
 	left: 0px;
-  right: 0px;
+	right: 0px;
 }
 #bottom {
-  position: absolute;
-  top: 50%;
   left:0px;
   right:0px;
 }

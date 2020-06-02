@@ -2,8 +2,8 @@
     display: none;
 }
 body {
-	text-align: center;
-  font-family: 'Work Sans', sans-serif;
+text-align: center;  
+font-family: 'Work Sans', sans-serif;
   font-display: block;
   font-size: 100%;
 }
@@ -26,16 +26,16 @@ ul {
   left: 0;
   width: 100%;
   background-color: red;
-  text-align: center;
   color: white;
   line-height: 1.5em;
 }
 #announcement a {
-  color: white;
+	color: white;
 }
 #firstbox {
+	text-align: center;
+	padding-top: 2em;
 	width: 100%;
-  text-align: center;
 }
 .profilepic {
   border-radius:50%;
@@ -50,10 +50,13 @@ ul {
 	max-width: 100%;
 	min-width: 10%
 }
+article {
+	text-align: left;
+}
 #subsequentbox {
+	text-align: center;
 	width: 100%;
-	padding-bottom: 5%;
-	display: none;
+	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-between;
 }
@@ -72,23 +75,24 @@ ul {
 .code {
   font-family: courier;
 }
-#top {
-	padding-top: 1em;
-	left: 0px;
-	right: 0px;
+#mvflexbox {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
-#bottom {
-  left:0px;
-  right:0px;
+.mvthumb {
+	width:24em;
+	text-align: center;
 }
+.mvthumb img {
+	width:100%;
+}
+
 #bottom h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2em;
   line-height: 0.5em;
   font-weight: bold;
-}
-#bottom p {
-  margin-bottom: 0.75em;
 }
 .social {
   margin-left: 0.5em;
@@ -112,5 +116,15 @@ ul {
 #twitter {
   width: 2.45em;
   height: 2.45em;
-  object-position: center .55em;
+  object-position: left .55em;
+}
+#cs {
+  margin-left: .2em;
+  width: 1.4em;
+  height: 1.4em;
+  object-position: right top;
+}
+#mastodon {
+  height: 1.4em;
+  object-position: center top;
 }

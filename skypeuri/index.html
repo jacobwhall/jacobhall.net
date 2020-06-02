@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>Testing Skype URIs on MacOS</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#FFFFFF"/>
+		<link rel="stylesheet" type="text/css" href="/articlestyle.css">
+</head>
+<body>
+        <div id="sidebar">
+                <a class="nostyle" href="/">
+                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper">
+                                <div class="front">
+                                        <img class="profilepic" id="backprofilepic" src="/images/toothbrush_profile_small.jpg" alt="sexy mirror selfie"/>
+                                </div>
+                                <div class="back">
+                                        <span>🏠</span>
+                                </div>
+                        </div>
+                </div>
+                        <h5>⬅️ Jacob Hall's weblog</h5>
+                </a>
+        </div>
+
+  <article>
+<h2>Let's test some Skype URIs on MacOS!</h2>
+<p>
+It seems that Skype removed their Applescript functionality a few years back. I can't find an official announcement, but <a href="https://answers.microsoft.com/en-us/skype/forum/all/skype-8-not-scriptable/0a5e4fe4-87d9-4e45-86c0-ce00d224087f">this Microsoft Community thread</a> and almost no posts about the topic from the last ~5 years has me convinced.
+</p>
+<p>
+So, what other options do we have to control Skype using scripts? Skype supports URIs, which basically are links that open applications instead of websites. There's <a href="https://docs.microsoft.com/en-us/skype-sdk/skypeuris/skypeuriapireference">a page on Skype's website</a> that describes the different actions your URI can make, including video calls! The syntax to make a video call is as follows:
+</p>
+<pre class="code">
+skype:participant1[;participant2;...participant9]?call&amp;amp;video=true
+</pre>
+<p>
+Since I'm just looking for a URI that makes a video call to one person, this should be pretty simple. But, what exactly do we replace "participant1" with to tell Skype who we want to call? Presumably the recipient's "Skype Name," which I found by clicking on my profile from within the Skype app:
+</p>
+<img style="height:30em; max-width:100%;" src="name-from-profile.png">
+<p>
+So, my Skype Name is <code>live:.cid.8e05c6f8360ed2c7</code>, glad to meet ya. Here's the HTML code for a link to video call me on Skype:
+<pre class="code">
+<span class="Purple">&lt;</span><span class="PurpleItalic">a</span><span class="Purple"> </span><span class="Blue">href</span><span class="Purple">=</span><span class="String">&quot;skype:live:.cid.8e05c6f8360ed2c7?call</span><span class="Special">&amp;amp;</span><span class="String">video=true&quot;</span><span class="Purple">&gt;</span>Call me on Skype<span class="Blue">&lt;/</span><span class="PurpleItalic">a</span><span class="Blue">&gt;</span>
+</pre>
+And here's what it looks like IRL: <a href="skype:live:.cid.8e05c6f8360ed2c7?call&amp;video=true">Call me on Skype</a><br>
+When I clicked it, my phone started buzzing with an incoming Skype call. Hooray!</p>
+<p>
+Okay Jacob, that's great, but how do I use this fancy Skype URI from a script on my computer instead of opening this weird blog post to call you? On Mac, there's an <code>open</code> command that is capable of handling URIs. So if you open your Terminal application, and type the following in, and cross your fingers, it might just do the same thing:<br>
+<i>Note that I added double slashes after the <code>skype:</code> because that's how it always looks in <code>open</code> code examples. It might also work without them</i>
+<pre class="code">
+open skype://live:.cid.8e05c6f8360ed2c7?call&amp;video=true
+</pre>
+<p>
+This might work; I don't have a Mac of my own to fully test it out. If it does, you could use the Run Shell Script action in Automator to run this code within any Automator workflow.
+</p>
+</article>
+</html>

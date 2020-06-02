@@ -1,0 +1,89 @@
+==================================================================
+https://keybase.io/totallyuneekname
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://jacobhall.net
+  * I am totallyuneekname (https://keybase.io/totallyuneekname) on keybase.
+  * I have a public key with fingerprint F7EF 4200 884F 5335 E2AB  5386 AD71 2C9B 3D81 9681
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012068210ec8a833aff3ee44ceb45cfeaddf0319bbac53d646fd28647b1f6c306f670a",
+      "fingerprint": "f7ef4200884f5335e2ab5386ad712c9b3d819681",
+      "host": "keybase.io",
+      "key_id": "ad712c9b3d819681",
+      "kid": "0101cde0114205afc63d5d0740d037fb4ff36dc1b922be4957f8e9a96f52c320ce050a",
+      "uid": "e0248cb371ea49e728a210ae08553b19",
+      "username": "totallyuneekname"
+    },
+    "merkle_root": {
+      "ctime": 1555377634,
+      "hash_meta": "4b0946961935165d4832ee60234f9105378162fceeb71e97676130a48c20c8ba",
+      "seqno": 5176531
+    },
+    "revoke": {
+      "sig_ids": [
+        "4458aec031c5294f79677b39677e4c25e5c7c46e57ede119eea6f42b455323be0f"
+      ]
+    },
+    "service": {
+      "hostname": "jacobhall.net",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1555377660,
+  "expire_in": 157680000,
+  "prev": "e0b0ddf23d71c15133a119e9e41eca837131a7f53c6c6c3c1c886a2ddfe5571b",
+  "seqno": 15,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.0
+Comment: https://keybase.io/crypto
+
+yMQKAnicbVMLbBRFGL6WAkIQaiqQgkVYkFho687OzuxulQSxodbaFFSCSOkxOzvb
+Xh+31729lisWKRB8UbCoRQWJhpICSXmklFcFCoJAC8WUoDxSwdAYEAIc1Fep4OwF
+YmLcTXazs9/3/998/zdHHu/nGRzTWJaydkp1XXVM++F3Qp685tS+hYJuGWEhfaFQ
+zKIvVmKwoOMt9hlCuiACScSqBERGVaJCSEwTMibLlOkyoiYjhmGKEGi6TiiCBpax
+aUgqlhUdmJhCEZtYEYmQIpg+fwGzA7bP7/CypsJMWRJFVZVNBCFiEtERVDExFCBR
+TYeGCjSsAk4stIIug4vTSZCl+Sy+xj+8UXn/g3+kWwTUYCIAvA0iJsXQQIaoyKIh
+QsXUZb4PbFCga5KkM1lDiqkyjWjYRBKFkkiZiKK6Q9FyTJRklepQAYzIGlMklXBP
+CBNVhKAONBcYZLaflDKOdiyHlJSEQ37GiqNLVSlCKbOLS5jXtizHNZk6PhcKEOcr
+CoYy3ygJFnpLmUN4BVkXNRlrGGgQAYwMWYUSY1iUoGxqQOQcFWDJpIzpXJKmYAUD
+KBKukUtXdVd4kJX5LSEdAQUjCLgCm5VbxcxtHvQVcPuCQvpcQZaRShjlI6RI0mRT
+0bCi6NB9MplKiCGqUBkzpDCDAaAxRjCfHB8+ghLUmWgK86rcZna5j0aLu/N66EMR
+oZZeyK1I8zOHSwrYlmNRq4T/KnScQDDdNcYJB1xsBdO9D6t4dZ/f4HHhjHJmB32W
+nxvFkf/xDIspAlsQ8NnM63MRSMGqyC+3DyuPDk0XeTwlyENCAQI8ve4ONCYDRnmY
+FQABUXj+KOY3pICqPIESpzCEFKD/ayJAXCcp4DW5dX7ihGw+08OH8uI8MYM9A/rH
+uufIM3hQ/KPTVdAy7H7qneVZw/sKH4Ra5iy71NGzdM3VXT3CzaTpr723OkKOb3ti
+5J9tGal2fXjKui2qeWXP9L+rczq7bqdVJy2OlDSdf/HrT7uS8yYVZWUPmdOR/PTE
+FTMvlJUOKKr5+eXnErprxtfFfvL79cbLLaN+25/mj62fuiy+a1tMX86g8GM7tFM5
+GalNH6plakaTaI9oXRe/dFtdR//tOScqZ/VtvOjM99QeuTTuXJs3tavuA7ZpQ9ye
+ysnLenuDPT3W+E1P7Sy81/mtiHLjEr/Y3ToxN2Gl/9zupH4pb94Y6Rsbd6r9fkW/
+uLBU23Yrc9/I78ZcO9AdWXG0pbX67Y4zSUblmLbmISPMeV07xmZHmrIMeHLC8zGZ
+8yNkVXt9aOsE/+lbnV2Bspg3vjz148k1oz3PJoQ/SjswY1bCX/HhtMam1uUN5z6e
+sXfSZ+Du8J25RZGOVWvj/ecPLbhmNWw+NrVn1+X1PRenLfpmSjZ5qYJtqb0+MGsT
+WtQQG8lckv9VYuKd0/c2zL89tfnzqqHrvW89s3juUqf33Zq8Yftvy3fy9dyjGStf
+6B5+tvv0uO29la/Ts7EpP9wIzd78y70HGzuDgSc7VlUYO67WnD2+cV/V6l9Ht+7e
+eyL7ROOFXRXfqz9NbrUPJr86MPGPDdPqktc+qB03amj7+6MXXWtom3nzLolNHn8m
+IbQ4f3JzSvncWwc9S47V578Cr8zenLD1H33pCrM=
+=IYGU
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/totallyuneekname
+
+==================================================================
+

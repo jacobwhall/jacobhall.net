@@ -1,0 +1,115 @@
+<article>
+<h2>📍 Mapping Education Development Projects in Afghanistan</h2>
+<p>
+This is the first time I've used R and LaTeX together, using a package called knitr. I believe papers that include statistical analyses should be fully reproducable, and part of my objective for this project is to learn how to accomplish that. I was partly inspired by <a href="https://blogs.worldbank.org/opendata/where-does-chinese-development-finance-go">this article</a> on Chinese investments (also using AidData data), available as an R notebook <a href="http://tariqkhokhar.com/data/aiddata-china-blog.html">here</a>. I also used <a href="https://eriqande.github.io/rep-res-eeb-2017/map-making-in-R.html">this guide</a> to help navigate the weird world of the maps R package. As I got further into the weeds of plotting the population density data, <a href="https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/">this Data Carpentry lesson</a> was indispensable.
+</p>
+<pre class="code">
+<span class="PreProc">library</span><span class="Special">(</span>tidyverse<span class="Special">)</span>
+<span class="PreProc">library</span><span class="Special">(</span>maps<span class="Special">)</span>
+<span class="PreProc">library</span><span class="Special">(</span>mapdata<span class="Special">)</span>
+<span class="PreProc">library</span><span class="Special">(</span>raster<span class="Special">)</span>
+<span class="PreProc">library</span><span class="Special">(</span>rasterVis<span class="Special">)</span>
+<span class="PreProc">library</span><span class="Special">(</span>rgdal<span class="Special">)</span>
+<span class="PreProc">library</span><span class="Special">(</span>viridis<span class="Special">)</span>
+</pre>
+<p>
+I requested a bunch of data about Afghanistan's education and forestry development from AidData. The download link for my query is <a href="http://geo.aiddata.org/data/geoquery_results/5e65e054c15e0068ea94abc5/5e65e054c15e0068ea94abc5.zip">here</a>. I decided to focus on the education data for this project, and experiment with overlaying the education project locations over a population density map of Afghanistan. I hope for this map to effectively convey how well-distributed these projects have been relative to populous areas. Have a majority of these projects been in cities, or in a specific region?
+</p>
+<p>
+Directly converting the population density raster to a data frame ate my laptop's memory and caused R to crash, simply outputting "Killed" in my terminal. I ended up <a href="https://stackoverflow.com/q/61535383/2180108">asking for help</a>, and it was suggested that I aggregate the data before conversion. I'm annoyed that R can't handle this data file with better memory management (and I dream of pixel-perfect output!), but the aggregated data still looks very nice.
+</p>
+<pre class="code">
+<span class="Comment"># Import AidData dataset</span>
+<span class="Comment"># Make sure you edit this path to reflect the file's location on your machine</span>
+inscription_data <span class="Statement">=</span> <span class="Identifier">read.csv</span><span class="Special">(</span><span class="Constant">&quot;results.csv&quot;</span><span class="Special">,</span> header <span class="Statement">=</span> <span class="Constant">TRUE</span><span class="Special">)</span>
+education_data <span class="Statement">&lt;-</span> <span class="Identifier">filter</span><span class="Special">(</span>inscription_data<span class="Special">,</span>
+                         <span class="Identifier">grepl</span><span class="Special">(</span><span class="Constant">&quot;Afghanistan&quot;</span><span class="Special">,</span> recipients<span class="Special">)</span><span class="Special">,</span>
+                         <span class="Identifier">grepl</span><span class="Special">(</span><span class="Constant">&quot;education&quot;</span><span class="Special">,</span> ad_sector_names<span class="Special">))</span>
+
+<span class="Comment"># Import population density data for Afghanistan (2020)</span>
+afg_pop <span class="Statement">&lt;-</span> <span class="Identifier">raster</span><span class="Special">(</span><span class="Constant">&quot;afg_ppp_2020.tif&quot;</span><span class="Special">)</span>
+<span class="Comment"># Theoretically not necessary if you have a lot of RAM overhead</span> 🙄
+afg_pop2 <span class="Statement">&lt;-</span> <span class="Identifier">aggregate</span><span class="Special">(</span>afg_pop<span class="Special">,</span> <span class="Constant">10</span><span class="Special">)</span>
+<span class="Comment"># This is the line that caused my laptop to crash without the aggregated input</span>
+afg_pop_df <span class="Statement">&lt;-</span> <span class="Identifier">as.data.frame</span><span class="Special">(</span>afg_pop2<span class="Special">,</span> xy <span class="Statement">=</span> <span class="Constant">TRUE</span><span class="Special">)</span>
+
+afg <span class="Statement">&lt;-</span> <span class="Identifier">map_data</span><span class="Special">(</span><span class="Constant">&quot;worldHires&quot;</span><span class="Special">,</span> <span class="Constant">&quot;Afghanistan&quot;</span><span class="Special">)</span>
+
+<span class="Comment"># Let's define a map that plots the population data all pretty</span>
+pop_map <span class="Statement">&lt;-</span> <span class="Identifier">ggplot</span><span class="Special">()</span> <span class="Statement">+</span>
+  <span class="Comment"># Remove axis labels because it is clear they are lat/long</span>
+  <span class="Identifier">theme</span><span class="Special">(</span>axis.title.x <span class="Statement">=</span> <span class="Identifier">element_blank</span><span class="Special">()</span><span class="Special">,</span>
+        axis.title.y <span class="Statement">=</span> <span class="Identifier">element_blank</span><span class="Special">())</span> <span class="Statement">+</span>
+  <span class="Comment"># Add population data</span>
+  <span class="Identifier">geom_raster</span><span class="Special">(</span>data <span class="Statement">=</span> afg_pop_df<span class="Special">,</span>
+              <span class="Identifier">aes</span><span class="Special">(</span>x <span class="Statement">=</span> x<span class="Special">,</span> y <span class="Statement">=</span> y<span class="Special">,</span> fill <span class="Statement">=</span> afg_ppp_2020<span class="Special">))</span> <span class="Statement">+</span>
+  <span class="Comment"># Define scaling for population data</span>
+  <span class="Identifier">scale_fill_continuous</span><span class="Special">(</span>name <span class="Statement">=</span> <span class="Constant">&quot;Population</span><span class="Special">\n</span><span class="Constant">Density&quot;</span><span class="Special">,</span>
+              <span class="Comment"># Poke holes wherever there isn't data</span>
+              na.value <span class="Statement">=</span> <span class="Constant">NA</span><span class="Special">,</span>
+              <span class="Comment"># Use pretty, colorblind-friendly colours</span>
+              type <span class="Statement">=</span> <span class="Constant">&quot;viridis&quot;</span><span class="Special">,</span>
+              <span class="Comment"># Use logarithmic scale</span>
+              trans <span class="Statement">=</span> <span class="Constant">&quot;log10&quot;</span><span class="Special">,</span>
+              <span class="Comment"># Custom breaks to make key more readable</span>
+              breaks <span class="Statement">=</span> <span class="Identifier">c</span><span class="Special">(</span><span class="Constant">0.1</span><span class="Special">,</span><span class="Constant">1</span><span class="Special">,</span><span class="Constant">5</span><span class="Special">,</span><span class="Constant">20</span><span class="Special">,</span><span class="Constant">100</span><span class="Special">))</span> <span class="Statement">+</span>
+  <span class="Comment"># Add outline of Afghanistan on top for a cleaner edge</span>
+  <span class="Identifier">geom_polygon</span><span class="Special">(</span>data <span class="Statement">=</span> afg<span class="Special">,</span>
+               <span class="Identifier">aes</span><span class="Special">(</span>x <span class="Statement">=</span> long<span class="Special">,</span> y <span class="Statement">=</span> lat<span class="Special">,</span> group <span class="Statement">=</span> group<span class="Special">)</span><span class="Special">,</span>
+               fill <span class="Statement">=</span> <span class="Constant">NA</span><span class="Special">,</span>
+               color <span class="Statement">=</span> <span class="Constant">&quot;black&quot;</span><span class="Special">)</span>
+
+<span class="Comment"># Now let's add the education project data to the map, and plot it!</span>
+pop_map <span class="Statement">+</span>
+  <span class="Comment"># Add education project sites</span>
+	<span class="Identifier">geom_point</span><span class="Special">(</span>data <span class="Statement">=</span> education_data<span class="Special">,</span>
+             <span class="Identifier">aes</span><span class="Special">(</span>x <span class="Statement">=</span> longitude<span class="Special">,</span> y <span class="Statement">=</span> latitude<span class="Special">)</span><span class="Special">,</span>
+             <span class="Comment"># Circular points</span>
+             shape <span class="Statement">=</span> <span class="Constant">21</span><span class="Special">,</span>
+	           size <span class="Statement">=</span> <span class="Constant">1</span><span class="Special">,</span>
+             color <span class="Statement">=</span> <span class="Constant">&quot;white&quot;</span><span class="Special">,</span>
+             <span class="Comment"># Do not fill circles</span>
+             fill <span class="Statement">=</span> <span class="Constant">NA</span><span class="Special">)</span> <span class="Statement">+</span>
+  <span class="Identifier">coord_equal</span><span class="Special">()</span>
+</pre>
+<img src="/2020/mapping-education-afghanistan/pop_map_1.png" alt="Population heatmap of Afghanistan with projects overlayed as circles">
+<p>
+That looks great! I know it's wrong to not have units for the population density scale, and that's something I'd like to fix. The value of each pixel in the original image represented the number of people in the area that it covered, so the numbers on this scale should represent the number of people who live within each of the aggregated chunks. I think this issue would be best solved by calculating the distance each chunk covers in mi/km, and then adjusting the values in the legend to represent people per square mi/km.
+</p>
+<p>
+That cluster of projects (and people!) in the Northeast is Kabul. How many projects are occuring in the greater Kabul area?
+</p>
+<pre class="code">
+<span class="Comment"># Coordinates from Wikipedia article on Kabul</span>
+kabul_lat <span class="Statement">&lt;-</span> <span class="Constant">34.525278</span>
+kabul_long <span class="Statement">&lt;-</span> <span class="Constant">69.178333</span>
+radius <span class="Statement">&lt;-</span> <span class="Constant">0.3</span>
+
+<span class="Comment"># New data frame from education_data with just the rows within radius of those coordinates</span>
+near_kabul <span class="Statement">&lt;-</span> <span class="Identifier">filter</span><span class="Special">(</span>education_data<span class="Special">,</span>
+                     <span class="Identifier">between</span><span class="Special">(</span>latitude<span class="Special">,</span> <span class="Special">(</span>kabul_lat <span class="Statement">-</span> radius<span class="Special">)</span><span class="Special">,</span> <span class="Special">(</span>kabul_lat <span class="Statement">+</span> radius<span class="Special">))</span><span class="Special">,</span>
+                     <span class="Identifier">between</span><span class="Special">(</span>longitude<span class="Special">,</span> <span class="Special">(</span>kabul_long <span class="Statement">-</span> radius<span class="Special">)</span><span class="Special">,</span> <span class="Special">(</span>kabul_long <span class="Statement">+</span> radius<span class="Special">)))</span>
+<span class="Comment"># The number of projects within that radius can be determined using the following command</span>
+<span class="Identifier">nrow</span><span class="Special">(</span>near_kabul<span class="Special">)</span>
+<span class="Comment"># I've suppressed the output of this code chunk so that I can call this command inline</span>
+</pre>
+<img src="/2020/mapping-education-afghanistan/pop_map_2.png" alt="The same population heatmap, with one larger circle around Kabul">
+<p>
+I think that looks a lot nicer, although it might benefit from more detailed info in the legend about what different sizes of circles indicate. I don't notice anything groundbreaking on this map. There might be fewer projects on the Western side of the country, but I guess that has more to do with the population around Kabul than any other bias. Kabul is nearly 10 times as populous as the second-biggest city, Kandahar, so it is no surprise to see a majority of projects in that region.
+</p>
+<p>
+Is this really all of the projects? Our education_data variable has `r nrow(education_data)` rows, and even with the `r nrow(near_kabul)` removed around Kabul, are all of them being displayed? I noticed that the dataset has rounded numbers for a lot of the latitude and longitude values, which could mean that many projects in the same town are drawn on top of each other. For example, there are three projects in Badakhshan that are all listed as having the exact same coordinates, despite differing descriptions, years, and dollars spent. There are two methods I'd like to use to mitigate this problem. The first is to cluster points that are within a radius of each other, and draw circles of proportional size to represent each cluster. The second is to calculate the average population density within a radius of each project, and then create a bar chart with each bar representing a range of population densities, and its length representing the number of projects that fall within an area of that density. It might be useful to create a few charts using different radii of average density.
+</p>
+<p>
+Other variables could be controlled to better represent the differences in aid allocation across Afghanistan. For example, the size of each point on the map could be scaled based on the monetary value of the project it represents, giving the viewer a better idea of where the majority of funds are allocated geographically. Projects in urban areas might receive more funding to serve more people, or maybe the cost of building a school in a rural area would be significantly more expensive, for example. The source of funding, years active, and preexisting school enrollment are all potentially insightful variables to incorporate in a visualization like this.
+</p>
+<h3>Data Sources</h3>
+<p>
+  Goodman, S., BenYishay, A., Lv, Z., & Runfola, D. (2019). GeoQuery: Integrating HPC systems andpublic web-based geospatial data tools. Computers & Geosciences, 122, 103-112.
+    The data from AidData used in this project were downloaded from <a href="http://geo.aiddata.org/query/#!/status/5e65e054c15e0068ea94abc5">this page</a>.
+</p>
+<p>
+  WorldPop (www.worldpop.org - School of Geography and Environmental Science, University of Southampton; Department of Geography and Geosciences, University of Louisville; Departement de Geographie, Universite de Namur) and Center for International Earth Science Information Network (CIESIN), Columbia University (2018). Global High Resolution Population Denominators Project - Funded by The Bill and Melinda Gates Foundation (OPP1134076). https://dx.doi.org/10.5258/SOTON/WP00645
+    The data from WorldPop used in this project were downloaded from <a href="https://www.worldpop.org/geodata/summary?id=6324">this page</a>.
+</p>
+</article>

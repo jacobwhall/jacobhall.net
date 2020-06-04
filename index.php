@@ -428,7 +428,7 @@ Any work that I contribute to it belongs to someone else.
 Maybe I'll try my hand at building a music video database with open licensing and improved discovery.
 </p>
 </article>
-<?php include("/2019/articles/read-everything-free.html"); ?>
+<?php include "2019/articles/read-everything-free.html"; ?>
 <div id="subsequentbox">
 	<div class="list">
 		<h2>Things I've written</h2>

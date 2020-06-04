@@ -215,12 +215,12 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 		<h2>Things I've written</h2>
 		<ul>
 			<li>
-				<a href="/2019/what-to-pack">What to Pack?</a>
+				<a href="/2019/what-to-pack.html">What to Pack?</a>
 			</li>
 			<li>
-				<a href="2019/read-everything-free">How to Read Everything for Free</a>
+				<a href="2019/articles/read-everything-free.html">How to Read Everything for Free</a>
 			<li>
-				<a href="/2019/american-city-dialects-qgis">Mapping dialect variation among US cities in QGIS</a>
+				<a href="/2019/american-city-dialects-qgis.html">Mapping dialect variation among US cities in QGIS</a>
 			</li>
 		</ul>
 		<a href="articles.html">view all posts ➡️</a>
@@ -241,7 +241,7 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 				<a href="https://thehbarchive.org">The H-B Archive</a>
 			</li>
 			<li>
-				<a href="2017/blurred-fonts-project">Blurred Fonts Project</a>
+				<a href="blurred-fonts-project.html">Blurred Fonts Project</a>
 			</li>
 		</ul>
 	</div>

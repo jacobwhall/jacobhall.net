@@ -1,4 +1,0 @@
-RewriteEngine On
-
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^\d{4}/.*$ /article.php?path=%{REQUEST_FILENAME}.html [L]

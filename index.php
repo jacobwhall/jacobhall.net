@@ -210,8 +210,6 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 -->
 <?php include "2020/code-highlighting-vim.html"; ?>
 <?php include "2020/mapping-education-afghanistan/index.html"; ?>
-<?php include "2019/articles/social-media-online-art.html"; ?>
-<?php include "2019/articles/read-everything-free.html"; ?>
 <div id="subsequentbox">
 	<div class="list">
 		<h2>Things I've written</h2>
@@ -219,6 +217,8 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 			<li>
 				<a href="/2019/what-to-pack.html">What to Pack?</a>
 			</li>
+			<li>
+				<a href="2019/articles/read-everything-free.html">How to Read Everything for Free</a>
 			<li>
 				<a href="/2019/american-city-dialects-qgis.html">Mapping dialect variation among US cities in QGIS</a>
 			</li>

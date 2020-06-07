@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>Simple HTML code highlighting workflow with vim</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#FFFFFF"/>
+		<link rel="stylesheet" type="text/css" href="/articlestyle.css">
+</head>
+<body>
+        <div id="sidebar">
+                <a class="nostyle" href="/">
+                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper">
+                                <div class="front">
+                                        <img class="profilepic" id="backprofilepic" src="/images/toothbrush_profile_small.jpg" alt="sexy mirror selfie"/>
+                                </div>
+                                <div class="back">
+                                        <span>🏠</span>
+                                </div>
+                        </div>
+                </div>
+                        <h5>⬅️ Jacob Hall's weblog</h5>
+                </a>
+        </div>
+<article>
+<h2>⌨️ Simple HTML code highlighting workflow with vim</h2>
+<p>
+Lately I've wanted to post code snippets to my website, but I want them to look pretty and highlighted instead of just using boring old &lt;pre&gt; tags.
+I know a lot of people use fancy scripts to highlight text client-side, but one of the rules I've set for myself in building this website is to avoid Javascript.
+Besides, is all that effort and computation really needed for some colored text?
+So I decided to find a workflow in which I can export my code into pre-formatted HTML.
+</p>
+<p>
+I recently put some effort into customizing vim, and after trying a bunch of themes settled on <a href="https://github.com/sainnhe/edge">Edge</a>.
+Staring at my beautifully-highlighted code in vim, I wondered if I could just replicate the same effect on my website.
+I quickly found the vim <code>TOhtml</code> function, which does exactly that!
+All you have to do is run <code>TOhtml</code> in vim, and it outputs a formatted HTML file complete with CSS rules that color different types of syntax exactly how it's displayed in the editor. Hoorah!
+</p>
+<p>
+After messing with <code>TOhtml</code> for a while, I realized that it was not actually outputting the same syntax highlighting that I was seeing in my terminal.
+For example, functions appeared light blue to me in vim, but the exported HTML did not discern them at all.
+It took me a long time to realize that the issue was with my color scheme, Edge!
+I have no idea why, but <code>TOhtml</code> does not play well with Edge and ignores some of its syntax highlighting rules.
+It also seems to forget that I have true colors turned on!
+I tried to run <code>TOhtml</code> using the popular <a href="https://github.com/altercation/solarized">Solarized</a> scheme, and it worked without hitch!
+</i>
+<p>
+...but I want to use the Edge color scheme.
+And besides, if I ever want to switch color schemes in the future, I don't want to worry about their compatibility with my current syntax highlighting workflow.
+In my .vimrc I've created a variable that defines my current color scheme of choice:
+</p>
+<pre class="code">
+<span class="Comment">&quot; Use edge color scheme: <a href="https://github.com/sainnhe/edge">https://github.com/sainnhe/edge</a></span>
+let <span class="Identifier">g:usual_colorscheme</span> <span class="Statement">=</span> <span class="Constant">&quot;edge</span><span class="Constant">&quot;</span>
+
+<span class="Comment">&quot; Set our colorscheme to the one I've defined above</span>
+<span class="vimCommand">execute</span> <span class="Constant">&quot;colorscheme </span><span class="Constant">&quot;</span><span class="Statement">.</span><span class="Identifier">g:usual_colorscheme</span>
+</pre>
+<p>
+By doing that, I can declare a function that temporarily sets my color scheme to solarized when I want to use TOhtml, and then define a command to run it:
+</p>
+<pre class="code">
+<span class="Comment">&quot; Function to output better syntax-highlighted HTML using solarized</span>
+<span class="vimCommand">function</span> SolarizedTOhtml<span class="Special">()</span>
+	<span class="vimCommand">colorscheme</span> <span class="vimIsCommand">solarized</span>
+	<span class="vimIsCommand">TOhtml</span>
+	<span class="vimCommand">execute</span> <span class="Constant">&quot;colorscheme </span><span class="Constant">&quot;</span><span class="Statement">.</span><span class="Identifier">g:usual_colorscheme</span>
+<span class="vimCommand">endfunction</span>
+
+<span class="vimCommand">command</span> <span class="vimIsCommand">NEWhtml</span> <span class="Identifier">call</span> <span class="Identifier">SolarizedTOhtml</span>()
+</pre>
+<p>
+It was humorously difficult to define suitable CSS rules for these vimscript snippets, but I think they look very nice considering how simple this system is.
+Since I'm only exporting code using Solarized now, the same CSS rules should work on future code snippets without much modification, and I'll be able to adjust them all uniformly with ease.
+The only other adjustments I've made to this setup are the following two settings in my .vimrc:
+</p>
+<pre class="code">
+<span class="Comment">&quot; For :TOhtml output, remove line numbers</span>
+ let <span class="Identifier">g:html_number_lines</span> <span class="Statement">=</span> <span class="Constant">0</span>
+
+<span class="Comment">&quot; For :TOhtml output, ignore code folding</span>
+ let <span class="Identifier">g:html_ignore_folding</span> <span class="Statement">=</span> <span class="Constant">1</span>
+</pre>
+<p>
+Have a beautiful day!
+</p>
+</article>
+</body>
+</html>

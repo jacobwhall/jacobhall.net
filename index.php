@@ -218,7 +218,7 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 				<a href="/2019/what-to-pack">What to Pack?</a>
 			</li>
 			<li>
-				<a href="/2019/articles/read-everything-free">How to Read Everything for Free</a>
+				<a href="/2019/read-everything-free">How to Read Everything for Free</a>
 			<li>
 				<a href="/2019/american-city-dialects-qgis">Mapping dialect variation among US cities in QGIS</a>
 			</li>

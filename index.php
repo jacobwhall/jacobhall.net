@@ -208,8 +208,8 @@
 ok so the current concept is free-form, undated articles each preceded by a relevant emoji
 </p>
 -->
-<?php include "2020/code-highlighting-vim.html"; ?>
-<?php include "2020/mapping-education-afghanistan/index.html"; ?>
+<?php include "2020/code-highlighting-vim/code-highlighting-vim.html"; ?>
+<?php include "2020/mapping-education-afghanistan/mapping-education-afghanistan.html"; ?>
 <div id="subsequentbox">
 	<div class="list">
 		<h2>Things I've written</h2>

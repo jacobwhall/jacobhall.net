@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>Mapping dialect variation among US cities in QGIS</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#FFFFFF"/>
+		<link rel="stylesheet" type="text/css" href="/articlestyle.css">
+</head>
+<body>
+        <div id="sidebar">
+                <a class="nostyle" href="/">
+                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper">
+                                <div class="front">
+                                        <img class="profilepic" id="backprofilepic" src="/images/toothbrush_profile_small.jpg" alt="sexy mirror selfie"/>
+                                </div>
+                                <div class="back">
+                                        <span>🏠</span>
+                                </div>
+                        </div>
+                </div>
+                        <h5>⬅️ Jacob Hall's weblog</h5>
+                </a>
+        </div>
+<article>
+<h2>📍 Mapping dialect variation among US cities in QGIS</h2>
+<p>
+This is a write-up of my journey to replicate an assignment for my linguistics class, in <a href="https://www.qgis.org">QGIS</a>.
+I am new to GIS, if you see anything I could improve please let me know!
+<strong>I should make it clear that I am new to this software, and these instructions may not be best practice.</strong>
+</p>
+<h3>Installing QGIS</h3>
+<p>
+You can download the latest version of QGIS <a href="https://www.qgis.org/en/site/forusers/download.html">here</a>.
+For this project I'm using version 3.4.6.
+</p>
+<h3>Preparing the data file</h3>
+<p>
+I'm using data for this project that I stole from my class, so I can't publish it here.
+It is a table of survey responses, with each row representing an individual survey respondent from a unique American city, and columns for each of a set of dialectical features those respondents demontrated.
+For QGIS to plot these responses on a map, the geographical locations of each of these cities needs to be determined, a process called geocoding.
+It appears to be <a href="https://wiki.state.ma.us/display/massgis/Plotting+Cities+on+a+Map+with+QGIS">relatively easy</a> to geocode a data file to determine the locations of place names, such as the city names I have.
+I'd normally be down to try out a workflow like this, but I don't want to right now for two reasons:
+</p>
+<ol>
+	<li>
+	Doing so would be using plugins, which I don't my first time using QGIS be complicated by integrating plugins.
+	I would love to learn about them in the future, but part of my goal right now is to get comfortable with QGIS
+	</li>
+
+	<li>
+	This is not my data, and it would be very uncool to send it to any geocoding service without permission.
+	</li>
+</ol>
+<p>
+...so, I got each city's coordinates manually, using <a href="https://www.wolframalpha.com/input/?i=coordinates+of+new+york+city%2C+NY">WolframAlpha searches</a>.
+Admittedly a lazy/boring solution, but with some good music it wasn't so bad.
+</p>
+
+<p>
+It looks like QGIS can import any filetype under the sun, but for simplicity's sake I exported the new data table as a comma separated values (.csv) file.
+To make the import as smooth as possible, <strong>separate the X and Y coordinates into different columns and label them "X Coord" and "Y Coord"</strong>
+</p>
+
+<h3>Importing data file</h3>
+<ol>
+	<li><strong>Create a new project</strong> by either hitting <strong>CTRL+N</strong> or navigating to Project &gt; New.</li>
+	<li>
+		The view box looks really empty and sad, so head down to the bottom of the screen and <strong>type "world" into the coordinate box</strong>, and then <strong>hit enter</strong>.
+		There should now be a simple outline of the world on the screen.
+	</li>
+	<li>Hit <strong>CTRL+L</strong> or hit one of the leftmost toolbar icons to open the <strong>data source manager</strong></li>
+	<li><strong>Click on the ellipsis</strong> in the upper right-hand corner of the popup window, and <strong>select the .csv file</strong></li>
+	<li>
+		Type a name in the "Layer name" field, like "Survey Data" or something
+	</li>
+	<li>
+		Review the import settings.
+		Make sure "X field" and "Y field" are referring to the correct columns, and also make sure it's treating the first few lines of your file correctly (in my case, it guessed correctly that the first row was the column headers)
+	</li>
+	<li>
+		<strong>Click "Add" and "Close"</strong> and confirm that there are now dots on your screen in the right places!
+	</li>
+</ol>
+<p>
+In the bottom right of your screen, you should now have a Layer for the survey data, labeled with the name you chose.
+As we add layers, this menu will be helpful in editing or hiding them.
+</p>
+
+<h3>Creating filters for each feature</h3>
+<p>
+Now we need to show QGIS what differences in the data it needs to see.
+I'm interested in learning a more efficient workflow for this, but the following steps were successful:
+</p>
+<ol>
+	<li>
+		<strong>Right-click on the survey data layer</strong>, and <strong>click on Open Attribute Table</strong>
+	</li>
+	<li>
+		Now <strong>hit CTRL+F</strong>, OR click on "Select/filter features using form" in the top menu
+	</li>
+	<li>
+		You should now be able to type in a search term next to one of your data table's columns.
+		For our first search, let's choose a field with one possible value.
+		The Feature 2 column in my data table represents the respondents who demonstrated monophthongization, so I typed monophthongization into the box next to that column.
+		<strong>When you're done typing your filter, click "Filter features" in the bottom right-hand corner.</strong>
+	</li>
+	<li>
+		There should now be a "Filter Expression" in a text box at the bottom of the window.
+		<strong>Copy it!</strong>
+		<br>
+		Mine looks like this:
+		<code>
+			("Feature 2" ILIKE '%monophthongization%')
+		</code>
+		<br>
+		You will use this expression when creating a rule for this layer's symbols.
+		Head down to the next step ⬇️
+	</li>
+</ol>
+
+<h3>Working with rule-based symbols</h3>
+<ol>
+	<li>
+		<strong>Right-click on the survey data layer</strong>, and <strong>click on properties</strong>.
+	</li>
+	<li>
+		<strong>Navigate to "symbology,"</strong> then <strong>select "Rule-based"</strong> from the top drop-down menu.
+	</li>
+	<li>
+		We now want to create rules for how QGIS should decide what symbol to show for each city.
+		To do this we need to create a rule that filters for each feature surveyed, and displays an icon for cities that have that feature.
+		The good news: you already have this filter rule copied to your clipboard!
+		<strong>Click "Add rule"</strong> (green plus sign in bottom right)
+	</li>
+	<li>
+		<strong>Paste the filter rule into "Filter"</strong>
+		While you're here, type in a name for this rule, and maybe pick a unique color for it.
+		You can fine-tune these things later.
+	</li>
+	<li>
+		<strong>Click "OK"</strong> and then while still in the symbology menu, drag your most recent rule above any other rules (you should make another one if there is none)
+		<strong>Apply your changes</strong> and exit the properties popup. You should now see a distinct color on the map that represents the filter you just created!
+	</li>	
+</ol>
+<p>
+Now repeat these instructions for the other features in your data.
+You should be able to adapt the same filter expression for the rest of your rules, editing it to represent the right column/value.
+If two or more features overlap, edit one of the symbols to be larger than the other, and then drag it to above the smaller symbol in the symbology popup.
+This way they will both be visible, the bigger one behind the smaller one.
+You can also control this in the layers menu.
+</p>
+
+<h3>On using QGIS in linguistics class</h3>
+<p>
+The paper assignment I did in class was tedious, because we had to manually plot the data on a paper map.
+As I've shown here, a GIS method can be just as tedious!
+For GIS to be incorporated into an assignment like this, I'd want to iron out the kinks with importing data and filtering symbols.
+I suggest providing students with a QGIS template file that already has neat symbology, and leave it to them to properly import data and match it to the rules.
+This would leave more time for more advanced data visualization, to show off current linguistics research as well as GIS magic.
+For example, students could download a GIS file with heatmap layers of the same dialect features, allowing them to see more nuanced distributions and see how their works fits into the larger data set.
+</p>
+<p>
+Anyways, this was a fun side project and a great excuse to learn some QGIS!
+</p>
+</article>
+</body>
+</html>

@@ -1,0 +1,108 @@
+		body {
+			text-align: center;
+			font-family: 'Work Sans', sans-serif;
+			font-size: 100%;
+			font-size: max(100%, .4cm);
+		}
+
+		@media (max-aspect-ratio: 1/1) {
+			body {
+				font-size: 4vw;
+				font-size: min(4vw, .4cm);
+			}
+		}
+		body, h1, h2, h3, h4, h5, h6 {
+			font-size-adjust: 0.5;
+		}
+
+		ul {
+			list-style-position: inside;
+			padding-left: 0.5em;
+		}
+
+		#announcement {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			background-color: red;
+			color: white;
+			line-height: 1.5em;
+		}
+
+		#announcement a {
+			color: white;
+		}
+
+		#firstbox {
+			text-align: center;
+			padding-top: 2em;
+			width: 100%;
+		}
+
+		.profilepic {
+			border-radius:50%;
+		}
+
+		#titleprofilepic {
+			height: 10em;
+			max-height: 50vh;
+		}
+
+		#bottom h1 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 2em;
+			line-height: 0.5em;
+			font-weight: bold;
+		}
+
+		#bottom #socials a {
+			font-size: 1.5em;
+			text-decoration: none;
+		}
+
+		#contentbox {
+			display: inline-block;
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%
+		}
+
+		article {
+			text-align: left;
+			padding-bottom: 1.5em;
+		}
+		
+		article img {
+			width: 100%;
+		}
+
+		#subsequentbox {
+			text-align: center;
+			width: 100%;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+		}
+
+		.list {
+			padding: 1em;
+		}
+
+		.list ul {
+			text-align: left;
+		}
+
+		#blog {
+			text-align: justify;
+		}
+
+		.centeredtext {
+			text-align: center;
+		}
+
+		.video {
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%
+		}

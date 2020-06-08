@@ -152,6 +152,7 @@
 			padding-bottom: 1.5em;
 		}
 		
+		/* this was originally written for the graphs in the mapping afghanistan post */
 		article img {
 			width: 100%;
 		}

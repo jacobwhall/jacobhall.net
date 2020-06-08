@@ -1,0 +1,70 @@
+		/* sitewide stuff like fonts and title sizes */
+		body {
+			text-align: center;
+			font-family: 'Work Sans', sans-serif;
+			font-size: 100%;
+			font-size: max(100%, .4cm);
+		}
+
+		@media (max-aspect-ratio: 1/1) {
+			body {
+				font-size: 4vw;
+				font-size: min(4vw, .4cm);
+			}
+		}
+		body, h1, h2, h3, h4, h5, h6 {
+			font-size-adjust: 0.5;
+		}
+
+		ul {
+			list-style-position: inside;
+			padding-left: 0.5em;
+		}
+		
+		/* code highlighting rules */
+		.code {
+			overflow-x:auto;
+			/* white-space: pre-wrap; */
+			font-family: monospace;
+			color: #c5cdd9;
+			background-color: #2c2e34;
+			border: 1em solid #2c2e34;
+			border-radius: 1em;	
+		}
+		.code a {
+			color: inherit;
+		}
+		.code .Comment {
+			color: #828a98;
+			font-style: italic;
+		}
+		.code .Constant {
+			color: #a0c980;
+		}
+		/* not used? might remove. i don't make errors ;) */
+		.code .Error {
+			color: #ffffff;
+			background-color: #ff6060;
+			padding-bottom: 1px;
+		}
+		.code .Identifier {
+			color: #6cb6eb;
+		}
+		.code .PreProc {
+			color: #ec7279;
+		}
+		.code .Special {
+			color: #c5cdd9;
+		}
+		.code .Statement {
+			color: #d38aea;
+		}	
+		.code .vimCommand {
+			color: #d38aea;
+		}	
+		#license {
+			display: inline-block;
+			width: 50em;
+			min-width: 50%;
+			max-width: 100%;
+		}

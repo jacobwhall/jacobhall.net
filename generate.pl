@@ -77,3 +77,20 @@ $homepage =~ s/.*(?=<\/head>)/$thisstyle/;
 
 # Write homepage to index.php
 overwrite_file('index.php', $homepage);
+
+# delete generated recipes from last time
+
+# Check for recipes in recipe folder
+
+# make array for recipe names/links
+ 
+# for each recipe
+ 	
+# 	read title, filename, ingredients, directions
+# 	create recipe page using templates
+# 	write recipe page to /recipes/filename
+#	save title, filename to array
+
+# create /recipes/index.html using template
+
+# write /recipes/index.html

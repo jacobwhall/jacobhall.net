@@ -71,6 +71,12 @@
 		.code .vimCommand {
 			color: #d38aea;
 		}	
+		.code .texStatement {
+			color: #6cb6eb;
+		}
+		.code .texSpecial {
+			color: #deb974;
+		}
 		#license {
 			display: inline-block;
 			width: 50em;

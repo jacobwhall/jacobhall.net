@@ -1,0 +1,57 @@
+<article>
+<h2>⌨️  A vim / LaTeX workflow for taking notes</h2>
+<p>
+I've been looking into how to take notes for my classes in vim / LaTeX.
+This might sound like an odd choice, but it has a lot of benefits:
+</p>
+<pre class="code" id="animation1">
+(Enable JavaScript to view animation)
+</pre>
+<p>
+There are some much more advanced things you can do as well.
+Here's a snippet in action that evaluates any expression in Octave, and replaces the block with the result:
+</p>
+<pre class="code" id="animation2">
+(Enable JavaScript to view animation)
+</pre>
+	<script>
+		let animations = [
+			["animation1", 0, [
+				"█",
+				"/█",
+				"//█",
+				"<span class=\"texStatement\">\\frac</span>{█{}",
+				"<span class=\"texStatement\">\\frac</span>{█{}",
+				"<span class=\"texStatement\">\\frac</span>{3█{}",
+				"<span class=\"texStatement\">\\frac</span>{3}{█",
+				"<span class=\"texStatement\">\\frac</span>{3}{x█",
+				"<span class=\"texStatement\">\\frac</span>{3}{x+█",
+				"<span class=\"texStatement\">\\frac</span>{3}{x+4█",
+				"<span class=\"texStatement\">\\frac</span>{3}{x+4}█"]],
+
+			["animation2", 0, [
+	 			"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> █",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">o</span>█",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oc</span>█",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct</span>█",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct █oct</span>",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct █oct</span>",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct 1█oct</span>",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct 1+█oct</span>",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct 1+2█oct</span>",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct 1+2 oct</span>█",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">oct 1+2 oct</span>█",
+				"<span class=\"texSpecial\">1 + 2</span> <span class=\"texStatement\">=</span> <span class=\"texSpecial\">3</span>█"]],
+
+			];
+		function animate(){
+			for (let i = 0; i < animations.length; i++) {
+				document.getElementById(animations[i][0]).innerHTML = animations[i][2][animations[i][1]];
+				animations[i][1]++;
+				if (animations[i][1] >= animations[i][2].length) animations[i][1] = 0;
+			}
+		}
+		animate();
+		window.setInterval(animate, 500);
+	</script>
+</article>

@@ -1,0 +1,86 @@
+<article>
+<h2>📹 Zooming in Linux Pt. 1: My Video Setup</h2>
+<p>
+Streaming on Linux often feels like a double-edged sword, simultaneously finicky and powerful.
+Like many people, this year I started video conferencing more often, and decided to invest some time and money into a setup that works comfortably on Linux.
+</p>
+<h3>Hardware</h3>
+<p>
+I do the majority of my work on my desktop computer, which almost exclusively runs Linux (I've been dual-booting Windows to run Creative Cloud and ArcGIS, but that's a blog post for another day).
+I have a <a href="https://en.wikipedia.org/wiki/Panasonic_Lumix_DMC-G7">Panasonic Lumix G7</a> camera, and wanted to use it for this setup.
+After researching video capture cards that play well with Linux, I purchased a <a href="https://www.blackmagicdesign.com/products/decklink/techspecs/W-DLK-33">Blackmagic DeckLink Mini Recorder 4K</a>.
+Along with the HDMI cable that marries them, and a little tripod to hold my camera up over my monitor, these pieces of hardware have enabled a comfortable webcam setup for me.
+</p>
+<h3>Installing v4l2loopback</h3>
+<p>
+In order for any video conferencing software to recognize our video stream as a webcam input, we need to use a kernel module entitled <a href="https://github.com/umlaeute/v4l2loopback">v4l2loopback</a>.
+This module creates dummy video devices that can be written or read by any application.
+<a href="https://github.com/umlaeute/v4l2loopback#install"Installing v4l2loopback</a> is a relatively simple process:
+<ol>
+	<li>Download the <a href="https://github.com/umlaeute/v4l2loopback/releases">latest release</a> of v4l2loopback and unpack it</li>
+	<li>cd to the unpacked directory, and run <pre class="code">make && sudo make install</pre></li>
+	<li>run the command <pre class="code">sudo depmod -a</pre></li>
+</ol>
+With any luck, v4l2loopback should now be installed!
+The <span class="code">make</span> command might spit out some SSL errors, which AFAIK are safe to ignore.
+You can now start your very own dummy video feed using the following command:
+<pre class="code">
+sudo modprobe v4l2loopback video_nr=10 card_label="webcam"
+</pre>
+After executing that command and restarting Zoom, it should now recognize a video input entitled "webcam," found at /dev/video10.
+If your video conferencing software uses Chrome/WebRTC, try tacking on "exclusive_caps=1" to the command:
+<pre class="code">
+sudo modprobe v4l2loopback video_nr=10 card_label="webcam" exclusive_caps=1
+</pre>
+which should solve any issues discovering the device.
+As far as I can tell, using the exclusive_caps option does not affect Zoom's performance.
+</p>
+<h3>Streaming Option 1: OBS Studio</h3>
+<p>
+OBS Studio is immensely popular among streamers, and has very good Linux support.
+It's an incredibly powerful piece of software, and is ideal if you want to overlay text, screenshares, other videos, etc. to your video stream.
+Setting up OBS Studio with my Blackmagic card was as simple as installing the <a href="https://www.blackmagicdesign.com/support/family/capture-and-playback">Blackmagic "Desktop Video" software for Linux</a>, and the <a href="https://github.com/CatxFish/obs-v4l2sink">obs-v4l2sink plugin</a> for OBS Studio.
+Installing these was fairly straightforward for me, but the process may differ based on your distribution.
+I'd recommend checking out <a href="https://www.eigenmagic.com/2020/04/22/how-to-use-obs-studio-with-zoom/">this article by Justin Warren</a> or <a href="https://jsmanrique.es/using-your-obs-output-as-input-for-your-webcam-in-debian/">this one by José Manrique</a> for help configuring obs-v4l2sink.
+</p>
+<p>
+Before trying out the new setup make sure you've executed modprobe commands since your last reboot!
+With those installed, open OBS Studio and navigate to Tools &gt; V4L2 Video Output, which will open a window entitled "V4l2sinkProperties."
+Check "Auto Start" if you'd like OBS Studio to automatically start the V4L2 video output on startup, and make sure the "Path to V4L2 Device" box corresponds to the correct video_nr in your modprobe command (if you used my example, it should say "/dev/video10")
+You might have to play with the Video Format dropdown, but for me "YUV420" has always worked fine.
+Now, hit start and close the pop-up.
+In the bottom left of the main OBS Studio window, add a new scene and then add a Blackmagic Device to its sources.
+With any luck, you should now see the output of your camera displayed in OBS!
+</p>
+<h3>Streaming Option 2: gstreamer</h3>
+<p>
+I have two reasons for wanting to use gstreamer instead of OBS Studio:
+<ul>
+	<li>I sometimes need to record my video feed as I'm streaming, which my computer is not powerful enough to do in OBS</li>
+	<li>It is entirely command-line based, which lets me run a single script to get my webcam up and running</li>
+</ul>
+gstreamer pipelines seem to be notoriously complex and fickle, so to be honest you might need to play around with it until you find something that suits you.
+Here is my pipeline command, I'll try to explain what it does:
+<pre class="code">
+gst-launch-1.0 decklinkvideosrc mode=1080p5994 ! videoconvert ! v4l2sink device="/dev/video10"
+</pre>
+This pipeline takes my decklink (Blackmagic) video source in 1080p, converts it, and outputs it to the v4l2sink device I created using modprobe.
+</p>
+<p>
+Recording video live is difficult, and requires a lot of processing power.
+I've had to record a few interviews I have conducted over Zoom, for which I want my captured video to be as crisp as possible.
+This is where another piece of hardware comes in: my graphics card.
+A couple of months ago I purchased a Radeon RX 5600XT, and spent some time getting it to play nice with my gstreamer pipeline:
+<pre class="code">
+gst-launch-1.0 decklinkvideosrc mode=1080p5994 ! videoconvert ! tee name=t !\
+	queue ! v4l2sink device="/dev/video10" t. !\
+	queue ! vaapih264enc ! avimux ! filesink location=videotestsrc.avi
+</pre>
+This pipeline takes the decklink feed and sends it in two directions: to my v4l2loopback device, and to a file via my graphics card's h264 encoding.
+By encoding the video in real-time to the h264 codec using my graphics card, I get the added benefit of small file sizes.
+If you also need to record your high-resolution video feed as you stream it, this has proved to be an effective solution for me that I recommend.
+</p>
+<p>
+See you in Zoomland!
+</p>
+</article>

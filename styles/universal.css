@@ -26,10 +26,12 @@
 			overflow-x:auto;
 			/* white-space: pre-wrap; */
 			font-family: monospace;
-			color: #c5cdd9;
-			background-color: #2c2e34;
+		}
+		pre.code {
 			border: 1em solid #2c2e34;
 			border-radius: 1em;	
+			color: #c5cdd9;
+			background-color: #2c2e34;
 		}
 		.code a {
 			color: inherit;

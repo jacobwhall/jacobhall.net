@@ -46,7 +46,12 @@ foreach (@dirs) {
 		$thisbeginning =~ s/(?<=<title>).*(?=<\/title>)/$title/;
 		
 		# Write article last modified timestamp to variable
-		my $epoch_timestamp = (stat($year.'/'.$name.'/'.$name.'.html'))[9];
+		$epoch_timestamp = (stat($year.'/'.$name.'/'.$name.'.html'))[9];
+		$dt_timestamp = DateTime->from_epoch( epoch => $epoch_timestamp );
+		
+		# Convert timestamp to ISO 8601 and human readable formats
+		$iso8601_timestamp = $dt_timestamp->iso8601();
+		$readable_timestamp = $dt_timestamp->month_name()." ".$dt_timestamp->day().", ".$dt_timestamp->year();
 		
 		# Assume that we should not overwrite article title: it is already written in .html
 		$writearticletitle = 0;
@@ -56,7 +61,6 @@ foreach (@dirs) {
 
 			# For this article we should write the article title, as well as timestamp
 			$writearticletitle = 1;
-			$timestamp = DateTime->from_epoch( epoch => $epoch_timestamp )->iso8601();
 		}
 
 		# Construct the style for this page
@@ -74,10 +78,10 @@ foreach (@dirs) {
 		}
 
 		if ($writearticletitle) {
-	$schema = "<script type=\"application/ld+json\">\n\t{\n\t\"\@context\": \"https://schema.org\",\n\t\"\@type\": \"BlogPosting\",\n\t\"headline\": \"$title\",\n\t\"author\": {\n\t\t\"\@type\": \"Person\",\n\t\t\"name\": \"Jacob Hall\"\n\t},\n\t\"dateModified\": \"$timestamp\"\n\t}\n\t</script>";
+	$schema = "<script type=\"application/ld+json\">\n\t{\n\t\"\@context\": \"https://schema.org\",\n\t\"\@type\": \"BlogPosting\",\n\t\"headline\": \"$title\",\n\t\"author\": {\n\t\t\"\@type\": \"Person\",\n\t\t\"name\": \"Jacob Hall\"\n\t},\n\t\"dateModified\": \"$iso8601_timestamp\"\n\t}\n\t</script>";
 			$thisbeginning =~ s/.*(?=<\/head>)/$schema/;
 			# Add <article> and title to top of article
-			$thisbeginning .= "\n<article>\n<h2>".$title."</h2>\n";
+			$thisbeginning .= "\n<article>\n<h2>".$title."</h2>\nLast updated on ".$readable_timestamp."\n";
 			# Write the concatenated $beginning, $article, and end tags to index.php, including title and <article> tags
 			overwrite_file($year.'/'.$name.'/index.html', $thisbeginning.$article."</article>\n</body>\n</html>");
 

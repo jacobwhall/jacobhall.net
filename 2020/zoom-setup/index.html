@@ -269,7 +269,18 @@ u:-webkit-scrollbar {
 			text-align: center;
 		}
 		</style>
-</head>
+<script type="application/ld+json">
+	{
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	"headline": "📹 Zooming in Linux Pt. 1: My Video Setup",
+	"author": {
+		"@type": "Person",
+		"name": "Jacob Hall"
+	},
+	"dateModified": ""
+	}
+	</script></head>
 <body>
         <div id="sidebar">
                 <a class="nostyle" href="/">
@@ -286,11 +297,12 @@ u:-webkit-scrollbar {
                         <h5>⬅️ Jacob Hall's weblog</h5>
                 </a>
         </div>
+
 <article>
 <h2>📹 Zooming in Linux Pt. 1: My Video Setup</h2>
 <p>
 Streaming on Linux often feels like a double-edged sword, simultaneously finicky and powerful.
-Like many people, this year I started video conferencing, and decided to invest some time and money into a setup that works comfortably on Linux.
+Like many people, this year I started video conferencing more often, and decided to invest some time and money into a setup that works comfortably on Linux.
 </p>
 <h3>Hardware</h3>
 <p>
@@ -303,7 +315,7 @@ Along with the HDMI cable that marries them, and a little tripod to hold my came
 <p>
 In order for any video conferencing software to recognize our video stream as a webcam input, we need to use a kernel module entitled <a href="https://github.com/umlaeute/v4l2loopback">v4l2loopback</a>.
 This module creates dummy video devices that can be written or read by any application.
-<a href="https://github.com/umlaeute/v4l2loopback#install"Installing v4l2loopback</a> is a relatively simple process:
+<a href="https://github.com/umlaeute/v4l2loopback#install">Installing v4l2loopback</a> is a relatively simple process:
 <ol>
 	<li>Download the <a href="https://github.com/umlaeute/v4l2loopback/releases">latest release</a> of v4l2loopback and unpack it</li>
 	<li>cd to the unpacked directory, and run <pre class="code">make && sudo make install</pre></li>

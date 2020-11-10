@@ -56,7 +56,7 @@ foreach (@dirs) {
 
 			# For this article we should write the article title, as well as timestamp
 			$writearticletitle = 1;
-			my $timestamp = DateTime->from_epoch( epoch => $epoch_timestamp )->iso8601();
+			$timestamp = DateTime->from_epoch( epoch => $epoch_timestamp )->iso8601();
 		}
 
 		# Construct the style for this page

@@ -23,6 +23,10 @@ u:-webkit-scrollbar {
 	text-align: left;
 	line-height: 2em;
 }
+.date {
+	color: gray;
+	font-style: italic;
+}
 .nostyle {
 	color: black;
 	text-decoration: none;

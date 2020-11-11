@@ -81,7 +81,7 @@ foreach (@dirs) {
 	$schema = "<script type=\"application/ld+json\">\n\t{\n\t\"\@context\": \"https://schema.org\",\n\t\"\@type\": \"BlogPosting\",\n\t\"headline\": \"$title\",\n\t\"author\": {\n\t\t\"\@type\": \"Person\",\n\t\t\"name\": \"Jacob Hall\"\n\t},\n\t\"dateModified\": \"$iso8601_timestamp\"\n\t}\n\t</script>";
 			$thisbeginning =~ s/.*(?=<\/head>)/$schema/;
 			# Add <article> and title to top of article
-			$thisbeginning .= "\n<article>\n<h2>".$title."</h2>\nLast updated on ".$readable_timestamp."\n";
+			$thisbeginning .= "\n<article>\n<h2>".$title."</h2>\n<span class=\"date\">Last updated on ".$readable_timestamp."</span>\n";
 			# Write the concatenated $beginning, $article, and end tags to index.php, including title and <article> tags
 			overwrite_file($year.'/'.$name.'/index.html', $thisbeginning.$article."</article>\n</body>\n</html>");
 

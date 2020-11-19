@@ -273,7 +273,18 @@ u:-webkit-scrollbar {
 			text-align: center;
 		}
 		</style>
-</head>
+<script type="application/ld+json">
+	{
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	"headline": "Mapping Education Development Projects in Afghanistan",
+	"author": {
+		"@type": "Person",
+		"name": "Jacob Hall"
+	},
+	"dateModified": "2020-11-19T19:10:28"
+	}
+	</script></head>
 <body>
         <div id="sidebar">
                 <a class="nostyle" href="/">
@@ -290,6 +301,10 @@ u:-webkit-scrollbar {
                         <h5>⬅️ Jacob Hall's weblog</h5>
                 </a>
         </div>
+
+<article>
+<h2>Mapping Education Development Projects in Afghanistan</h2>
+<span class="date">Last updated on November 19, 2020</span>
 <article>
 <h2>📍 Mapping Education Development Projects in Afghanistan</h2>
 <p>
@@ -364,7 +379,8 @@ pop_map <span class="Statement">+</span>
              fill <span class="Statement">=</span> <span class="Constant">NA</span><span class="Special">)</span> <span class="Statement">+</span>
   <span class="Identifier">coord_equal</span><span class="Special">()</span>
 </pre>
-<img src="/2020/mapping-education-afghanistan/pop_map_1.png" alt="Population heatmap of Afghanistan with projects overlayed as circles">
+<img src="/2020/mapping-education-afghanistan/pop_map_1_small.jpg" alt="Population heatmap of Afghanistan with projects overlayed as circles">
+<a href="/2020/mapping-education-afghanistan/pop_map_1.png">Full-size image</a>
 <p>
 That looks great! I know it's wrong to not have units for the population density scale, and that's something I'd like to fix. The value of each pixel in the original image represented the number of people in the area that it covered, so the numbers on this scale should represent the number of people who live within each of the aggregated chunks. I think this issue would be best solved by calculating the distance each chunk covers in mi/km, and then adjusting the values in the legend to represent people per square mi/km.
 </p>
@@ -385,7 +401,8 @@ near_kabul <span class="Statement">&lt;-</span> <span class="Identifier">filter<
 <span class="Identifier">nrow</span><span class="Special">(</span>near_kabul<span class="Special">)</span>
 <span class="Comment"># I've suppressed the output of this code chunk so that I can call this command inline</span>
 </pre>
-<img src="/2020/mapping-education-afghanistan/pop_map_2.png" alt="The same population heatmap, with one larger circle around Kabul">
+<img src="/2020/mapping-education-afghanistan/pop_map_2_small.jpg" alt="The same population heatmap, with one larger circle around Kabul">
+<a href="/2020/mapping-education-afghanistan/pop_map_2_small.jpg">Full-size image</a>
 <p>
 I think that looks a lot nicer, although it might benefit from more detailed info in the legend about what different sizes of circles indicate. I don't notice anything groundbreaking on this map. There might be fewer projects on the Western side of the country, but I guess that has more to do with the population around Kabul than any other bias. Kabul is nearly 10 times as populous as the second-biggest city, Kandahar, so it is no surprise to see a majority of projects in that region.
 </p>
@@ -404,6 +421,7 @@ Other variables could be controlled to better represent the differences in aid a
   WorldPop (www.worldpop.org - School of Geography and Environmental Science, University of Southampton; Department of Geography and Geosciences, University of Louisville; Departement de Geographie, Universite de Namur) and Center for International Earth Science Information Network (CIESIN), Columbia University (2018). Global High Resolution Population Denominators Project - Funded by The Bill and Melinda Gates Foundation (OPP1134076). https://dx.doi.org/10.5258/SOTON/WP00645
     The data from WorldPop used in this project were downloaded from <a href="https://www.worldpop.org/geodata/summary?id=6324">this page</a>.
 </p>
+</article>
 </article>
 </body>
 </html>

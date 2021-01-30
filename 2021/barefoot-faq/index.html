@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>👣 Barefoot FAQs</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#FFFFFF"/>
+		<!-- <link rel="stylesheet" type="text/css" href="/articlestyle.css"> -->
+		<style>
+		/* sitewide stuff like fonts and title sizes */
+		body {
+			text-align: center;
+			font-family: 'Work Sans', sans-serif;
+			font-size: 100%;
+			font-size: max(100%, .4cm);
+		}
+
+		@media (max-aspect-ratio: 1/1) {
+			body {
+				font-size: 4vw;
+				font-size: min(4vw, .4cm);
+			}
+		}
+		body, h1, h2, h3, h4, h5, h6 {
+			font-size-adjust: 0.5;
+		}
+
+		ul {
+			list-style-position: inside;
+			padding-left: 0.5em;
+		}
+		
+		/* code highlighting rules */
+		.code {
+			overflow-x:auto;
+			/* white-space: pre-wrap; */
+			font-family: monospace;
+		}
+		pre.code {
+			border: 1em solid #2c2e34;
+			border-radius: 1em;	
+			color: #c5cdd9;
+			background-color: #2c2e34;
+		}
+		.code a {
+			color: inherit;
+		}
+		.code .Comment {
+			color: #828a98;
+			font-style: italic;
+		}
+		.code .Constant {
+			color: #a0c980;
+		}
+		/* not used? might remove. i don't make errors ;) */
+		.code .Error {
+			color: #ffffff;
+			background-color: #ff6060;
+			padding-bottom: 1px;
+		}
+		.code .Identifier {
+			color: #6cb6eb;
+		}
+		.code .PreProc {
+			color: #ec7279;
+		}
+		.code .Special {
+			color: #c5cdd9;
+		}
+		.code .Statement {
+			color: #d38aea;
+		}	
+		.code .vimCommand {
+			color: #d38aea;
+		}	
+		.code .texStatement {
+			color: #6cb6eb;
+		}
+		.code .texSpecial {
+			color: #deb974;
+		}
+		#license {
+			display: inline-block;
+			width: 50em;
+			min-width: 50%;
+			max-width: 100%;
+		}
+u:-webkit-scrollbar {
+    display: none;
+}
+
+.warning {
+  color:red;
+}
+#backprofilepic {
+	border-radius: 50%;
+	height: 4em;
+}
+/*
+#backarrow {
+  width: 6em;
+  height: 6em;
+  padding-top: 1.25em;
+  padding-left: 1.25em;
+  border-radius: 50%;
+}
+*/
+#sidebar {
+	padding: 1em;
+	text-align: left;
+	line-height: 2em;
+}
+.date {
+	color: gray;
+	font-style: italic;
+}
+.nostyle {
+	color: black;
+	text-decoration: none;
+}
+
+		table {
+			margin: 0 auto;
+			border-collapse: collapse;
+			margin-bottom: 1em;
+		}
+		table, th, td {
+			border: 1px solid black;
+		}
+		th, td {
+			padding: .5em;
+		}
+		#scifairimg {
+			object-fit: scale-down;
+			width: 100%;
+			max-width: 40em;
+		}
+		.graph {
+			object-fit: contain;
+			width: 100%;
+			max-width: 30em;
+		}
+		.graphboxwrapper {
+			text-align: center;
+		}
+		.graphbox {
+			display:inline-block;
+			padding: .75em;
+			border: 1px solid lightgrey;
+		}
+		.slider {
+			object-fit: contain;
+			width: 100%;
+			max-width: 34.5em;
+		}
+		#backprofilepic {
+			border-radius: 50%;
+			height: 4em;
+		}
+		#sidebar {
+			padding: 1em;
+			text-align: left;
+			line-height: 2em;
+		}
+		.nostyle {
+			color: black;
+			text-decoration: none;
+		}
+
+		/* entire container, keeps perspective */
+		.flip-container {
+			float: left;
+			padding-right: 1em;
+			padding-bottom: 1em;
+			display: inline-block;	
+			perspective: 1000px;
+		}
+		.flip-container, .front, .back {
+			border-radius: 50%;
+			width: 4em;
+			height: 4em;
+		}
+		/* flip speed goes here */
+		.flipper {
+			transition: 0.4s;
+			transform-style: preserve-3d;
+			position: relative;
+		}
+		/* hide back of pane during swap */
+		.front, .back {
+			text-align: center;
+			backface-visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;	
+		}
+		/* front pane, placed above back */
+		.front {
+			z-index: 2;
+			/* for firefox 31 */
+			transform: rotateY(0deg);
+		}
+		/* back, initially hidden pane */
+		.back {
+			line-height:4em;
+			transform: rotateY(180deg);
+			background-color: lightgrey;
+		}
+		.back span {
+			font-size: 3em;
+		}
+		@media (min-width: 80em) {
+			#backprofilepic {
+				height: 8em;
+				width: 8em;
+			}
+			#sidebar {
+				position: absolute;
+				left: 5em;
+				/* distance from left side should = distance from left side of article to the left side of the window divided by two, and then subtract 5em */
+				left: calc(calc(calc(50% - 25em) / 2) - 5em);
+				top: 5em;
+				text-align: center;
+				line-height: 0px;
+			}
+			.flip-container {
+				float: none;
+				padding: 0px;
+			}
+			/* flip the pane when hovered */
+			.flip-container:hover .flipper, .flip-container.hover .flipper {
+				transform: rotateY(180deg);
+			}
+			.flip-container, .front, .back {
+				width: 8em;
+				height: 8em;
+			}
+			.back {
+				line-height: 8em;
+			}
+			.back span {
+				font-size: 6em;
+			}
+		}
+		#contentbox {
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%
+		}
+		article {
+			display: inline-block;
+			text-align: left;
+			/* padding-left: 15vw; */
+			/* width: 70vw; */
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%;
+			padding-bottom: 5em;
+		}
+		@media (min-width: 80em) {
+			article {
+				padding-top: 5em;
+			}
+		}
+		article h1:first-of-type {
+			line-height: 0px;
+		}
+		/* this was originally written for the graphs in the mapping afghanistan post */
+		article img {
+			width: 100%;
+		}
+		.centeredtext {
+			text-align: center;
+		}
+		</style>
+<script type="application/ld+json">
+	{
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	"headline": "👣 Barefoot FAQs",
+	"author": {
+		"@type": "Person",
+		"name": "Jacob Hall"
+	},
+	"dateModified": "2021-01-30T21:09:04"
+	}
+	</script></head>
+<body>
+        <div id="sidebar">
+                <a class="nostyle" href="/">
+                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                        <div class="flipper">
+                                <div class="front">
+                                        <img class="profilepic" id="backprofilepic" src="/images/toothbrush_profile_small.jpg" alt="sexy mirror selfie"/>
+                                </div>
+                                <div class="back">
+                                        <span>🏠</span>
+                                </div>
+                        </div>
+                </div>
+                        <h5>⬅️ Jacob Hall's weblog</h5>
+                </a>
+        </div>
+
+<article>
+<h2>👣 Barefoot FAQs</h2>
+<span class="date">Last updated on January 30, 2021</span>
+<p>
+I've been going barefoot for many years now, since my ~sophomore year of high school.
+I don't think I've ever met anyone who's gone barefoot as much as I have, so as you might imagine I get a lot of questions about the practice.
+Writing this post is, as usual, mostly for my own benefit.
+However, I'll try to make it interesting to anyone who'd like to read some stories about my experiences!
+</p>
+<h3>Why do you go barefoot?</h3>
+<p>
+In short, I find it more comfortable.
+</p>
+<ul>
+	<li>It feels nice to "feel the ground" with my feet.
+	There are so many interesting sensations! Texture, temperature, etc.</li>
+	<li>Shoes are uncomfortable for me.
+	I only want to wear them when I need to keep my feet warm, kinda like gloves.</li>
+	<li>Going barefoot is increasingly a part of my identity.
+	I feel more myself when I'm barefoot, and I love meeting other people who enjoy to go barefoot.</li>
+</ul>
+<p>
+Sometimes people will ask me if I go barefoot to be "grounded" or for a heightened sense of spirituality.
+I honestly don't understand much about the concept of grounding, and it's not something I ever think about.
+As an atheist, I don't find much religious or spiritual meaning in going barefoot, but it's cool that other people do!
+</p>
+<p>
+People have also told me that I go barefoot to attract more attention.
+I love meeting and talking to people, and freely admit to expressing myself in ways that spur conversations!
+I honestly forget that It's Weird To Go Barefoot.
+Along with the way I dress, do my hair..., the way I express myself is genuine.
+It's ok if you don't think my self-expression is attractive or sexy or tasteful, but I do!
+</p>
+<h3>When do you go barefoot?</h3>
+<p>
+In the warm season, which for me in Williamsburg, Virginia is ~March-October.
+I plan to move somewhere warmer after I graduate from college, so that I can go barefoot all year and generally avoid cold weather.
+</p>
+<h3>Where do you go barefoot?</h3>
+<p>
+Wherever I'm allowed to, which is most everywhere.
+There are no laws (to my knowledge) that disallow it, so I'm only banned from places that intentionally ban me.
+</p>
+<h3>Have you ever been kicked out of somewhere?</h3>
+<p>
+Yes, plenty of times.
+</p>
+<p>
+During the 2018 March for Our Lives protest, a large group of students from my high school marched from our school to the Capitol Building.
+Once things had wrapped up, I really had to pee.
+We were close to the National Museum of the American Indian, and knowing that they have a public bathroom I popped in for a minute.
+The security stopped me, asking if I had shoes.
+When I said that I did not and just needed to use the bathroom, they asked their supervisor and they said that I may not enter the museum without shoes on.
+I'd peed myself a little by the time I got into the Botanic Garden bathroom!
+</p>
+<p>
+When I was a student at James Madison University I was frequently asked to leave the dining halls, but I don't recall any issues going barefoot to class, except for a bio lab professor who required closed-toe shoes in class.
+The following year I transferred to William &amp; Mary, and started having similar problems with dining hall employees asking me to leave.
+I filed a complaint with the Office of Compliance &amp; Equity, who forwarded my case to a Human Resources Manager for William &amp; Mary Dining Services.
+He kindly investigated the issue for me, and concluded that there are no laws, "Food Safety issues," or campus policies that say I shouldn't go barefoot in dining facilities.
+Since then I've been asked to leave dining halls a number of times, but I've either been able to show them that email, or they've been intercepted by a manager.
+</p>
+<p>
+When an employee at a store or restaurant asks me to leave, I try not to make too much of a fuss.
+Maybe it could be seen as discrimination, but I do want to respect the wishes of store owners.
+It doesn't happen very often though, and for every time it does, there's another time where an employee apologizes to me about a spill on aisle X or something like that.
+Once the owner of a Kebab restaurant came out from the back and profusely apologized to me because she hadn't cleaned the floor that day!
+Writing that story years later brings a smile to my face 😁
+</p>
+<h3>Have you ever hurt your feet?</h3>
+<p>
+Never very badly.
+My feet are pretty tough at this point, and I watch the ground as I walk!
+I can remember a two minor cuts I've gotten on my feet that stopped bleeding very quickly.
+I can say with certainty that I've cut my hands and stubbed my toes indoors way more times!
+I'm also very confident at this point about the risk: I've stepped on a lot of things and understand how they can feel or even hurt me.
+Even if I do injure my feet severely, I doubt I'll stop going barefoot as long as I'm still able.
+</p>
+</article>
+</body>
+</html>

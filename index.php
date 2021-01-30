@@ -227,6 +227,7 @@
 ok so the current concept is free-form, undated articles each preceded by a relevant emoji
 </p>
 -->
+<?php include "2020/barefoot-faqs/barefoot-faqs.html"; ?>
 <?php include "2020/code-highlighting-vim/code-highlighting-vim.html"; ?>
 <?php include "2020/mapping-education-afghanistan/mapping-education-afghanistan.html"; ?>
 <div id="subsequentbox">

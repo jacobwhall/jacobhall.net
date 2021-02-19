@@ -211,7 +211,8 @@
 			&nbsp;&nbsp;
 			<a rel="me" title="my Instagram profile" href="https://www.instagram.com/jacobwhall/">📷</a>
 			&nbsp;&nbsp;
-			<a rel="me" title="my Keybase profile" href="https://keybase.io/totallyuneekname">🔑</a>
+			<!-- <a rel="me" title="my Keybase profile" href="https://keybase.io/totallyuneekname">🔑</a> -->
+			<a rel="me" title="my GitHub profile" href="https://github.com/jacobwhall">👨‍💻</a>
 			&nbsp;&nbsp;
 			<a rel="me" title="my Couchsurfing profile" href="https://www.couchsurfing.com/people/jacob-hall-10">🛋️</a>
 			&nbsp;&nbsp;

@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#FFFFFF"/>
 	<meta name="Description" content="Jacob Hall's personal website">
+	<link href="webmention.php" rel="webmention" />
 		<style>
 		/* sitewide stuff like fonts and title sizes */
 		body {

@@ -2,6 +2,7 @@
     "require": {
         "cboden/ratchet": "^0.4.3",
         "indieweb/mention-client": "^1.2",
-        "masterminds/html5": "^2.7"
+        "masterminds/html5": "^2.7",
+        "react/zmq": "^0.4.0"
     }
 }

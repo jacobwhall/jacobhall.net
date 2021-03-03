@@ -27,6 +27,7 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
         ),
         'R' => 
         array (
+            'React\\ZMQ\\' => 10,
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
             'React\\Promise\\Timer\\' => 20,
@@ -67,6 +68,10 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'React\\ZMQ\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/zmq/src',
         ),
         'React\\Stream\\' => 
         array (

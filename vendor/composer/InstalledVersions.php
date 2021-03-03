@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '5ec79b7676fbe5d40e71617ae03b2bbf43a5bb1d',
+    'reference' => 'eec05f1ab9e3f956208b2d45cf928e43b56578d6',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '5ec79b7676fbe5d40e71617ae03b2bbf43a5bb1d',
+      'reference' => 'eec05f1ab9e3f956208b2d45cf928e43b56578d6',
     ),
     'cboden/ratchet' => 
     array (
@@ -194,6 +194,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '7c02b510ee3f582c810aeccd3a197b9c2f52ff1a',
+    ),
+    'react/zmq' => 
+    array (
+      'pretty_version' => 'v0.4.0',
+      'version' => '0.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '13dec0bd2397adcc5d6aa54c8d7f0982fba66f39',
     ),
     'symfony/deprecation-contracts' => 
     array (

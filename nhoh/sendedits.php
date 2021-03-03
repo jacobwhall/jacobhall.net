@@ -1,4 +1,6 @@
 <?php
+/*
+// Archiving on March 3, 2021
 // the message
 $msg = "Name:" . $_POST["name"] . "\n\nAddress: " . $_POST["address"] . "\n\nDescription (or comment):" . $_POST["description"];
 
@@ -20,4 +22,5 @@ Thanks, your edits have been submitted! <a href='/nhoh'>head back</a>
 </p>
 </body>
 </html>");
+*/
 ?>

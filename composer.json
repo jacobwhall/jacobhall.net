@@ -1,4 +1,7 @@
 {
+    "autoload": {
+        "psr-4": {"desklight\\": "2021/desklight/"}
+    },
     "require": {
         "cboden/ratchet": "^0.4.3",
         "indieweb/mention-client": "^1.2",

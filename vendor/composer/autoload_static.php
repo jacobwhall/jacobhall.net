@@ -18,6 +18,10 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixLengthsPsr4 = array (
+        'd' => 
+        array (
+            'desklight\\' => 10,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -53,6 +57,10 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixDirsPsr4 = array (
+        'desklight\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/2021/desklight',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<title>Ceilings Instead of Skies</title>
+		<title>💡 Control my Desk Light</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#FFFFFF"/>
@@ -277,7 +277,7 @@ u:-webkit-scrollbar {
 	{
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
-	"headline": "Ceilings Instead of Skies",
+	"headline": "💡 Control my Desk Light",
 	"author": {
 		"@type": "Person",
 		"name": "Jacob Hall"
@@ -303,13 +303,75 @@ u:-webkit-scrollbar {
         </div>
 
 <article class="h-entry">
-<h2 class="p-name">Ceilings Instead of Skies</h2>
+<h2 class="p-name">💡 Control my Desk Light</h2>
 <span class="date">Last updated on March 8, 2021</span>
-<article>
-  <h1>Ceilings Instead of Skies</h1>
-<p>My brilliant friend Aidan Walker wrote a collection of poems entitled <i>Ceilings Instead of Skies</i>. He proposed to me a concept for a website on which readers could explore the collection, by clicking on key words in each poem that would lead to a random poem that shared that theme.</p>
-<p>I don't want to take much credit for this project: Aidan was very specific about how he'd like the poems to link together. The site is still a work in progress, but you can check it out <a href="https://wordways.us">here</a>.</p>
-</article>
+<div>
+	<input id="colorPicker" type="color" value="#ff0000">
+	<button id="sendcolor">Send Color</button>
+</div>
+<script>
+	var color = document.getElementById('colorPicker');
+	sendbutton = document.getElementById('sendcolor');
+	ws = new WebSocket("wss://ws.jacobhall.net:8080/");
+	message = "hello";
+	ws.onmessage = function (event) {
+		recvColor = event.data;
+		console.log("Current color is ".concat(recvColor));
+	};
+	function convertHex(hex) {
+		var bigint = parseInt(hex, 16);
+		var r = (bigint >> 16) & 255;	// RGB value for R
+		var g = (bigint >> 8) & 255;	// RGB value for G
+		var b = bigint & 255;		// RGB value for B
+		// At this point r, g, b are the actual RGB values.
+		// Now converting to HSL
+		r /= 255;
+		g /= 255;
+		b /= 255;
+		let cmin = Math.min(r,g,b),
+			cmax = Math.max(r,g,b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0;
+
+		if (delta == 0) h = 0;
+		else if (cmax == r)
+			h = ((g - b) / delta) % 6;
+		else if (cmax == g)
+			h = (b - r) / delta + 2;
+		else
+			h = (r - g) / delta + 4;
+
+		h = Math.round(h * 60);
+
+		if (h < 0) h += 360;
+
+		l = (cmax + cmin) / 2;
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		s = +(s * 65535).toFixed(0);
+
+		// now converting hue to LIFX range
+		h = ((h * 65535) / 360).toFixed(0);
+		//  l = +(l * 100).toFixed(1);
+
+		return h + "," + s;
+	}
+
+	sendbutton.onclick = function (event) {
+		console.log("send button was clicked. value of color picker:")
+		var hexcode = color.value;
+		while(hexcode.charAt(0)=="#") {
+			hexcode = hexcode.substring(1);
+		}
+		console.log("input hex code:")
+		console.log(hexcode);
+		var colorToSend = convertHex(hexcode);
+		console.log("converted to LIFX hue/sat:");
+		console.log(colorToSend);
+		ws.send(colorToSend);
+  }
+</script>
 </article>
 </body>
 </html>

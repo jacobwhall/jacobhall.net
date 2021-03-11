@@ -6,10 +6,14 @@
 	var color = document.getElementById('colorPicker');
 	sendbutton = document.getElementById('sendcolor');
 	ws = new WebSocket("wss://ws.jacobhall.net:8080/");
-	message = "hello";
+	var message;
 	ws.onmessage = function (event) {
 		recvColor = event.data;
 		console.log("Current color is ".concat(recvColor));
+		colorUpdate = recvColor.split(",");
+		hexUpdate = convertMessage(colorUpdate[0], colorUpdate[1], colorUpdate[2]);
+		console.log("Updated hex:".concat(hexUpdate));
+		color.value = hexUpdate;
 	};
 	function convertHex(hex) {
 		var bigint = parseInt(hex, 16);
@@ -46,11 +50,54 @@
 
 		// now converting hue to LIFX range
 		h = ((h * 65535) / 360).toFixed(0);
-		//  l = +(l * 100).toFixed(1);
+		l = +(l * 65535).toFixed(0);
 
-		return h + "," + s;
+		return h + "," + s + "," + l;
 	}
 
+	function convertMessage(h,s,l) {
+
+		// Must be fractions of 1
+		h *= 0.005493248;
+		s /= 65535;
+		l /= 65535;
+
+  let c = (1 - Math.abs(2 * l - 1)) * s,
+      x = c * (1 - Math.abs((h / 60) % 2 - 1)),
+      m = l - c/2,
+      r = 0,
+      g = 0,
+      b = 0;
+if (0 <= h && h < 60) {
+    r = c; g = x; b = 0;  
+  } else if (60 <= h && h < 120) {
+    r = x; g = c; b = 0;
+  } else if (120 <= h && h < 180) {
+    r = 0; g = c; b = x;
+  } else if (180 <= h && h < 240) {
+    r = 0; g = x; b = c;
+  } else if (240 <= h && h < 300) {
+    r = x; g = 0; b = c;
+  } else if (300 <= h && h < 360) {
+    r = c; g = 0; b = x;
+  }
+  r = Math.round((r + m) * 255);
+  g = Math.round((g + m) * 255);
+  b = Math.round((b + m) * 255);
+
+ r = r.toString(16);
+  g = g.toString(16);
+  b = b.toString(16);
+
+  if (r.length == 1)
+    r = "0" + r;
+  if (g.length == 1)
+    g = "0" + g;
+  if (b.length == 1)
+    b = "0" + b;
+
+  return "#" + r + g + b;
+}
 	sendbutton.onclick = function (event) {
 		console.log("send button was clicked. value of color picker:")
 		var hexcode = color.value;

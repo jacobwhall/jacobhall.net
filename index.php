@@ -80,7 +80,7 @@
 		.code .texSpecial {
 			color: #deb974;
 		}
-		#license {
+		#license #indiewebring {
 			display: inline-block;
 			width: 50em;
 			min-width: 50%;
@@ -206,6 +206,7 @@
 	</div>
 	<div id="bottom">
 		<h1 class="p-name">Jacob Hall</h1>
+		<data class="p-note">Student at William &amp; Mary studying geology and coding in his free time</data>
 		<p><i>howdy! this is my weblog.<br>please leave your shoes by the door</i></p>
 		<p id="socials">
 			<a class="u-email" title="email me" href="mailto:totallyuneekemail@gmail.com">📧</a>
@@ -273,9 +274,11 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 </div>
 </div>
 <footer>
-<a href="https://xn--sr8hvo.ws/%F0%9F%9A%84%F0%9F%8F%8B%F0%9F%94%A7/previous">←</a>
-  An IndieWeb Webring 🕸💍
-  <a href="https://xn--sr8hvo.ws/%F0%9F%9A%84%F0%9F%8F%8B%F0%9F%94%A7/next">→</a>
+<div id="indiewebring">
+	<a href="https://xn--sr8hvo.ws/%F0%9F%9A%84%F0%9F%8F%8B%F0%9F%94%A7/previous">←</a>
+	An IndieWeb Webring 🕸💍
+	<a href="https://xn--sr8hvo.ws/%F0%9F%9A%84%F0%9F%8F%8B%F0%9F%94%A7/next">→</a>
+</div>
 <div id="license">
 <p>
 <p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">

@@ -20,6 +20,10 @@
 			list-style-position: inside;
 			padding-left: 0.5em;
 		}
+		/* h-entry rules */
+		.p-note {
+			display: none;
+		}
 		
 		/* code highlighting rules */
 		.code {

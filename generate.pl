@@ -13,6 +13,15 @@ $universalstyle = read_file("styles/universal.css");
 $articlestyle = read_file("styles/article.css");
 $homepagestyle = read_file("styles/homepage.css");
 
+# Generate template for feed pages
+# Construct the style for this page
+$entrybeginning = $beginning;
+$entrystyle = "\t\t<style>\n".$universalstyle.$articlestyle."\t\t</style>\n";
+
+# Add CSS style to end of <head>
+$entrybeginning =~ s/.*(?=<\/head>)/$entrystyle/;
+overwrite_file('beforeentry.html', $entrybeginning);
+
 # Foreach file from glob
 foreach (@dirs) {
 	# If file path matches regex, assign parentheticals to $1 and $2

@@ -156,6 +156,7 @@ u:-webkit-scrollbar {
 			}
 		}
 		#contentbox {
+			display: inline-block;
 			width: 100%;
 			max-width: 50em;
 			min-width: 10%

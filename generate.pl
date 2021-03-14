@@ -20,7 +20,7 @@ $entrystyle = "\t\t<style>\n".$universalstyle.$articlestyle."\t\t</style>\n";
 
 # Add CSS style to end of <head>
 $entrybeginning =~ s/.*(?=<\/head>)/$entrystyle/;
-overwrite_file('beforeentry.html', $entrybeginning);
+overwrite_file('beforeentry.html', $entrybeginning . "\n<div id=\"contentbox\">\n");
 
 # Foreach file from glob
 foreach (@dirs) {

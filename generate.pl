@@ -55,7 +55,7 @@ foreach (@dirs) {
 		$thisbeginning =~ s/(?<=<title>).*(?=<\/title>)/$title/;
 		
 		# Write article last modified timestamp to variable
-		$epoch_timestamp = (stat($year.'/'.$name.'/'.$name.'.html'))[9];
+		$epoch_timestamp = `git log -1 --pretty="format:%ct" $year/$name/$name.html`;
 		$dt_timestamp = DateTime->from_epoch( epoch => $epoch_timestamp );
 		
 		# Convert timestamp to ISO 8601 and human readable formats

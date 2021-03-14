@@ -42,8 +42,8 @@ ok so the current concept is free-form, undated articles each preceded by a rele
 </p>
 -->
 <article>
-<h2><?php include "2021/barefoot-faq/title.txt"; ?></h2>
-<?php include "2021/barefoot-faq/barefoot-faq.html"; ?>
+<h2><?php include "2021/03/barefoot-faq/title.txt"; ?></h2>
+<?php include "2021/03/barefoot-faq/barefoot-faq.html"; ?>
 </article>
 <?php include "2020/code-highlighting-vim/code-highlighting-vim.html"; ?>
 <?php include "2020/mapping-education-afghanistan/mapping-education-afghanistan.html"; ?>

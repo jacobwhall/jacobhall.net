@@ -147,6 +147,7 @@
 		}
 		#contentbox {
 			display: inline-block;
+			padding-top: 3.5em;
 			width: 100%;
 			max-width: 50em;
 			min-width: 10%
@@ -154,12 +155,12 @@
 		article {
 			display: inline-block;
 			text-align: left;
+			padding-bottom: 3em;
 			/* padding-left: 15vw; */
 			/* width: 70vw; */
 			width: 100%;
 			max-width: 50em;
 			min-width: 10%;
-			padding-bottom: 5em;
 		}
 		.kind {
 			font-family: monospace;
@@ -174,7 +175,10 @@
 		}
 		@media (min-width: 80em) {
 			article {
-				padding-top: 5em;
+				margin-top: 2em;
+				padding: 1em;
+				border-radius: 25px;
+				border: solid .2em lightgrey;
 			}
 		}
 		article h1:first-of-type {

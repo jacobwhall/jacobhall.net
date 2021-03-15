@@ -54,7 +54,7 @@ $result = $sth->fetchAll();
 			$content = $row['content_summary'] . " <a href=\"" . $row["permalink"] . "\">Read article &gt;&gt;</a>\n";
 		}
 		if ($row['post_type'] == 2) {
-			echo "\t<a href=\"/kind/note\" class=\"kind\">📝 NOTE</a><br>\n";
+			echo "\t<a href=\"/kind/note\" class=\"kind\">📝 NOTE</a><br><br>\n";
 			if (isset($row['post_title']))
 				echo "<h2 class=\"p-name\">" . $row['post_title'] . "</h2>";
 		}
@@ -64,7 +64,7 @@ $result = $sth->fetchAll();
 		if ($row['post_type'] == 4) echo "🎥 VIDEO ";
 		if ($row['post_type'] == 5) {
 			echo "<a href=\"/kind/bookmark\" class=\"kind\">🔗 BOOKMARK</a>\n";
-			$content = "\t\<h2 class=\"p-name\">\n\t\t<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\">" . $row['post_title'] . "</a>\n\t</h2>";
+			$content = "\t\t<h2 class=\"p-name\">\n\t\t\t<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\">" . $row['post_title'] . "</a>\n\t\t</h2>";
 		}
 		if ($row['post_type'] == 6) echo "❤️ LIKE \n";
 		// TODO: properly link to original author's h-card and the original post
@@ -86,8 +86,8 @@ $result = $sth->fetchAll();
 		} else {
 			echo $row['content'];
 		}
-		echo "\n\t</span><br>\n";
-		echo "\t<span class=\"entry-data\">\n";
+		echo "\n\t</span>\n";
+		echo "\t<p class=\"entry-data\">\n";
 		// Ok now for the cute lil bottom text, with location/timestamps/such
 		if ($row['display_location'] == 1) echo "\t\t📍 " . $row['location'] . "<br>\n";
 
@@ -96,7 +96,7 @@ $result = $sth->fetchAll();
 		if (isset($row['updated_date'])) {
 			echo ", updated <date class=\"dt-updated\" datetime=\"" . $row['updated_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['updated_date'])) . "</date>";
 		}
-		echo "\n\t\t</a>\n\t</span>\n</article>\n";
+		echo "\n\t\t</a>\n\t</p>\n</article>\n";
 	}
 echo "</div>\n</body>\n</html>";
 ?>

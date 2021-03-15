@@ -48,12 +48,12 @@ $result = $sth->fetchAll();
 		echo "<article class=\"h-entry\">";
 
 		if ($row['post_type'] == 1) {
-			echo "<span class=\"kind\">🖋️ ARTICLE</span>";
+			echo "<a href=\"/kind/article\" class=\"kind\">🖋️ ARTICLE</a>";
 			if (isset($row['post_title']))
 				echo "<h2 class=\"p-name\">" . $row['post_title'] . "</h2>";
 		}
 		if ($row['post_type'] == 2) {
-			echo "<p class=\"kind\">📝 NOTE</p>";
+			echo "<p><a href=\"/kind/note\" class=\"kind\">📝 NOTE</a></p>";
 			if (isset($row['post_title']))
 				echo "<h2 class=\"p-name\">" . $row['post_title'] . "</h2>";
 		}
@@ -62,7 +62,7 @@ $result = $sth->fetchAll();
 			// Photos and videos will probably be under any caption/note/other content
 		if ($row['post_type'] == 4) echo "🎥 VIDEO ";
 		if ($row['post_type'] == 5) {
-			echo "<span class=\"kind\">🔗 BOOKMARK</span>";
+			echo "<a href=\"/kind/bookmark\" class=\"kind\">🔗 BOOKMARK</a>";
 			$content = "<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\"><h2 class=\"p-name\">" . $row['post_title'] . "</h2></a>";
 		}
 		if ($row['post_type'] == 6) echo "❤️ LIKE ";

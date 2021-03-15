@@ -1,37 +1,27 @@
-u:-webkit-scrollbar {
-    display: none;
-}
+		u:-webkit-scrollbar {
+			display: none;
+		}
 
-.warning {
-  color:red;
-}
-#backprofilepic {
-	border-radius: 50%;
-	height: 4em;
-}
-/*
-#backarrow {
-  width: 6em;
-  height: 6em;
-  padding-top: 1.25em;
-  padding-left: 1.25em;
-  border-radius: 50%;
-}
-*/
-#sidebar {
-	padding: 1em;
-	text-align: left;
-	line-height: 2em;
-}
-.date {
-	color: gray;
-	font-style: italic;
-}
-.nostyle {
-	color: black;
-	text-decoration: none;
-}
-
+		.warning {
+			color:red;
+		}
+		#backprofilepic {
+			border-radius: 50%;
+			height: 4em;
+		}
+		#sidebar {
+			padding: 1em;
+			text-align: left;
+			line-height: 2em;
+		}
+		.date {
+			color: gray;
+			font-style: italic;
+		}
+		.nostyle {
+			color: black;
+			text-decoration: none;
+		}
 		table {
 			margin: 0 auto;
 			border-collapse: collapse;
@@ -170,6 +160,17 @@ u:-webkit-scrollbar {
 			max-width: 50em;
 			min-width: 10%;
 			padding-bottom: 5em;
+		}
+		.kind {
+			font-family: monospace;
+			color: black;
+			text-decoration: none;
+		}
+		.kind:hover {
+			text-decoration: underline;
+		}
+		.entry-data {
+			font-family: monospace;
 		}
 		@media (min-width: 80em) {
 			article {

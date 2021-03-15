@@ -51,6 +51,7 @@ $result = $sth->fetchAll();
 			echo "<a href=\"/kind/article\" class=\"kind\">🖋️ ARTICLE</a>";
 			if (isset($row['post_title']))
 				echo "<h2 class=\"p-name\">" . $row['post_title'] . "</h2>";
+			$content = $row['content_summary'] . " <a href=\"" . $row_["permalink"] . "\">Read article &gt;&gt;</a>";
 		}
 		if ($row['post_type'] == 2) {
 			echo "<p><a href=\"/kind/note\" class=\"kind\">📝 NOTE</a></p>";
@@ -75,6 +76,7 @@ $result = $sth->fetchAll();
 		// TODO: Add more post types. 🎧 jam, 📺 watch,📖 read, presentation? 📅 event?
 
 		// Output content of post!
+		echo "<span class=\"e-content\">";
 		if (isset($content)) {
 			echo $content;
 		} elseif (isset($row['content_summary'])) {
@@ -84,20 +86,17 @@ $result = $sth->fetchAll();
 		} else {
 			echo $row['content'];
 		}
+		echo "</span>";
 		echo "<p class=\"entry-data\">";
 		// Ok now for the cute lil bottom text, with location/timestamps/such
 		if ($row['display_location'] == 1) echo "📍 " . $row['location'] . "<br>";
 
 		
+		echo "<a class=\"u-url\" href=\"" . $row['permalink'] . "\"> Posted <date class=\"dt-published\" datetime=\"" . $row['published_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['published_date'])) . "</date>";
 		if (isset($row['updated_date'])) {
-			$date = "Updated " . date('F j, Y \a\t H:i', strtotime($row['updated_date']));
-			$mouseover_date = "Posted " . $row['published_date'] . ", last updated " . $row['updated_date'];
-		} else {
-			$date = "Posted " . date('F j, Y \a\t H:i', strtotime($row['published_date']));
-			$mouseover_date = "Posted " . $row['published_date'];
+			echo ", updated <date class=\"dt-updated\" datetime=\"" . $row['updated_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['updated_date'])) . "</date>";
 		}
-	        echo "<span class=\"date\"><a title=\"" . $mouseover_date . " UTC\" href=\"" . $row['permalink'] . "\">" . $date . "</a></span>";
-		echo "</p></article>";
+		echo "</a></p></article>";
 	}
-echo "</body>\n</html>";
+echo "</div>\n</body>\n</html>";
 ?>

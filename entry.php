@@ -28,6 +28,7 @@ $querystring = "SELECT post_type,
 			reply_to_id,
 			reply_to_author_h_card,
 			reply_to_author_photo,
+			reply_to_title,
 			reply_to_content,
 			reply_to_url,
 			content,
@@ -69,10 +70,10 @@ $result = $sth->fetchAll();
 			echo "\t<a href=\"/kind/article\" class=\"kind\">🖋️ ARTICLE</a>\n";
 			if (isset($row['post_title']))
 				echo "\t<h2 class=\"p-name\">\n\t\t<a href=\"" . $row['permalink'] . "\">" . $row['post_title'] . "</a>\n\t</h2>\n";
-			$content = $row['content_summary'] . " <a href=\"" . $row["permalink"] . "\">Read article &gt;&gt;</a>\n";
+			$content = "<p>" . $row['content_summary'] . " <a href=\"" . $row["permalink"] . "\">Read article &gt;&gt;</a></p>\n";
 		}
 		if ($row['post_type'] == 2) {
-			echo "\t<a href=\"/kind/note\" class=\"kind\">📝 NOTE</a><br><br>\n";
+			echo "\t<a href=\"/kind/note\" class=\"kind\">📝 NOTE</a>\n";
 			if (isset($row['post_title']))
 				echo "<h2 class=\"p-name\">" . $row['post_title'] . "</h2>";
 		}
@@ -86,7 +87,14 @@ $result = $sth->fetchAll();
 		}
 		if ($row['post_type'] == 6) echo "❤️ LIKE \n";
 		// TODO: properly link to original author's h-card and the original post
-		if ($row['post_type'] == 7) echo "↩️ REPLY \n";
+		if ($row['post_type'] == 7) {
+			echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> to <a href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'s";
+			if (isset($row['reply_to_title'])) {
+				echo " post <a href=\"" . $row['reply_to_url'] . "\">" . $row['reply_to_title'] . "</a>:";
+			} else {
+				echo " <a href=\"" . $row['reply_to_url'] . "\">post</a>:";
+			}
+		}
 		// TODO: properly link to original author's h-card and the original post
 		if ($row['post_type'] == 8) echo "🔄 REPOST of \n";
 		// TODO: properly link to the event h-entry
@@ -105,7 +113,7 @@ $result = $sth->fetchAll();
 			echo $row['content'];
 		}
 		echo "\n\t</span>\n";
-		echo "\t<p class=\"entry-data\">\n";
+		echo "\t<span class=\"entry-data\">\n";
 		// Ok now for the cute lil bottom text, with location/timestamps/such
 		if ($row['display_location'] == 1) echo "\t\t📍 " . $row['location'] . "<br>\n";
 
@@ -113,7 +121,7 @@ $result = $sth->fetchAll();
 		if (isset($row['updated_date'])) {
 			echo ", updated <date class=\"dt-updated\" datetime=\"" . $row['updated_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['updated_date'])) . "</date>";
 		}
-		echo " by <img class=\"u-photo hidden-u-photo\" src=\"https://jacobhall.net/images/toothbrush_profile_small.jpg\" /><a class=\"p-author h-card\" href=\"https://jacobhall.net\">Jacob Hall</a>\n\t</p>\n</article>\n";
+		echo " by <img class=\"u-photo hidden-u-photo\" src=\"https://jacobhall.net/images/toothbrush_profile_small.jpg\" /><a class=\"p-author h-card\" href=\"https://jacobhall.net\">Jacob Hall</a>\n\t</span>\n</article>\n";
 	}
 echo "</div>\n</body>\n</html>";
 ?>

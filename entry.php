@@ -13,7 +13,25 @@ try {
 //	echo "Error:".$e->getMessage();
 	die("Error connecting to database!\n</body>\n</html>");
 }
-$querystring = "SELECT * from entries";
+$querystring = "SELECT post_type,
+			post_title,
+			content_location,
+			to_char(published_date at time zone 'UTC', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') as published_date,
+			updated_date,
+			permalink,
+			location,
+			display_location,
+			author_h_card,
+			author_photo,
+			original_url,
+			reply_to_author,
+			reply_to_id,
+			reply_to_author_h_card,
+			reply_to_author_photo,
+			reply_to_content,
+			reply_to_url,
+			content,
+			content_summary from entries";
 $needsand = false;
 if (isset($_GET['id'])) {
 	if (is_numeric($_GET["id"])) {
@@ -50,7 +68,7 @@ $result = $sth->fetchAll();
 		if ($row['post_type'] == 1) {
 			echo "\t<a href=\"/kind/article\" class=\"kind\">🖋️ ARTICLE</a>\n";
 			if (isset($row['post_title']))
-				echo "\t<h2 class=\"p-name\">" . $row['post_title'] . "</h2>\n";
+				echo "\t<h2 class=\"p-name\">\n\t\t<a href=\"" . $row['permalink'] . "\">" . $row['post_title'] . "</a>\n\t</h2>\n";
 			$content = $row['content_summary'] . " <a href=\"" . $row["permalink"] . "\">Read article &gt;&gt;</a>\n";
 		}
 		if ($row['post_type'] == 2) {
@@ -91,12 +109,11 @@ $result = $sth->fetchAll();
 		// Ok now for the cute lil bottom text, with location/timestamps/such
 		if ($row['display_location'] == 1) echo "\t\t📍 " . $row['location'] . "<br>\n";
 
-		
-		echo "\t\t<a class=\"u-url\" href=\"" . $row['permalink'] . "\">\n\t\t\t Posted <date class=\"dt-published\" datetime=\"" . $row['published_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['published_date'])) . "</date>";
+		echo "\t\tPosted <time class=\"dt-published\" datetime=\"" . $row['published_date'] . "\"><a class=\"u-url\" href=\"" . $row['permalink'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['published_date'])) . "</a></time>";
 		if (isset($row['updated_date'])) {
 			echo ", updated <date class=\"dt-updated\" datetime=\"" . $row['updated_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['updated_date'])) . "</date>";
 		}
-		echo "\n\t\t</a>\n\t</p>\n</article>\n";
+		echo " by <img class=\"u-photo hidden-u-photo\" src=\"https://jacobhall.net/images/toothbrush_profile_small.jpg\" /><a class=\"p-author h-card\" href=\"https://jacobhall.net\">Jacob Hall</a>\n\t</p>\n</article>\n";
 	}
 echo "</div>\n</body>\n</html>";
 ?>

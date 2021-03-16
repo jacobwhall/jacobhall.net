@@ -206,7 +206,7 @@
 <div class="h-card" id="firstbox">
 	<a class="u-url" href="https://jacobhall.net"></a>
 	<div id="top">
-		<img class="profilepic u-photo" id="titleprofilepic" src="images/toothbrush_profile_small.jpg" alt=""/>
+		<img class="profilepic u-photo" id="titleprofilepic" src="/profile.jpg" alt=""/>
 	</div>
 	<div id="bottom">
 		<h1 class="p-name">Jacob Hall</h1>

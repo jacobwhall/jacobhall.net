@@ -79,21 +79,33 @@ $result = $sth->fetchAll();
 		}
 		// TODO: Add plural if there are multiple photos
 		if ($row['post_type'] == 3) echo "📷 PHOTO ";
-			// Photos and videos will probably be under any caption/note/other content
+			// echo post_title if there is one
+			// echo content (or content_summary)
+			// $content = <img> tags
 		if ($row['post_type'] == 4) echo "🎥 VIDEO ";
+			// echo post_title if there is one
+			// echo content (or content_summary)
+			// $content = embedded html video
 		if ($row['post_type'] == 5) {
 			echo "<a href=\"/kind/bookmark\" class=\"kind\">🔗 BOOKMARK</a>\n";
-			$content = "\t\t<h2 class=\"p-name\">\n\t\t\t<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\">" . $row['post_title'] . "</a>\n\t\t</h2>";
+			echo "\t\t<h2 class=\"p-name\">\n";
+				echo "\t\t\t<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\">" . $row['post_title'] . "</a>\n";
+			echo "\t\t</h2>";
 		}
 		if ($row['post_type'] == 6) echo "❤️ LIKE \n";
 		// TODO: properly link to original author's h-card and the original post
 		if ($row['post_type'] == 7) {
-			echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> to <a href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'s";
-			if (isset($row['reply_to_title'])) {
-				echo " post <a href=\"" . $row['reply_to_url'] . "\">" . $row['reply_to_title'] . "</a>:";
-			} else {
-				echo " <a href=\"" . $row['reply_to_url'] . "\">post</a>:";
-			}
+			echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> ";
+			echo "<span class=\"u-in-reply-to h-cite\">";
+			echo "to <a class=\"p-author h-card\" href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'s";
+				if (isset($row['reply_to_title'])) {
+					echo " post <a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">";
+						echo "<span class=\"p-name\">" . $row['reply_to_title'] . "</span>";
+					echo "</a>";
+				} else {
+					echo " <a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">post</a>:";
+				}
+			echo "</span>";
 		}
 		// TODO: properly link to original author's h-card and the original post
 		if ($row['post_type'] == 8) echo "🔄 REPOST of \n";

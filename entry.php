@@ -1,6 +1,5 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/beforeentry.html';
-include '../jhsite.config.php';
 $querystring = "SELECT post_type,
 			post_title,
 			content_location,

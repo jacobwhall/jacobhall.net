@@ -61,13 +61,6 @@
 			text-decoration: none;
 		}
 
-		#contentbox {
-			display: inline-block;
-			width: 100%;
-			max-width: 50em;
-			min-width: 10%
-		}
-
 		article {
 			text-align: left;
 			padding-bottom: 1.5em;

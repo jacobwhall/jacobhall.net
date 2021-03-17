@@ -263,7 +263,8 @@ include("feed.php");
 				<a href="/2019/american-city-dialects-qgis">Mapping dialect variation among US cities in QGIS</a>
 			</li>
 		</ul>
-		<a href="articles.html">view all posts ➡️</a>
+		<!-- TODO: Add all articles to entries database, and then change this link to /kind/article -->
+		<a href="articles.html">view all articles➡️</a>
 	</div>
 	<div class="list">
 		<h2>things i've made</h2>

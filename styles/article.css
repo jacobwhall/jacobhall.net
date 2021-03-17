@@ -1,7 +1,6 @@
 		u:-webkit-scrollbar {
 			display: none;
 		}
-
 		.warning {
 			color:red;
 		}
@@ -113,6 +112,9 @@
 			font-size: 3em;
 		}
 		@media (min-width: 80em) {
+			#contentbox {
+				padding-top: 3.5em;
+			}
 			#backprofilepic {
 				height: 8em;
 				width: 8em;

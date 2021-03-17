@@ -34,7 +34,6 @@
 		<p><a href="about.html">about</a> - <a href="links.html">linkroll</a> - <a href="dreams.html">ideas</a></p>
 	</div>
 </div>
-<p>
 <div id="contentbox">
 <?php
 $querystring = "SELECT post_type,

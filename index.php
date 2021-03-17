@@ -86,7 +86,6 @@
 		}
 		#contentbox {
 			display: inline-block;
-			padding-top: 3.5em;
 			width: 100%;
 			max-width: 50em;
 			min-width: 10%
@@ -259,7 +258,6 @@
 		<p><a href="about.html">about</a> - <a href="links.html">linkroll</a> - <a href="dreams.html">ideas</a></p>
 	</div>
 </div>
-<p>
 <div id="contentbox">
 <?php
 $querystring = "SELECT post_type,

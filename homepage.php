@@ -36,17 +36,29 @@
 </div>
 <p>
 <div id="contentbox">
-<!--
-<p>
-ok so the current concept is free-form, undated articles each preceded by a relevant emoji
-</p>
--->
-<article>
-<h2><?php include "2021/01/barefoot-faq/title.txt"; ?></h2>
-<?php include "2021/01/barefoot-faq/barefoot-faq.html"; ?>
-</article>
-<?php include "2020/code-highlighting-vim/code-highlighting-vim.html"; ?>
-<?php include "2020/mapping-education-afghanistan/mapping-education-afghanistan.html"; ?>
+<?php
+$querystring = "SELECT post_type,
+			post_title,
+			content_location,
+			to_char(published_date at time zone 'UTC', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') as published_date,
+			updated_date,
+			permalink,
+			location,
+			display_location,
+			author_h_card,
+			author_photo,
+			original_url,
+			reply_to_author,
+			reply_to_id,
+			reply_to_author_h_card,
+			reply_to_author_photo,
+			reply_to_title,
+			reply_to_content,
+			reply_to_url,
+			content,
+			content_summary from entries";
+include("feed.php");
+?>
 <div id="subsequentbox">
 	<div class="list">
 		<h2>Things I've written</h2>

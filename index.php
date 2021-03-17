@@ -30,9 +30,19 @@
 			list-style-position: inside;
 			padding-left: 0.5em;
 		}
-		/* h-entry rules */
-		.p-note {
-			display: none;
+		#contentbox {
+			display: inline-block;
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%
+		}
+		article {
+			display: inline-block;
+			text-align: left;
+			padding-bottom: 3em;
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%;
 		}
 		
 		/* code highlighting rules */
@@ -84,21 +94,9 @@
 		.code .texSpecial {
 			color: #deb974;
 		}
-		#contentbox {
-			display: inline-block;
-			width: 100%;
-			max-width: 50em;
-			min-width: 10%
-		}
-		article {
-			display: inline-block;
-			text-align: left;
-			padding-bottom: 3em;
-			/* padding-left: 15vw; */
-			/* width: 70vw; */
-			width: 100%;
-			max-width: 50em;
-			min-width: 10%;
+		/* h-card, h-entry rules */
+		.p-note {
+			display: none;
 		}
 		.kind {
 			font-family: monospace;
@@ -128,28 +126,6 @@
 			min-width: 50%;
 			max-width: 100%;
 		}
-		body {
-			text-align: center;
-			font-family: 'Work Sans', sans-serif;
-			font-size: 100%;
-			font-size: max(100%, .4cm);
-		}
-
-		@media (max-aspect-ratio: 1/1) {
-			body {
-				font-size: 4vw;
-				font-size: min(4vw, .4cm);
-			}
-		}
-		body, h1, h2, h3, h4, h5, h6 {
-			font-size-adjust: 0.5;
-		}
-
-		ul {
-			list-style-position: inside;
-			padding-left: 0.5em;
-		}
-
 		#announcement {
 			position: absolute;
 			top: 0;
@@ -189,16 +165,6 @@
 		#bottom #socials a {
 			font-size: 1.5em;
 			text-decoration: none;
-		}
-
-		article {
-			text-align: left;
-			padding-bottom: 1.5em;
-		}
-		
-		/* this was originally written for the graphs in the mapping afghanistan post */
-		article img {
-			width: 100%;
 		}
 
 		#subsequentbox {
@@ -280,11 +246,13 @@ $querystring = "SELECT post_type,
 			reply_to_url,
 			content,
 			content_summary from entries";
+$querylimit = 5;
 include("feed.php");
 ?>
+<h2><a href="/kind">view more posts ➡️</a></h2>
 <div id="subsequentbox">
 	<div class="list">
-		<h2>Things I've written</h2>
+		<h2>articles i've written</h2>
 		<ul>
 			<li>
 				<a href="/2019/what-to-pack">What to Pack?</a>
@@ -298,7 +266,7 @@ include("feed.php");
 		<a href="articles.html">view all posts ➡️</a>
 	</div>
 	<div class="list">
-		<h2>Things I've made</h2>
+		<h2>things i've made</h2>
 		<ul>
 			<li>
 				<a href="2019/printkey">3D Print KW1, SC1, SC4 Keys</a>

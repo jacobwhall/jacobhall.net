@@ -1,25 +1,3 @@
-		body {
-			text-align: center;
-			font-family: 'Work Sans', sans-serif;
-			font-size: 100%;
-			font-size: max(100%, .4cm);
-		}
-
-		@media (max-aspect-ratio: 1/1) {
-			body {
-				font-size: 4vw;
-				font-size: min(4vw, .4cm);
-			}
-		}
-		body, h1, h2, h3, h4, h5, h6 {
-			font-size-adjust: 0.5;
-		}
-
-		ul {
-			list-style-position: inside;
-			padding-left: 0.5em;
-		}
-
 		#announcement {
 			position: absolute;
 			top: 0;
@@ -59,16 +37,6 @@
 		#bottom #socials a {
 			font-size: 1.5em;
 			text-decoration: none;
-		}
-
-		article {
-			text-align: left;
-			padding-bottom: 1.5em;
-		}
-		
-		/* this was originally written for the graphs in the mapping afghanistan post */
-		article img {
-			width: 100%;
 		}
 
 		#subsequentbox {

@@ -56,11 +56,13 @@ $querystring = "SELECT post_type,
 			reply_to_url,
 			content,
 			content_summary from entries";
+$querylimit = 5;
 include("feed.php");
 ?>
+<h2><a href="/kind">view more posts ➡️</a></h2>
 <div id="subsequentbox">
 	<div class="list">
-		<h2>Things I've written</h2>
+		<h2>articles i've written</h2>
 		<ul>
 			<li>
 				<a href="/2019/what-to-pack">What to Pack?</a>
@@ -74,7 +76,7 @@ include("feed.php");
 		<a href="articles.html">view all posts ➡️</a>
 	</div>
 	<div class="list">
-		<h2>Things I've made</h2>
+		<h2>things i've made</h2>
 		<ul>
 			<li>
 				<a href="2019/printkey">3D Print KW1, SC1, SC4 Keys</a>

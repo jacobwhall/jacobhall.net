@@ -13,6 +13,7 @@ try {
 	die("Error connecting to database!\n</body>\n</html>");
 }
 $querystring = $querystring . " ORDER BY published_date DESC";
+if (isset($querylimit)) $querystring = $querystring . " LIMIT " . $querylimit;
 $sth = $conn->prepare($querystring);
 $sth->execute();
 $result = $sth->fetchAll();

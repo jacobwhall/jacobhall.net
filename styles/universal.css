@@ -20,9 +20,19 @@
 			list-style-position: inside;
 			padding-left: 0.5em;
 		}
-		/* h-entry rules */
-		.p-note {
-			display: none;
+		#contentbox {
+			display: inline-block;
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%
+		}
+		article {
+			display: inline-block;
+			text-align: left;
+			padding-bottom: 3em;
+			width: 100%;
+			max-width: 50em;
+			min-width: 10%;
 		}
 		
 		/* code highlighting rules */
@@ -74,21 +84,9 @@
 		.code .texSpecial {
 			color: #deb974;
 		}
-		#contentbox {
-			display: inline-block;
-			width: 100%;
-			max-width: 50em;
-			min-width: 10%
-		}
-		article {
-			display: inline-block;
-			text-align: left;
-			padding-bottom: 3em;
-			/* padding-left: 15vw; */
-			/* width: 70vw; */
-			width: 100%;
-			max-width: 50em;
-			min-width: 10%;
+		/* h-card, h-entry rules */
+		.p-note {
+			display: none;
 		}
 		.kind {
 			font-family: monospace;

@@ -20,11 +20,10 @@
 		<data class="p-note">Student at William &amp; Mary studying geology and coding in his free time</data>
 		<p><i>howdy! this is my weblog.<br>please leave your shoes by the door</i></p>
 		<p id="socials">
-			<a class="u-email" title="email me" href="mailto:totallyuneekemail@gmail.com">📧</a>
+			<a class="u-email" title="email me" href="mailto:email@jacobhall.net">📧</a>
 			&nbsp;&nbsp;
 			<a rel="me" title="my Instagram profile" href="https://www.instagram.com/jacobwhall/">📷</a>
 			&nbsp;&nbsp;
-			<!-- <a rel="me" title="my Keybase profile" href="https://keybase.io/totallyuneekname">🔑</a> -->
 			<a rel="me" title="my GitHub profile" href="https://github.com/jacobwhall">👨‍💻</a>
 			&nbsp;&nbsp;
 			<a rel="me" title="my Couchsurfing profile" href="https://www.couchsurfing.com/people/jacob-hall-10">🛋️</a>
@@ -64,17 +63,18 @@ include("feed.php");
 	<div class="list">
 		<h2>articles i've written</h2>
 		<ul>
-			<li>
-				<a href="/2019/what-to-pack">What to Pack?</a>
-			</li>
-			<li>
-				<a href="/2019/read-everything-free">How to Read Everything for Free</a>
-			<li>
-				<a href="/2019/american-city-dialects-qgis">Mapping dialect variation among US cities in QGIS</a>
-			</li>
+<?php
+$querystring = "SELECT post_title, permalink FROM entries WHERE post_type=1 AND published=true ORDER BY published_date DESC LIMIT 3";
+$articlequery = $conn->prepare($querystring);
+$articlequery->execute();
+$result = $articlequery->fetchAll();
+foreach ($result as $row) {
+	echo "\t\t\t<li>\n\t\t\t\t<a href=\"" . $row['permalink'] . "\">" . $row['post_title'] . "</a>\n\t\t\t</li>\n";
+}
+?>
 		</ul>
 		<!-- TODO: Add all articles to entries database, and then change this link to /kind/article -->
-		<a href="articles.html">view all articles➡️</a>
+		<a href="articles.html">view all articles ➡️</a>
 	</div>
 	<div class="list">
 		<h2>things i've made</h2>

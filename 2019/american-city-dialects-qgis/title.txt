@@ -1,1 +1,1 @@
-Mapping dialect variation among US cities in QGIS
+📍 Mapping dialect variation among US cities in QGIS

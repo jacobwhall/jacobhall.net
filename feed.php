@@ -23,7 +23,7 @@ $result = $sth->fetchAll();
 		// Very important, reset the content for this entry!!
 		unset($content);
 
-		echo "<article class=\"h-entry\">\n";
+		echo "<article class=\"h-entry feed\">\n";
 
 		if ($row['post_type'] == 1) {
 			echo "\t<a href=\"/kind/article\" class=\"kind\">🖋️ ARTICLE</a>\n";

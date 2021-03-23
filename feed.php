@@ -37,16 +37,20 @@ $result = $sth->fetchAll();
 				echo "<h2 class=\"p-name\">" . $row['post_title'] . "</h2>";
 		}
 		// TODO: Add plural if there are multiple photos
-		if ($row['post_type'] == 3) echo "📷 PHOTO ";
+		if ($row['post_type'] == 3) {
+			echo "\t<a href=\"/kind/article\" class=\"kind\">📷 PHOTO</a>\n";
 			// echo post_title if there is one
+			if (isset($row['post_title'])) echo "\t<h2>" . $row['post_title'] . "</h2>\n";
+			// if (isset($row['content'])) echo $row['content'];
 			// echo content (or content_summary)
 			// $content = <img> tags
+		}
 		if ($row['post_type'] == 4) echo "🎥 VIDEO ";
 			// echo post_title if there is one
 			// echo content (or content_summary)
 			// $content = embedded html video
 		if ($row['post_type'] == 5) {
-			echo "<a href=\"/kind/bookmark\" class=\"kind\">🔗 BOOKMARK</a>\n";
+			echo "<a href=\"/kind/bookmark\" class=\"kind\">🔖 BOOKMARK</a>\n";
 			echo "\t\t<h2 class=\"p-name\">\n";
 				echo "\t\t\t<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\">" . $row['post_title'] . "</a>\n";
 			echo "\t\t</h2>";
@@ -71,6 +75,10 @@ $result = $sth->fetchAll();
 		// TODO: properly link to the event h-entry
 		if ($row['post_type'] == 9) echo "✉️ RSVP \n";
 		// TODO: Add more post types. 🎧 jam, 📺 watch,📖 read, presentation? 📅 event?
+		if ($row['post_type'] == 10) {
+			echo "<a href=\"/kind/bookmark\" class=\"kind\">📎 FILE</a>\n";
+			if (isset($row['post_title'])) echo "<h2>" . $row['post_title'] . "</h2>";
+		}
 
 		// Output content of post!
 		echo "\t<span class=\"e-content\">\n";
@@ -78,11 +86,15 @@ $result = $sth->fetchAll();
 			echo $content;
 		} elseif (isset($row['content_summary'])) {
 			echo "\t\t<p class=\"p-summary\">\n" . $row['content_summary'] . "\n\t\t</p>";
-		} elseif (isset($row['content_location'])) {
-			include ($_SERVER['DOCUMENT_ROOT'] . $row['content_location']);
 		} else {
 			echo $row['content'];
 		}
+		if ($row['post_type'] == 3) {
+			echo "<img class=\"feed\" src=\"" . $row['content_location'] . "\" />";
+		} 
+		if ($row['post_type'] == 10) {
+			echo "<p>\n\t<a href=\"" . $row['content_location'] . "\" download>📎 <strong>" . $row['post_title'] . "</strong></a>\n</p>";
+		} 
 		echo "\n\t</span>\n";
 		echo "\t<span class=\"entry-data\">\n";
 		// Ok now for the cute lil bottom text, with location/timestamps/such

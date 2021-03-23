@@ -150,10 +150,6 @@
 		article h1:first-of-type {
 			line-height: 0px;
 		}
-		/* this was originally written for the graphs in the mapping afghanistan post */
-		article img {
-			width: 100%;
-		}
 		.centeredtext {
 			text-align: center;
 		}

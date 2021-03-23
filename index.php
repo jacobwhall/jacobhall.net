@@ -44,7 +44,13 @@
 			max-width: 50em;
 			min-width: 10%;
 		}
-		
+		article img {
+			width: 100%;
+		}
+		.feed img {
+			width: 100%;
+		}
+			
 		/* code highlighting rules */
 		.code {
 			overflow-x:auto;

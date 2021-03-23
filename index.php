@@ -117,7 +117,7 @@
 				margin-top: 2em;
 				padding: 1em;
 			}
-			article .feed {
+			article.feed {
 				border-radius: 25px;
 				border: solid .2em lightgrey;
 			}

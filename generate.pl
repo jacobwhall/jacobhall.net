@@ -63,13 +63,14 @@ foreach (@dirs) {
 		$readable_timestamp = $dt_timestamp->month_name()." ".$dt_timestamp->day().", ".$dt_timestamp->year();
 		
 		# Assume that we should not overwrite article title: it is already written in .html
-		$writearticletitle = 0;
+		$writearticletitle = 1;
 
 		# Was article written after I started keeping track of article modification times?
-		if ($epoch_timestamp > 1604714100) {
+		if ($name == "discrete-rv-distributions") {
 
 			# For this article we should write the article title, as well as timestamp
-			$writearticletitle = 1;
+			$writearticletitle = 0;
+			# }
 		}
 
 		# Construct the style for this page
@@ -90,7 +91,7 @@ foreach (@dirs) {
 	$schema = "<script type=\"application/ld+json\">\n\t{\n\t\"\@context\": \"https://schema.org\",\n\t\"\@type\": \"BlogPosting\",\n\t\"headline\": \"$title\",\n\t\"author\": {\n\t\t\"\@type\": \"Person\",\n\t\t\"name\": \"Jacob Hall\"\n\t},\n\t\"dateModified\": \"$iso8601_timestamp\"\n\t}\n\t</script>";
 			$thisbeginning =~ s/.*(?=<\/head>)/$schema/;
 			# Add <article> and title to top of article
-			$thisbeginning .= "\n<article class=\"h-entry\">\n<h2 class=\"p-name\">".$title."</h2>\n<span class=\"date\">Last updated on ".$readable_timestamp."</span>\n";
+			$thisbeginning .= "\n<article class=\"h-entry\">\n<h2 class=\"p-name\">".$title."</h2>"; #\n<span class=\"date\">Last updated on ".$readable_timestamp."</span>\n";
 			# Write the concatenated $beginning, $article, and end tags to index.php, including title and <article> tags
 			overwrite_file($year.'/'.$name.'/index.html', $thisbeginning.$article."</article>\n</body>\n</html>");
 

@@ -66,7 +66,7 @@ foreach (@dirs) {
 		$writearticletitle = 1;
 
 		# Was article written after I started keeping track of article modification times?
-		if ($name == "discrete-rv-distributions") {
+		if ($name eq "discrete-rv-distributions") {
 
 			# For this article we should write the article title, as well as timestamp
 			$writearticletitle = 0;
@@ -96,7 +96,6 @@ foreach (@dirs) {
 			overwrite_file($year.'/'.$name.'/index.html', $thisbeginning.$article."</article>\n</body>\n</html>");
 
 		} else {
-
 			# Write the concatenated $beginning, $article, and end tags to index.php
 			overwrite_file($year.'/'.$name.'/index.html', $thisbeginning.$article."</body>\n</html>");
 

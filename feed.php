@@ -111,6 +111,7 @@ $result = $sth->fetchAll();
 		echo " by <img class=\"u-photo hidden-u-photo\" src=\"https://jacobhall.net/images/toothbrush_profile_small.jpg\" /><a class=\"p-author h-card\" href=\"https://jacobhall.net\">Jacob Hall</a>\n\t</span>\n";
 			
 		// Now let's see if this baby has some comments
+		// TODO: better handle situations where there is not a $row['post_id']
 		$commentquery = "SELECT published_date, updated_date, permalink, content, content_summary, author, author_h_card FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND published = true ORDER BY published_date DESC";
 		$getcomments = $conn->prepare($commentquery);
 		$getcomments->execute();

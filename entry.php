@@ -1,6 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/beforeentry.html';
 $querystring = "SELECT post_type,
+			post_id,
 			post_title,
 			content_location,
 			to_char(published_date at time zone 'UTC', 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') as published_date,

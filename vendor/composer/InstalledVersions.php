@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'eaec2521d5507e97742f7e616f653ab5d969e490',
+    'reference' => '4d47f8635fc82874997ff1530a2766be159e94b7',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'eaec2521d5507e97742f7e616f653ab5d969e490',
+      'reference' => '4d47f8635fc82874997ff1530a2766be159e94b7',
     ),
     'cboden/ratchet' => 
     array (

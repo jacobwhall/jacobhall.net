@@ -127,23 +127,24 @@ function normalize_properties($properties) {
 # https://indieweb.org/post-type-discovery
 # returns the MF2 post type
 function post_type_discovery($properties) {
-    $vocab = array('rsvp',
-                 'in-reply-to',
-                 'repost-of',
-                 'like-of',
-                 'bookmark-of',
-                 'photo');
-    foreach ($vocab as $type) {
+	$vocab = ['rsvp' => 9,
+                 'in-reply-to' => 9,
+                 'repost-of' => 9,
+                 'like-of' => 9,
+                 'bookmark-of' => 5,
+                 'photo' => 9,
+	];
+    foreach (array_keys($vocab) as $type) {
         if (isset($properties[$type])) {
-            return $type;
+            return $vocab[$type];
         }
     }
     # articles have titles, which Micropub defines as "name"
     if (isset($properties['name'])) {
-        return 'article';
+        return 1;
     }
     # no other match?  Must be a note.
-    return 'note';
+    return 2;
 }
 
 function make_html($input) {
@@ -190,10 +191,6 @@ function create($request, $photos = []) {
 	# ensure that the properties array doesn't contain 'content'
 	unset($properties['content']);
 
-	if (isset($properties['bookmark-of'])) {
-		not_implemented("bookmarks");
-	}
-
 	if (!empty($photos)) {
 	# add uploaded photos to the front matter.
 		if (!isset($properties['photo'])) {
@@ -222,14 +219,26 @@ function create($request, $photos = []) {
 		# explicitly mark this item as published
 		$properties['published'] = true;
 	}
+
 	// echo ("published: ". $properties['published']);
 	$insertionData = [
+		"posttype" => $properties['posttype'],
+		"posttitle" => "NULL",
 		"content" => $content,
 		"published" => $properties['published'],
+		"bookmarkof" => "NULL",
 	];
-	$querystring = "INSERT INTO entries (post_type, published, content) VALUES (2, :published, :content) RETURNING permalink, content";
-	$sth = $conn->prepare($querystring);
 
+	if (isset($properties["bookmark-of"])) {
+		$insertionData["bookmarkof"] = $properties["bookmark-of"];
+	}
+	if (isset($properties["name"])) {
+		$insertionData["posttitle"] = $properties["name"];
+	}
+
+	$querystring = "INSERT INTO entries (post_type, post_title, published, content, bookmark_of) VALUES (:posttype, :posttitle, :published, :content, :bookmarkof) RETURNING permalink";
+
+	$sth = $conn->prepare($querystring);
 	if ($sth->execute($insertionData)) {
 		$result = $sth->fetch(PDO::FETCH_ASSOC);
 
@@ -240,9 +249,9 @@ function create($request, $photos = []) {
 	} else {
 		header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
 		echo "Database insertion unsuccessful! There might be a permission issue.";
-		// echo "\n";
-		// $arr = $sth->errorInfo();
-		// print_r($arr);
+		 echo "\n";
+		 $arr = $sth->errorInfo();
+		 print_r($arr);
 		exit;
 	}
 }

@@ -50,10 +50,13 @@ $result = $sth->fetchAll();
 			// echo content (or content_summary)
 			// $content = embedded html video
 		if ($row['post_type'] == 5) {
-			echo "<a href=\"/kind/bookmark\" class=\"kind\">🔖 BOOKMARK</a>\n";
-			echo "\t\t<h2 class=\"p-name\">\n";
-				echo "\t\t\t<a class=\"u-bookmark-of\" href=\"" . $row['content'] . "\">" . $row['post_title'] . "</a>\n";
-			echo "\t\t</h2>";
+			$content = "<a href=\"/kind/bookmark\" class=\"kind\">🔖 BOOKMARK</a>\n";
+			$content .= "\t\t<h2 class=\"p-name\">\n";
+				$content .= "\t\t\t<a class=\"u-bookmark-of\" href=\"" . $row['bookmark_of'] . "\">" . $row['post_title'] . "</a>\n";
+			$content .= "\t\t</h2>";
+			if (isset($row['content'])) {
+				$content .= "\n" . $row['content'];
+			}
 		}
 		if ($row['post_type'] == 6) echo "❤️ LIKE \n";
 		// TODO: properly link to original author's h-card and the original post

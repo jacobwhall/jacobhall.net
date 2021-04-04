@@ -3,6 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/beforeentry.html';
 $querystring = "SELECT post_type,
 			post_id,
 			post_title,
+			bookmark_of,
 			content_location,
 			to_char(published_date, 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') as published_date,
 			updated_date,

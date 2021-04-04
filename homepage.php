@@ -41,6 +41,7 @@
 $querystring = "SELECT post_type,
 			post_title,
 			content_location,
+			bookmark_of,
 			to_char(published_date, 'YYYY-MM-DD\"T\"HH24:MI:SS\"Z\"') as published_date,
 			updated_date,
 			permalink,

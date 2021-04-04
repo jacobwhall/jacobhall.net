@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'c93982bd06c7450699b549b883f56e0985e022f8',
+    'reference' => 'd8243af307b0320cc72bccfc67a08827a15be79b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'c93982bd06c7450699b549b883f56e0985e022f8',
+      'reference' => 'd8243af307b0320cc72bccfc67a08827a15be79b',
     ),
     'cboden/ratchet' => 
     array (
@@ -64,12 +64,12 @@ private static $installed = array (
     ),
     'guzzlehttp/psr7' => 
     array (
-      'pretty_version' => '1.7.0',
-      'version' => '1.7.0.0',
+      'pretty_version' => '1.8.1',
+      'version' => '1.8.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '53330f47520498c0ae1f61f7e2c90f55690c06a3',
+      'reference' => '35ea11d335fd638b5882ff1725228b3d35496ab1',
     ),
     'indieweb/mention-client' => 
     array (
@@ -152,12 +152,12 @@ private static $installed = array (
     ),
     'react/dns' => 
     array (
-      'pretty_version' => 'v1.4.0',
-      'version' => '1.4.0.0',
+      'pretty_version' => 'v1.5.0',
+      'version' => '1.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '665260757171e2ab17485b44e7ffffa7acb6ca1f',
+      'reference' => 'b22b0b20278e8535e633ab71a52472c5bf620aa1',
     ),
     'react/event-loop' => 
     array (
@@ -224,12 +224,12 @@ private static $installed = array (
     ),
     'symfony/http-foundation' => 
     array (
-      'pretty_version' => 'v5.2.3',
-      'version' => '5.2.3.0',
+      'pretty_version' => 'v5.2.4',
+      'version' => '5.2.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '20c554c0f03f7cde5ce230ed248470cccbc34c36',
+      'reference' => '54499baea7f7418bce7b5ec92770fd0799e8e9bf',
     ),
     'symfony/polyfill-mbstring' => 
     array (
@@ -251,12 +251,12 @@ private static $installed = array (
     ),
     'symfony/routing' => 
     array (
-      'pretty_version' => 'v5.2.3',
-      'version' => '5.2.3.0',
+      'pretty_version' => 'v5.2.6',
+      'version' => '5.2.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '348b5917e56546c6d96adbf21d7f92c9ef563661',
+      'reference' => '31fba555f178afd04d54fd26953501b2c3f0c6e6',
     ),
   ),
 );

@@ -18,9 +18,9 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixLengthsPsr4 = array (
-        'w' => 
+        'm' => 
         array (
-            'webmentions\\' => 12,
+            'micropub\\' => 9,
         ),
         'S' => 
         array (
@@ -57,9 +57,9 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixDirsPsr4 = array (
-        'webmentions\\' => 
+        'micropub\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/webmentions',
+            0 => __DIR__ . '/../..' . '/micropub',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (

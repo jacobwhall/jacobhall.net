@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4d47f8635fc82874997ff1530a2766be159e94b7',
+    'reference' => 'c93982bd06c7450699b549b883f56e0985e022f8',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4d47f8635fc82874997ff1530a2766be159e94b7',
+      'reference' => 'c93982bd06c7450699b549b883f56e0985e022f8',
     ),
     'cboden/ratchet' => 
     array (
@@ -73,6 +73,15 @@
       array (
       ),
       'reference' => '00b70ee7eb7f5b0585b1bd467f6c9cbd75055d23',
+    ),
+    'p3k/micropub' => 
+    array (
+      'pretty_version' => '0.0.3',
+      'version' => '0.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9e3b2f7c1d4d40fef5cbd955689b8e7392a6976d',
     ),
     'psr/http-message' => 
     array (

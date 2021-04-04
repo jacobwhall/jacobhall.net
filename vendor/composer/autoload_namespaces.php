@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'p3k' => array($vendorDir . '/p3k/micropub/src'),
     'IndieWeb' => array($vendorDir . '/indieweb/mention-client/src'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
 );

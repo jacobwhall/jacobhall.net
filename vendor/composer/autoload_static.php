@@ -18,9 +18,9 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixLengthsPsr4 = array (
-        'd' => 
+        'w' => 
         array (
-            'desklight\\' => 10,
+            'webmentions\\' => 12,
         ),
         'S' => 
         array (
@@ -57,9 +57,9 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixDirsPsr4 = array (
-        'desklight\\' => 
+        'webmentions\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/2021/desklight',
+            0 => __DIR__ . '/../..' . '/webmentions',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -132,6 +132,13 @@ class ComposerStaticInit68b24b7ae5bc27d011ab422674bf323c
     );
 
     public static $prefixesPsr0 = array (
+        'p' => 
+        array (
+            'p3k' => 
+            array (
+                0 => __DIR__ . '/..' . '/p3k/micropub/src',
+            ),
+        ),
         'I' => 
         array (
             'IndieWeb' => 

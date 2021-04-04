@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteRule ^profile.jpg$ /images/toothbrush_profile_small.jpg [L]
+RewriteRule ^micropub$ /micropub.php [L]
 RewriteRule ^\d{4}/\d{2}/\d{2}/([0-9]+)(/$|$) /entry.php?id=$1 [L]
 RewriteRule ^kind/article /entry.php?type=1 [L]
 RewriteRule ^kind/note /entry.php?type=2 [L]

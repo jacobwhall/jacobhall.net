@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
 );

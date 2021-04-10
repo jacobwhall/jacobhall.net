@@ -10,6 +10,20 @@ class ComposerStaticInit0700a8db6c7a19093290ee900b61ba21
         '757772e28a0943a9afe83def8db95bdf' => __DIR__ . '/..' . '/mf2/mf2/Mf2/Parser.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'Masterminds\\' => 12,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'p' => 
         array (
@@ -27,6 +41,8 @@ class ComposerStaticInit0700a8db6c7a19093290ee900b61ba21
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0700a8db6c7a19093290ee900b61ba21::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0700a8db6c7a19093290ee900b61ba21::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit0700a8db6c7a19093290ee900b61ba21::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit0700a8db6c7a19093290ee900b61ba21::$classMap;
 

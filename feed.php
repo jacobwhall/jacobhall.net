@@ -113,6 +113,19 @@ $result = $sth->fetchAll();
 		}
 		echo " by <img class=\"u-photo hidden-u-photo\" src=\"https://jacobhall.net/images/toothbrush_profile_small.jpg\" /><a class=\"p-author h-card\" href=\"https://jacobhall.net\">Jacob Hall</a>\n\t</span>\n";
 			
+		$tagquery = "SELECT tag FROM tags WHERE post_id = " . $row['post_id'];
+		$gettags = $conn->prepare($tagquery);
+		$gettags->execute();
+		$tagresult = $gettags->fetchAll();
+
+		// For each returned row from query
+		if (count($tagresult) > 0) {
+			echo "<br>tags: ";
+			foreach($tagresult as $tag) {
+				echo "<span class=\"p-category\">" . $tag['tag'] . "</span> ";
+			}
+		}
+
 		// Now let's see if this baby has some comments
 		// TODO: better handle situations where there is not a $row['post_id']
 		$commentquery = "SELECT published_date, updated_date, permalink, content, content_summary, author, author_h_card FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND published = true ORDER BY published_date DESC";

@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#FFFFFF"/>
 	<meta name="Description" content="Jacob Hall's personal website">
-	<!-- <link href="webmention.php" rel="webmention" /> -->
-	<link href="https://jacobhall.net/micropub/" rel="micropub" />
+	<!-- <link href="indieweb/webmention.php" rel="webmention" /> -->
+	<link href="https://jacobhall.net/indieweb/micropub.php" rel="micropub" />
 	<link rel="authorization_endpoint" href="https://indieauth.com/auth">
 	<link rel="token_endpoint" href="https://tokens.indieauth.com/token">
 		<style>

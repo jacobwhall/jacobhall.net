@@ -12,3 +12,4 @@ RewriteRule ^kind/(repost|re-post) /entry.php?type=8 [L]
 RewriteRule ^kind/rsvp /entry.php?type=9 [L]
 RewriteRule ^kind/file /entry.php?type=10 [L]
 RewriteRule ^kind /entry.php
+RewriteRule ^now$ /now.html

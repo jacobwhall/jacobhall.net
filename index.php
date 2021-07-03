@@ -256,7 +256,10 @@ $querystring = "SELECT post_type,
 			reply_to_content,
 			reply_to_url,
 			content,
-			content_summary FROM entries WHERE published = TRUE";
+			content_summary
+		FROM entries
+		WHERE published = TRUE
+		AND post_type != 5";
 $querylimit = 5;
 include("feed.php");
 ?>

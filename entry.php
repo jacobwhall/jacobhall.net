@@ -43,6 +43,13 @@ if (isset($_GET['type'])) {
 		}
 	}
 }
+
+if($needsand) {
+	$querystring = $querystring . " AND published = true";
+} else {
+	$querystring = $querystring . " WHERE published = true";
+}
+
 include 'feed.php';
 echo "</div>\n</body>\n</html>";
 ?>

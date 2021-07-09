@@ -35,11 +35,12 @@ if (isset($_GET['type'])) {
 	if (is_numeric($_GET["type"])) {
 		if ($_GET["type"] > 0) {
 			if ($needsand) {
-				$querystring = $querystring . " and";
+				$querystring = $querystring . " AND";
 			} else {
-				$querystring = $querystring . " where";
+				$querystring = $querystring . " WHERE";
 			}
 			$querystring = $querystring . " post_type=" . $_GET["type"];
+			$needsand = true;
 		}
 	}
 }

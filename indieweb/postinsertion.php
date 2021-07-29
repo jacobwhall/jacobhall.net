@@ -22,9 +22,10 @@ function connectToDB() {
 	}
 
 }
-function insertPost($insertionData, $tags) {
+function insertPost($table, $insertionData, $tags) {
 
 	$insertionDataTypes = [
+		"table" => $table,
 		"posttype",
 		"posttitle",
 		"content",
@@ -39,7 +40,7 @@ function insertPost($insertionData, $tags) {
 
 	$conn = connectToDB();
 
-	$querystring = "INSERT INTO entries (post_type, post_title, published, content, bookmark_of) VALUES " .
+	$querystring = "INSERT INTO :table (post_type, post_title, published, content, bookmark_of) VALUES " .
 			"(:posttype, :posttitle, :published, :content, :bookmarkof) RETURNING permalink, post_id";
 
 	$sth = $conn->prepare($querystring);
@@ -69,9 +70,9 @@ function insertPost($insertionData, $tags) {
 	} else {
 		header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
 		echo "Database insertion unsuccessful! There might be a permission issue.";
-		 echo "\n";
-		 $arr = $sth->errorInfo();
-		 print_r($arr);
+		echo "\n";
+		$arr = $sth->errorInfo();
+		print_r($arr);
 		exit;
 	}
 }

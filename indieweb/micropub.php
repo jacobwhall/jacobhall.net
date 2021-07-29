@@ -155,7 +155,6 @@ function normalize_properties($properties) {
 
 
 // Much of this code borrowed from https://github.com/skpy/micropub/blob/master/inc/content.php
-// this probably belongs in the micropub file tbh
 function create($request, $photos = []) {
 
 	$mf2 = $request->toMf2();
@@ -232,7 +231,7 @@ function create($request, $photos = []) {
 		$insertionData["posttitle"] = $properties["name"];
 	}
 	
-	insertPost($insertionData, $categories);
+	insertPost("entries", $insertionData, $categories);
 }
 
 switch($request->action):

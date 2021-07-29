@@ -141,7 +141,7 @@ $result = $sth->fetchAll();
 			// TODO: create a better styling system that puts comments in a better-suited container
 			echo "<article>\n";
 			echo "<h2>Comments</h2>";
-			echo "<p>You will soon be able to leave a comment here via webmention! Instructions for doing so coming soon...</p>";
+			echo "<p>You can leave a comment here via webmention! Note that I moderate webmentions manually, so it may take a few days to appear.</p>";
 			foreach($commentresult as $comment) {
 				echo "<span class=\"kind\">↩️ REPLY</span> ";
 				// echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> ";

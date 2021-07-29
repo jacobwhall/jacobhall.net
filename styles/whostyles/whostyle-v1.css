@@ -1,0 +1,20 @@
+.whostyle {
+	border-radius: 25px;
+	border: solid .2em lightgrey;
+	font-family: 'Work Sans', sans-serif;
+	padding: 0em 1em;
+	text-align: left;
+}
+.whostyle,
+.whostyle h1,
+.whostyle h2,
+.whostyle h3,
+.whostyle h4,
+.whostyle h5, {
+	font-size-adjust: 0.5;
+}
+.whostyle blockquote {
+	border-left: 0.3em solid lightgrey;
+	margin-left: 2em;
+	padding-left: 0.4em;
+}

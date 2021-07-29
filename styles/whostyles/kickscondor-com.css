@@ -1,0 +1,102 @@
+.whostyle-kickscondor-com {
+  font-family: "Times New Roman", serif;
+  background-color: #fff9f4;
+  padding: 20px;
+  border: solid 1px #f16;
+  box-shadow: 5px 4px 0 0 #f16;
+}
+
+.whostyle-kickscondor-com a:link {
+  color: #178;
+}
+
+.whostyle-kickscondor-com a:hover {
+  color: #f16;
+}
+
+.whostyle-kickscondor-com h1 {
+  font-size: 20px;
+  color: #1a6;
+  padding: 0;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+.whostyle-kickscondor-com hr {
+  border: none;
+  background: url("/images/pixelb.png") repeat-x;
+  width: 100%;
+  height: 8px;
+  padding: 8px 0;
+}
+.whostyle-kickscondor-com img.emoji {
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+.whostyle-kickscondor-com sup,
+.whostyle-kickscondor-com sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+.whostyle-kickscondor-com sub {
+  top: 0.4em;
+}
+.whostyle-kickscondor-com dl {
+  margin: 0 0 25px 0;
+}
+.whostyle-kickscondor-com dd {
+  margin: 0 0 25px 25px;
+}
+.whostyle-kickscondor-com s {
+  text-decoration: none;
+  background-image: linear-gradient(transparent 7px, #316 7px, #316 13px, transparent 13px);
+}
+
+.whostyle-kickscondor-com p {
+  line-height: 140%;
+  margin: 0 0 20px 0;
+}
+.whostyle-kickscondor-com p:last-of-type {
+  margin-bottom: 0;
+}
+.whostyle-kickscondor-com ul {
+  padding: 4px;
+  margin: 0 0 20px 0;
+}
+.whostyle-kickscondor-com li {
+  margin: 0 0 0 20px;
+}
+.whostyle-kickscondor-com blockquote {
+  font-size: 16px;
+  background-color: #fcfff4;
+  padding: 14px;
+  margin: 20px;
+  border: solid 1px #ccb;
+  box-shadow: 4px 3px 0 0 #ccb;
+}
+.whostyle-kickscondor-com p.rt,
+.whostyle-kickscondor-com a.rt,
+.whostyle-kickscondor-com img.rt,
+.whostyle-kickscondor-com p.rt100 {
+  float: right;
+  margin: 0 0 6px 16px;
+}
+.whostyle-kickscondor-com p.rt100 {
+  width: 100px;
+  height: 100px;
+}
+.whostyle-kickscondor-com p.lt,
+.whostyle-kickscondor-com a.lt,
+.whostyle-kickscondor-com img.lt {
+  float: left;
+  margin: 0 16px 6px 0;
+}
+.whostyle-kickscondor-com p.ct {
+  text-align: center;
+}
+.whostyle-kickscondor-com a.ct > img,
+.whostyle-kickscondor-com img.ct {
+  display: block;
+  margin: 0 auto;
+}

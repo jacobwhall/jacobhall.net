@@ -128,7 +128,7 @@ $result = $sth->fetchAll();
 
 		// Now let's see if this baby has some comments
 		// TODO: better handle situations where there is not a $row['post_id']
-		$commentquery = "SELECT published_date, updated_date, permalink, content, content_summary, author, author_h_card FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND published = true ORDER BY published_date DESC";
+		$commentquery = "SELECT published_date, updated_date, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND published = true ORDER BY published_date DESC";
 		$getcomments = $conn->prepare($commentquery);
 		$getcomments->execute();
 		$commentresult = $getcomments->fetchAll();
@@ -142,7 +142,14 @@ $result = $sth->fetchAll();
 			echo "<article>\n";
 			echo "<h2>Comments</h2>";
 			echo "<p>You can leave a comment here via webmention! Note that I moderate webmentions manually, so it may take a few days to appear.</p>";
+
 			foreach($commentresult as $comment) {
+				if (isset($comment['whostyle'])) {
+					echo "<link rel=\"stylesheet\" href=\"/styles/whostyles/" . $comment['whostyle'] . ".css\">";
+					echo "<div class=\"whostyle-" . $comment['whostyle'] . "\">";
+				} else {
+					echo "<div>";
+				}
 				echo "<span class=\"kind\">↩️ REPLY</span> ";
 				// echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> ";
 				
@@ -160,6 +167,7 @@ $result = $sth->fetchAll();
 					echo $comment['content'];
 				}
 				echo "</span>";
+				echo "</div>";
 			}
 			echo "</article>\n";
 		} else {

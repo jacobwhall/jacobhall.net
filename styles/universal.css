@@ -63,7 +63,7 @@
 		.code .Constant {
 			color: #a0c980;
 		}
-		/* not used? might remove. i don't make errors ;) */
+		/* not used? might remove. */
 		.code .Error {
 			color: #ffffff;
 			background-color: #ff6060;

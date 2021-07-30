@@ -12,29 +12,46 @@ try {
 //	echo "Error:".$e->getMessage();
 	die("Error connecting to database!\n</body>\n</html>");
 }
-$querystring = $querystring . " ORDER BY published_date DESC";
+if (isset($querystring)) {
+	$querystring = $querystring . " ORDER BY published_date DESC";
+} else {
+	$querystring = "SELECT * FROM entries WHERE published = TRUE ORDER BY published_date DESC";
+}
 if (isset($querylimit)) $querystring = $querystring . " LIMIT " . $querylimit;
 $sth = $conn->prepare($querystring);
 $sth->execute();
 $result = $sth->fetchAll();
-if {$_GET["type"] == "rss") {
-echo "<rss version="2.0">\n
+if ($_GET["type"] == "rss") {
+echo "<rss version=\"2.0\">\n
 	<channel>\n
 	<title>Jacob Hall</title>\n
 	<link>https://jacobhall.net</link>\n
 	<description>RSS feed of Jacob Hall's blog</description>\n
 	<docs>https://validator.w3.org/feed/docs/rss2.html</docs>\n
-	<managingEditor>email@jacobhall.net</managingEditor>\n
-	<webMaster>email@jacobhall.net</webMaster>\n
+	<managingEditor>email@jacobhall.net (Jacob Hall)</managingEditor>\n
+	<webMaster>email@jacobhall.net (Jacob Hall)</webMaster>\n
 	<ttl>120</ttl>";
 	// For each returned row from query
 	foreach($result as $row) {
-		echo "\t<title>" . $row["post_title"] . "</title>\n";
-		echo "\t<link>" . $row["permalink"] . "</link>\n";
-		// if isset($row["content_summary"]) ...
-		// TODO: write notes out as "description" if no title is present
-		echo "\t<description>" . $row["content_summary"] . "</description>\n";
-		echo "\t<author>email@jacobhall.net</author>\n";
+		echo "\t<item>\n";
+		if (isset($row["post_title"])) {
+			echo "\t\t<title>" . $row["post_title"] . "</title>\n";
+			if (isset($row["content_summary"])) {
+				echo "\t\t<description>" . $row["content_summary"] . "</description>\n";
+			} elseif (isset($row["content"])) {
+				echo "\t\t<description>" . $row["content"] . "</description>\n";
+			}
+		} else {
+			if (isset($row["content"])) {
+				echo "\t\t<description>" . $row["content"] . "</description>\n";
+			} elseif (isset($row["content_summary"])) {
+				echo "\t\t<description>" . $row["content_summary"] . "</description>\n";
+			} else {
+				echo "\t\t<description>(no title or description)</description>\n";
+			}
+		}
+		echo "\t\t<link>" . $row["permalink"] . "</link>\n";
+		echo "\t\t<author>email@jacobhall.net (Jacob Hall)</author>\n";
 		// get tags for this post
 		$tagquery = "SELECT tag FROM tags WHERE post_id = " . $row['post_id'];
 		$gettags = $conn->prepare($tagquery);
@@ -43,7 +60,7 @@ echo "<rss version="2.0">\n
 		// For each returned row from query
 		if (count($tagresult) > 0) {
 			foreach($tagresult as $tag) {
-				echo "\t<category>" . $tag . "</category>\n";
+				echo "\t\t<category>" . $tag . "</category>\n";
 			}
 		}
 		// Now let's see if this baby has some comments
@@ -53,11 +70,13 @@ echo "<rss version="2.0">\n
 		$getcomments->execute();
 		$commentresult = $getcomments->fetchAll();
 		if (count($commentresult) > 0) {
-			echo "\t<comments>" . $row["permalink"] . "</comments>\n";
+			echo "\t\t<comments>" . $row["permalink"] . "</comments>\n";
 		}
 		// TODO: output <enclosure> tags if there is multimedia in post
-		echo "<pubDate>" . date('D, d F Y H:i:s e', strtotime($row['published_date'])) . "</pubDate>";
-
+		echo "\t\t<pubDate>" . date('D, d F Y H:i:s e', strtotime($row['published_date'])) . "</pubDate>\n";
+		echo "\t\t<guid isPermaLink=\"true\">" . $row["permalink"] . "</guid>\n";
+		echo "\t</item>\n";
+	}
 } else {
 # TODO: add elseif ($_GET["type"] == "atom") ...
 	// For each returned row from query

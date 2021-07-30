@@ -17,7 +17,49 @@ if (isset($querylimit)) $querystring = $querystring . " LIMIT " . $querylimit;
 $sth = $conn->prepare($querystring);
 $sth->execute();
 $result = $sth->fetchAll();
+if {$_GET["type"] == "rss") {
+echo "<rss version="2.0">\n
+	<channel>\n
+	<title>Jacob Hall</title>\n
+	<link>https://jacobhall.net</link>\n
+	<description>RSS feed of Jacob Hall's blog</description>\n
+	<docs>https://validator.w3.org/feed/docs/rss2.html</docs>\n
+	<managingEditor>email@jacobhall.net</managingEditor>\n
+	<webMaster>email@jacobhall.net</webMaster>\n
+	<ttl>120</ttl>";
+	// For each returned row from query
+	foreach($result as $row) {
+		echo "\t<title>" . $row["post_title"] . "</title>\n";
+		echo "\t<link>" . $row["permalink"] . "</link>\n";
+		// if isset($row["content_summary"]) ...
+		// TODO: write notes out as "description" if no title is present
+		echo "\t<description>" . $row["content_summary"] . "</description>\n";
+		echo "\t<author>email@jacobhall.net</author>\n";
+		// get tags for this post
+		$tagquery = "SELECT tag FROM tags WHERE post_id = " . $row['post_id'];
+		$gettags = $conn->prepare($tagquery);
+		$gettags->execute();
+		$tagresult = $gettags->fetchAll();
+		// For each returned row from query
+		if (count($tagresult) > 0) {
+			foreach($tagresult as $tag) {
+				echo "\t<category>" . $tag . "</category>\n";
+			}
+		}
+		// Now let's see if this baby has some comments
+		// TODO: better handle situations where there is not a $row['post_id']
+		$commentquery = "SELECT published_date, updated_date, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND published = true ORDER BY published_date DESC";
+		$getcomments = $conn->prepare($commentquery);
+		$getcomments->execute();
+		$commentresult = $getcomments->fetchAll();
+		if (count($commentresult) > 0) {
+			echo "\t<comments>" . $row["permalink"] . "</comments>\n";
+		}
+		// TODO: output <enclosure> tags if there is multimedia in post
+		echo "<pubDate>" . date('D, d F Y H:i:s e', strtotime($row['published_date'])) . "</pubDate>";
 
+} else {
+# TODO: add elseif ($_GET["type"] == "atom") ...
 	// For each returned row from query
 	foreach($result as $row) {
 		// Very important, reset the content for this entry!!
@@ -180,4 +222,5 @@ $result = $sth->fetchAll();
 
 		
 	}
+}
 ?>

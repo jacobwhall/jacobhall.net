@@ -12,6 +12,13 @@ try {
 //	echo "Error:".$e->getMessage();
 	die("Error connecting to database!\n</body>\n</html>");
 }
+
+function getXMLfromHTML($html) {
+	$dom = new DOMDocument;
+	$dom->loadHTML($html);
+	return $dom->saveXML($dom);
+}
+
 if (isset($querystring)) {
 	$querystring = $querystring . " ORDER BY published_date DESC";
 } else {
@@ -22,15 +29,18 @@ $sth = $conn->prepare($querystring);
 $sth->execute();
 $result = $sth->fetchAll();
 if ($_GET["type"] == "rss") {
-echo "<rss version=\"2.0\">\n
+	header('Content-type: application/rss+xml');
+	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n
+	<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n
 	<channel>\n
 	<title>Jacob Hall</title>\n
+	<atom:link href=\"https://jacobhall.net/feed/rss/v1.rss\" rel=\"self\" type=\"application/rss+xml\" />
 	<link>https://jacobhall.net</link>\n
 	<description>RSS feed of Jacob Hall's blog</description>\n
 	<docs>https://validator.w3.org/feed/docs/rss2.html</docs>\n
 	<managingEditor>email@jacobhall.net (Jacob Hall)</managingEditor>\n
 	<webMaster>email@jacobhall.net (Jacob Hall)</webMaster>\n
-	<ttl>120</ttl>";
+	<ttl>120</ttl>\n";
 	// For each returned row from query
 	foreach($result as $row) {
 		echo "\t<item>\n";
@@ -73,10 +83,11 @@ echo "<rss version=\"2.0\">\n
 			echo "\t\t<comments>" . $row["permalink"] . "</comments>\n";
 		}
 		// TODO: output <enclosure> tags if there is multimedia in post
-		echo "\t\t<pubDate>" . date('D, d F Y H:i:s e', strtotime($row['published_date'])) . "</pubDate>\n";
+		echo "\t\t<pubDate>" . date(DateTimeInterface::RFC822, strtotime($row['published_date'])) . " GMT</pubDate>\n";
 		echo "\t\t<guid isPermaLink=\"true\">" . $row["permalink"] . "</guid>\n";
 		echo "\t</item>\n";
 	}
+	echo "</channel>\n</rss>";
 } else {
 # TODO: add elseif ($_GET["type"] == "atom") ...
 	// For each returned row from query
@@ -235,6 +246,7 @@ echo "<rss version=\"2.0\">\n
 			if (count($commentresult) > 0) {
 				echo " - <a href=\"" . $row['permalink'] . "#Comments\">" . count($commentresult) . " comment";
 				if (count($commentresult) > 1) echo "s";
+				echo "</a>";
 			}
 			echo "\n</article>\n";
 		}

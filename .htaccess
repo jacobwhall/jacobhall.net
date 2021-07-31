@@ -12,5 +12,8 @@ RewriteRule ^kind/(repost|re-post) /entry.php?type=8 [L]
 RewriteRule ^kind/rsvp /entry.php?type=9 [L]
 RewriteRule ^kind/file /entry.php?type=10 [L]
 RewriteRule ^kind /entry.php
+RewriteRule ^rss$ /feed.php?type=rss
+RewriteRule ^feed/rss$ /feed.php?type=rss
+RewriteRule ^feed/rss/v1 /feed.php?type=rss
 RewriteRule ^now$ /now.html
 RewriteRule ^webmention$ /indieweb/webmention.php

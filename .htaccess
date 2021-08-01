@@ -13,8 +13,6 @@ RewriteRule ^kind/rsvp /entry.php?type=9 [L]
 RewriteRule ^kind/file /entry.php?type=10 [L]
 RewriteRule ^kind /entry.php
 RewriteRule ^rss$ /feed.php?type=rss
-RewriteRule ^feed/rss$ /feeds/rss.php
-RewriteRule ^feed/rss/v1 /feeds/rss.php
-RewriteRule ^feeds/rss$ /feeds/rss.php
+RewriteRule ^feeds/rss/v1.rss /feeds/rss.php
 RewriteRule ^now$ /now.html
 RewriteRule ^webmention$ /indieweb/webmention.php

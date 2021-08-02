@@ -65,7 +65,7 @@ $querystring = "SELECT post_type,
 		WHERE published = TRUE
 		AND post_type != 5";
 $querylimit = 5;
-include("feed.php");
+include("feeds/h-feed.php");
 ?>
 <h2><a href="/kind">view more posts ➡️</a></h2>
 <div id="subsequentbox">

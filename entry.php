@@ -51,6 +51,6 @@ if($needsand) {
 	$querystring = $querystring . " WHERE published = true";
 }
 
-include 'feed.php';
+include 'feeds/h-feed.php';
 echo "</div>\n</body>\n</html>";
 ?>

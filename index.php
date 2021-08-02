@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#FFFFFF"/>
 	<meta name="Description" content="Jacob Hall's personal website">
+	<link rel="alternate" type="application/rss+xml" title="RSS Feed for jacobhall.net" href="/feeds/rss/v1.rss">
 	<link href="/styles/whostyles/whostyle-v1.css" rel="whostyle">
 	<link href="/webmention" rel="webmention">
 	<link href="/indieweb/micropub.php" rel="micropub">

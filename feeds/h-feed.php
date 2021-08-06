@@ -155,7 +155,7 @@ $result = $sth->fetchAll();
 					echo "<link rel=\"stylesheet\" href=\"/styles/whostyles/" . $comment['whostyle'] . ".css\">";
 					echo "<div class=\"whostyle-" . $comment['whostyle'] . "\">";
 				} else {
-					echo "<div>";
+					echo "<div class=\"whostyle-jacobhall-net\">";
 				}
 				echo "<span class=\"kind\">↩️ REPLY</span> ";
 				// echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> ";

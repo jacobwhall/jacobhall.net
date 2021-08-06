@@ -90,6 +90,9 @@
 		.code .texSpecial {
 			color: #deb974;
 		}
+		.code .Type {
+			color: #d38aea;
+		}	
 		/* h-card, h-entry rules */
 		.p-note {
 			display: none;

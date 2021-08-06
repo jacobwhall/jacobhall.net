@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Zing';
+  src: url('fonts/zing.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: extra-condensed;
+  unicode-range: U+000D-1F41B;
+}
+.whostyle-philosopher-life {
+  border: 1px solid #3b3333;
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  font-family: 'Zing', sans-serif;
+  padding: 12px;
+}
+.whostyle-philosopher-life blockquote {
+  border-left: 5px solid #ffffff;
+  margin-left: 25px;
+  padding-left: 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+.whostyle-philosopher-life h1,
+.whostyle-philosopher-life h2,
+.whostyle-philosopher-life h3 {
+  font-weight: normal;
+  color: #02A1D6;
+}
+.whostyle-philosopher-life a {
+  color: #02A1D6;
+}
+

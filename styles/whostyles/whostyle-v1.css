@@ -1,19 +1,20 @@
-.whostyle {
+.whostyle-jacobhall-net {
+	all: revert;
 	border-radius: 25px;
 	border: solid .2em lightgrey;
 	font-family: 'Work Sans', sans-serif;
 	padding: 0em 1em;
 	text-align: left;
 }
-.whostyle,
-.whostyle h1,
-.whostyle h2,
-.whostyle h3,
-.whostyle h4,
-.whostyle h5, {
+.whostyle-jacobhall-net,
+.whostyle-jacobhall-net h1,
+.whostyle-jacobhall-net h2,
+.whostyle-jacobhall-net h3,
+.whostyle-jacobhall-net h4,
+.whostyle-jacobhall-net h5, {
 	font-size-adjust: 0.5;
 }
-.whostyle blockquote {
+.whostyle-jacobhall-net blockquote {
 	border-left: 0.3em solid lightgrey;
 	margin-left: 2em;
 	padding-left: 0.4em;

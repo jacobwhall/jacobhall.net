@@ -63,7 +63,8 @@ $querystring = "SELECT post_type,
 			content_summary	
 		FROM entries
 		WHERE published = TRUE
-		AND post_type != 5";
+		AND post_type != 5
+		AND author = 'Jacob Hall'";
 $querylimit = 5;
 include("feeds/h-feed.php");
 ?>

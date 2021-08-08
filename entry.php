@@ -46,9 +46,9 @@ if (isset($_GET['type'])) {
 }
 
 if($needsand) {
-	$querystring = $querystring . " AND published = true";
+	$querystring = $querystring . " AND published = true AND author = 'Jacob Hall'";
 } else {
-	$querystring = $querystring . " WHERE published = true";
+	$querystring = $querystring . " WHERE published = true AND author = 'Jacob Hall'";
 }
 
 include 'feeds/h-feed.php';

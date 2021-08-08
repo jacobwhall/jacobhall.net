@@ -18,7 +18,7 @@ if (isset($querystring)) {
 } else {
 	$standalone = TRUE;
 	include $_SERVER['DOCUMENT_ROOT'] . '/beforeentry.html';
-	$querystring = "SELECT * FROM entries WHERE published = TRUE ORDER BY published_date DESC";
+	$querystring = "SELECT * FROM entries WHERE published = TRUE AND author = 'Jacob Hall' ORDER BY published_date DESC";
 }
 if (isset($querylimit)) $querystring = $querystring . " LIMIT " . $querylimit;
 $sth = $conn->prepare($querystring);

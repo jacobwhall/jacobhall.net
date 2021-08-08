@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap");
+
+/** Basic styling */
+.whostyle-maya-land {
+	all: revert;
+	font: 400 16px/1.3 "Sorts Mill Goudy", serif;
+	color: #200F00;
+	background-color: white;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-feature-settings: "kern" 1;
+	-moz-font-feature-settings: "kern" 1;
+	-o-font-feature-settings: "kern" 1;
+	font-feature-settings: "kern" 1;
+	font-kerning: normal;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: pixelated;
+	-ms-interpolation-mode: nearest-neighbor;
+}
+
+/** Set `margin-bottom` to maintain vertical rhythm */
+.whostyle-maya-land h1,
+.whostyle-maya-land h2,
+.whostyle-maya-land h3,
+.whostyle-maya-land h4,
+.whostyle-maya-land h5,
+.whostyle-maya-land h6,
+.whostyle-maya-land p,
+.whostyle-maya-land blockquote,
+.whostyle-maya-land pre,
+.whostyle-maya-land ul,
+.whostyle-maya-land ol,
+.whostyle-maya-land dl,
+.whostyle-maya-land figure,
+.whostyle-maya-land .highlight { margin-bottom: 15px; }
+
+
+/** Images */
+.whostyle-maya-land img {
+	max-width: 100%;
+	vertical-align: middle;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: pixelated;
+	-ms-interpolation-mode: nearest-neighbor;
+}
+
+/** Figures */
+.whostyle-maya-land figure figcaption { opacity: 0; transition-timing-function: ease-in; transition: opacity 2.5s; }
+
+.whostyle-maya-land figure:hover figcaption { opacity: 1; transition: opacity 0.25s; }
+
+.whostyle-maya-land figure > img { display: block; opacity: 1; }
+
+.whostyle-maya-land figcaption { font-size: 14px; }
+
+/** Lists */
+.whostyle-maya-land ul,
+.whostyle-maya-land ol {
+	margin-left: 30px;
+}
+
+.whostyle-maya-land li > ul,
+.whostyle-maya-land li > ol {
+	margin-bottom: 0;
+}
+
+/** Headings */
+.whostyle-maya-land h1,
+.whostyle-maya-land h2,
+.whostyle-maya-land h3,
+.whostyle-maya-land h4,
+.whostyle-maya-land h5,
+.whostyle-maya-land h6 {
+	font-weight: bolder;
+	font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.whostyle-maya-land h1 { letter-spacing: -0.08em; font-size: 2.2em; }
+
+.whostyle-maya-land h2 { letter-spacing: 0.06em; word-spacing: 0.02em; font-weight: lighter; }
+
+.whostyle-maya-land h3 { letter-spacing: -0.04em; /*font-variant: small-caps;*/ font-weight: bolder; }
+
+.whostyle-maya-land h2,
+.whostyle-maya-land h4,
+.whostyle-maya-land h5,
+.whostyle-maya-land h6 { font-style: italic; }
+
+/** Links */
+.whostyle-maya-land a { color: #FF0d0D; text-decoration: none; }
+
+.whostyle-maya-land a:visited { color: #c00000; }
+
+.whostyle-maya-land a:hover { color: #200F00; text-decoration: underline; }
+.whostyle-maya-land blockquote {
+	color: #75470B;
+	border-left: 4px solid #f0b05c;
+	padding-left: 15px;
+	font-size: 18px;
+	letter-spacing: -1px;
+	font-style: italic;
+}
+
+.whostyle-maya-land blockquote > :last-child { margin-bottom: 0; }
+.whostyle-maya-land { 
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-right: 37px;
+	padding-left: 37px;
+	background-color: white;
+	border-style: dotted;
+	z-index: 0;
+	position: relative;
+	border-image: url("properframe.png") 93 92 87 92 stretch stretch;
+	border-image-width: 28px;
+	border-image-outset: 0px;
+}

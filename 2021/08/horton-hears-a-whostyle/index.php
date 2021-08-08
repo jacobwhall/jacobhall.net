@@ -325,7 +325,8 @@
 
 <article class="h-entry">
 <h2 class="p-name">🖌️ Horton Hears a Whostyle</h2>
-<span class="date">Last updated on August 6, 2021</span>
+<span class="date">Published on August 6, 2021</span>
+<div class="e-content">
 <a class="u-category" href="https://news.indieweb.org/en"></a>
 <link rel="stylesheet" href="whostyles/kickscondor-com.css">
 <link rel="stylesheet" href="whostyles/philosopher-life.css">
@@ -466,6 +467,13 @@ If you would like to style your comment from scratch, there is a CSS property ca
 <p>
 	TTFN ❤️
 </p>
+</div>
 </article>
+<article>
+<?php
+$postID = 83;
+include $_SERVER['DOCUMENT_ROOT'] . '/feeds/comments.php';
+?>
+<article>
 </body>
 </html>

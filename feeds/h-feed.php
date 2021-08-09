@@ -133,53 +133,19 @@ $result = $sth->fetchAll();
 			}
 		}
 
-		// Now let's see if this baby has some comments
-		// TODO: better handle situations where there is not a $row['post_id']
-		$commentquery = "SELECT published_date, updated_date, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND published = true ORDER BY published_date DESC";
-		$getcomments = $conn->prepare($commentquery);
-		$getcomments->execute();
-		$commentresult = $getcomments->fetchAll();
-
-		// For each returned row from query
-		
-
 		if (isset($_GET['id'])) {
-			echo "</article>\n";
-			// TODO: create a better styling system that puts comments in a better-suited container
-			echo "<article>\n";
-			echo "<h2>Comments</h2>";
-			echo "<p>You can leave a comment here via webmention! Note that I moderate webmentions manually, so it may take a few days to appear.</p>";
-
-			foreach($commentresult as $comment) {
-				if (isset($comment['whostyle'])) {
-					echo "<link rel=\"stylesheet\" href=\"/styles/whostyles/" . $comment['whostyle'] . ".css\">";
-					echo "<div class=\"whostyle-" . $comment['whostyle'] . "\">";
-				} else {
-					echo "<div class=\"whostyle-jacobhall-net\">";
-				}
-				echo "<span class=\"kind\">↩️ REPLY</span> ";
-				// echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> ";
-				
-				echo "<span class=\"u-in-reply-to h-cite\">";
-				echo "from <a class=\"p-author h-card\" href=\"" . $comment['author_h_card'] . "\">" . $comment['author'] . "</a>\n";
-				
-				echo "\t\ton <time class=\"dt-published\" datetime=\"" . $comment['published_date'] . "\"><a class=\"u-url\" href=\"" . $comment['permalink'] . "\">" . date('F j, Y \a\t H:i', strtotime($comment['published_date'])) . "</a></time>";
-				if (isset($comment['updated_date'])) {
-					echo ", updated <date class=\"dt-updated\" datetime=\"" . $comment['updated_date'] . "\">" . date('F j, Y \a\t H:i', strtotime($row['updated_date'])) . "</date>";
-				}
-				if (isset($row['content_summary'])) {
-					echo "\t\t<p class=\"p-summary\">\n" . $comment['content_summary'] . "\n\t\t</p>";
-					echo "<a href=\"" . $comment['permalink'] . "\">read full comment &gt;&gt;</a>";
-				} else {
-					echo $comment['content'];
-				}
-				echo "</span>";
-				echo "</div>";
-			}
-			echo "</article>\n";
+			$postID = $_GET['id'];
+			include "comments.php";
 		} else {
+			// Now let's see if this baby has some comments
+			// TODO: better handle situations where there is not a $row['post_id']
+			$commentquery = "SELECT published_date FROM entries WHERE reply_to_id = " . $row['post_id'] . " AND post_type != 6 AND published = true ORDER BY published_date DESC";
+			$getcomments = $conn->prepare($commentquery);
+			$getcomments->execute();
+			$commentresult = $getcomments->fetchAll();
 			if (count($commentresult) > 0) {
-				echo " - <a href=\"" . $row['permalink'] . "#Comments\">" . count($commentresult) . " comment";
+				# TODO: link to comment section specifically
+				echo " - <a href=\"" . $row['permalink'] . "\">" . count($commentresult) . " comment";
 				if (count($commentresult) > 1) echo "s";
 				echo "</a>";
 			}

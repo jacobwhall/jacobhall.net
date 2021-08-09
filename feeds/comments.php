@@ -12,9 +12,24 @@ try {
 //	echo "Error:".$e->getMessage();
 	die("Error connecting to database!\n</body>\n</html>");
 }
+// Check this post for likes
+// TODO: better handle situations where there is not a $row['post_id']
+$likesquery = "SELECT author, author_photo, original_url FROM entries WHERE reply_to_id = " . $postID . " AND published = true AND post_type = 6 ORDER BY published_date DESC";
+$getlikes = $conn->prepare($likesquery);
+$getlikes->execute();
+$likesresult = $getlikes->fetchAll();
+
+if (!empty($likesresult)) {
+	echo "<h2>Likes</h2>\n<div class=\"facepile\">\n";
+	foreach ($likesresult as $like) {
+		echo "<a href=\"" . $like["original_url"] . "\"><img src=\"" . $like["author_photo"] . "\" alt=\"Photo of " . $like["author"] . "\"></a>";
+	}
+	echo "</div>";
+}
+
 // Now let's see if this baby has some comments
 // TODO: better handle situations where there is not a $row['post_id']
-$commentquery = "SELECT published_date, updated_date, original_url, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $postID . " AND published = true ORDER BY published_date DESC";
+$commentquery = "SELECT published_date, updated_date, original_url, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $postID . " AND post_type != 6 AND published = true ORDER BY published_date DESC";
 $getcomments = $conn->prepare($commentquery);
 $getcomments->execute();
 $commentresult = $getcomments->fetchAll();

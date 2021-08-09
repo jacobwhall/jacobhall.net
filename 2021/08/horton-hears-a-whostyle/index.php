@@ -52,6 +52,11 @@
 		.feed img {
 			width: 100%;
 		}
+		.facepile img {
+			width: 4em;
+			height:4em;
+			border-radius: 50%;
+		}
 			
 		/* code highlighting rules */
 		.code {

@@ -1,4 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap");
+/* 
+ * Sorts Mill Goudy licensed under Open Font License
+ * https://fonts.google.com/specimen/Sorts+Mill+Goudy#license
+ */
+
+@font-face {
+  font-family: 'Sorts Mill Goudy';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/sorts-mill-goudy-italic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Sorts Mill Goudy';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/sorts-mill-goudy-normal.ttf) format('truetype');
+}
 
 /** Basic styling */
 .whostyle-maya-land {
@@ -116,7 +134,7 @@
 	border-style: dotted;
 	z-index: 0;
 	position: relative;
-	border-image: url("properframe.png") 93 92 87 92 stretch stretch;
+	border-image: url("images/properframe.png") 93 92 87 92 stretch stretch;
 	border-image-width: 28px;
 	border-image-outset: 0px;
 }

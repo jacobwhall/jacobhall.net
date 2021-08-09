@@ -32,6 +32,7 @@
 			padding-left: 0.5em;
 		}
 		#contentbox {
+			text-align: left;
 			display: inline-block;
 			width: 100%;
 			max-width: 50em;
@@ -322,13 +323,13 @@
                         <h5>⬅️ Jacob Hall's weblog</h5>
                 </a>
         </div>
-
+<div id="contentbox">
 <article class="h-entry">
 <h2 class="p-name">🖌️ Horton Hears a Whostyle</h2>
 <span class="date">Published on August 6, 2021</span>
 <div class="e-content">
 <a class="u-category" href="https://news.indieweb.org/en"></a>
-<link rel="stylesheet" href="whostyles/kickscondor-com.css">
+<link rel="stylesheet" href="styles/whostyles/kickscondor-com/whostyle.css">
 <link rel="stylesheet" href="whostyles/philosopher-life.css">
 <p>
 Back in 2018, <a class="u-category h-card" href="https://www.kickscondor.com/">Kicks Condor</a>, <a href="https://sphygm.us/">sphygmus</a>, and others came up with "<a href="https://www.kickscondor.com/whostyles/">whostyles</a>."
@@ -469,11 +470,10 @@ If you would like to style your comment from scratch, there is a CSS property ca
 </p>
 </div>
 </article>
-<article>
 <?php
 $postID = 83;
 include $_SERVER['DOCUMENT_ROOT'] . '/feeds/comments.php';
 ?>
-<article>
+</div>
 </body>
 </html>

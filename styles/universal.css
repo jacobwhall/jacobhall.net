@@ -21,6 +21,7 @@
 			padding-left: 0.5em;
 		}
 		#contentbox {
+			text-align: left;
 			display: inline-block;
 			width: 100%;
 			max-width: 50em;

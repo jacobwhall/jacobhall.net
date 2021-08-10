@@ -29,7 +29,7 @@ if (!empty($likesresult)) {
 
 // Now let's see if this baby has some comments
 // TODO: better handle situations where there is not a $row['post_id']
-$commentquery = "SELECT published_date, updated_date, original_url, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $postID . " AND post_type != 6 AND published = true ORDER BY published_date DESC";
+$commentquery = "SELECT published_date, updated_date, original_url, permalink, content, content_summary, author, author_h_card, whostyle FROM entries WHERE reply_to_id = " . $postID . " AND post_type != 6 AND published = true ORDER BY published_date ASC";
 $getcomments = $conn->prepare($commentquery);
 $getcomments->execute();
 $commentresult = $getcomments->fetchAll();

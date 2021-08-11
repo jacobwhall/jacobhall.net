@@ -65,12 +65,25 @@ $result = $sth->fetchAll();
 				$content .= "\n" . $row['content'];
 			}
 		}
-		if ($row['post_type'] == 6) echo "❤️ LIKE \n";
-		// TODO: properly link to original author's h-card and the original post
+		if ($row['post_type'] == 6) {
+			echo "<a href=\"/kind/reply\" class=\"kind\">❤️ LIKED</a> ";
+			echo "<span class=\"u-in-reply-to h-cite\">";
+			echo " <a class=\"p-author h-card\" href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'";
+			if (substr($row['reply_to_author'], -1) != "s") echo "s";
+				if (isset($row['reply_to_title'])) {
+					echo " post <a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">";
+						echo "<span class=\"p-name\">" . $row['reply_to_title'] . "</span>";
+					echo "</a>";
+				} else {
+					echo " <a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">post</a>";
+				}
+			echo "</span>";
+		}
 		if ($row['post_type'] == 7) {
 			echo "<a href=\"/kind/reply\" class=\"kind\">↩️ REPLY</a> ";
 			echo "<span class=\"u-in-reply-to h-cite\">";
-			echo "to <a class=\"p-author h-card\" href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'s";
+			echo "to <a class=\"p-author h-card\" href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'";
+			if (substr($row['reply_to_author'], -1) != "s") echo "s";
 				if (isset($row['reply_to_title'])) {
 					echo " post <a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">";
 						echo "<span class=\"p-name\">" . $row['reply_to_title'] . "</span>";
@@ -86,7 +99,7 @@ $result = $sth->fetchAll();
 			// TODO: properly link to the event h-entry
 		}			
 		if ($row['post_type'] == 9) {
-			echo "<a href=\"/kind/reply\" class=\"kind\">✉️ RSVP</a> ";
+			echo "<a href=\"/kind/rsvp\" class=\"kind\">✉️ RSVP</a> ";
 			// TODO: Add more post types. 🎧 jam, 📺 watch,📖 read, presentation? 📅 event?
 		}
 		if ($row['post_type'] == 10) {

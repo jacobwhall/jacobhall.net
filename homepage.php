@@ -64,6 +64,7 @@ $querystring = "SELECT post_type,
 		FROM entries
 		WHERE published = TRUE
 		AND post_type != 5
+		AND post_type != 6
 		AND author = 'Jacob Hall'";
 $querylimit = 5;
 include("feeds/h-feed.php");

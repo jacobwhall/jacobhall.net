@@ -66,8 +66,8 @@ $result = $sth->fetchAll();
 			}
 		}
 		if ($row['post_type'] == 6) {
-			echo "<a href=\"/kind/reply\" class=\"kind\">❤️ LIKED</a> ";
-			echo "<span class=\"u-in-reply-to h-cite\">";
+			echo "<a href=\"/kind/like\" class=\"kind\">❤️ LIKED</a> ";
+			echo "<span class=\"u-like-of h-cite\">";
 			echo " <a class=\"p-author h-card\" href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'";
 			if (substr($row['reply_to_author'], -1) != "s") echo "s";
 				if (isset($row['reply_to_title'])) {
@@ -117,7 +117,7 @@ $result = $sth->fetchAll();
 			echo $row['content'];
 		}
 		if ($row['post_type'] == 3) {
-			echo "<img class=\"feed\" src=\"" . $row['content_location'] . "\" />";
+			echo "<img class=\"feed\" src=\"" . $row['content_location'] . "\" loading=\"lazy\" />";
 		} 
 		if ($row['post_type'] == 10) {
 			echo "<p>\n\t<a href=\"" . $row['content_location'] . "\" download>📎 <strong>" . $row['post_title'] . "</strong></a>\n</p>";

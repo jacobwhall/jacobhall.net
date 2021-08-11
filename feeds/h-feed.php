@@ -100,15 +100,21 @@ $result = $sth->fetchAll();
 		}			
 		if ($row['post_type'] == 9) {
 			echo "<a href=\"/kind/rsvp\" class=\"kind\">✉️ RSVP</a> ";
-			// TODO: Add more post types. 🎧 jam, 📺 watch,📖 read, presentation? 📅 event?
+			// TODO: Add more post types. 🎧 jam, 📖 read, presentation? 📅 event?
 		}
 		if ($row['post_type'] == 10) {
 			echo "<a href=\"/kind/file\" class=\"kind\">📎 FILE</a>\n";
 			if (isset($row['post_title'])) echo "<h2>" . $row['post_title'] . "</h2>";
 		}
+		if ($row['post_type'] == 11) {
+			echo "<a href=\"/kind/watch\" class=\"kind\">📺 WATCHED</a>\n";
+			echo "<a href=\"" . $row['original_url'] . "\">" . $row['post_title'] . "</a>";
+		}
 
 		// Output content of post!
-		echo "\t<div class=\"e-content\">\n";
+		echo "\t<div class=\"e-content";
+		if ($row['post_type'] == 11) echo " watch";
+		echo "\">\n";
 		if (isset($content)) {
 			echo $content;
 		} elseif (isset($row['content_summary'])) {

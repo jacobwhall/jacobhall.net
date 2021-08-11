@@ -21,6 +21,11 @@
 			color: black;
 			text-decoration: none;
 		}
+		.watch img {
+			width: 8em;
+			padding: 0em 1em;
+			float: left;
+		}
 		table {
 			margin: 0 auto;
 			border-collapse: collapse;

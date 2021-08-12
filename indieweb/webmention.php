@@ -57,6 +57,48 @@ function sniffForHCards($propertyarray) {
 	}
 }
 
+// From: https://stackoverflow.com/a/18915457
+function urlsSame($url1, $url2)
+{
+	$url1 = trim($url1, '/');
+	$url2 = trim($url2, '/');
+
+	$mustMatch = array_flip(['host', 'port', 'path']);
+	$defaults = ['path' => '/']; // if not present, assume these (consistency)
+	$url1 = array_intersect_key(parse_url($url1), $mustMatch);
+	$url2 = array_intersect_key(parse_url($url2), $mustMatch);
+
+	return $url1 === $url2;
+}
+
+function detect_reply($mfArray, $aggressive = False) {
+	$isReply = False;
+	foreach($mfArray as $property) {
+		sniffForHCards($property);
+		if (urlsSame($property, $_POST['target'])) {
+			$isReply = True;
+			break;
+		}
+		if (detect_reply($property['url'], $aggressive)) {
+			$isReply = True;
+			break;
+		}
+		if (detect_reply($property['in-reply-to'], True)) {
+			$isReply = True;
+			break;
+		}
+		if (detect_reply($property['like-of'], True)) {
+			$isReply = True;
+			break;
+		}
+		if (detect_reply($property, $aggressive)) {
+			$isReply = True;
+			break;
+		}
+	}
+	return $isReply;
+}
+
 $isReply = False;
 // Get microformats array of the source
 $sourcemf = mf2\fetch($_POST['source']);
@@ -65,19 +107,11 @@ foreach ($sourcemf[items] as $item) {
 	if ($item[type][0] == "h-card") {
 		sniffForHCards($item['properties']);
 	// elseif entry is an h-entry and is a reply
-	} elseif ($item['type'][0] == "h-entry" && isset($item['properties']['in-reply-to'])) {
+	} elseif ($item['type'][0] == "h-entry" && (isset($item['properties']['in-reply-to']) or isset($item['properties']['like-of']))) {
 		// Is this reply the one we're looking for?
 		if ($item['properties']['url'][0] == $_POST['source']) {
 			// For every post this reply might be replying to
-			foreach ($item['properties']['in-reply-to'] as $replyitem) {
-				// If this post replies to the target (my post)
-				if ($replyitem['properties']['url'][0] == $_POST['target']) {
-					$isReply = True;
-				}
-				// Sniff for h-cards to add to my contacts
-				sniffForHCards($replyitem['properties']);
-			}
-			if ($isReply) {
+			if (detect_reply($item)) {
 				// TODO: support whostyle sniffing
 				insertComment($_POST["source"], $_POST["target"], Null, $item);
 			}

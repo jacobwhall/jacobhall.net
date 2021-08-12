@@ -55,6 +55,9 @@
 		.feed img {
 			width: 100%;
 		}
+		blockquote:before {
+			content: ">";
+		}
 			
 		/* code highlighting rules */
 		.code {
@@ -125,16 +128,6 @@
 		}
 		.hidden-u-photo {
 			display: none;
-		}
-		@media (min-width: 80em) {
-			article {
-				margin-top: 2em;
-				padding: 1em;
-			}
-			article.feed {
-				border-radius: 25px;
-				border: solid .2em lightgrey;
-			}
 		}
 		#license #indiewebring {
 			display: inline-block;
@@ -213,6 +206,7 @@
 			min-width: 10%
 		}
 		</style>
+		<link rel="stylesheet" href="/styles/whostyles/whostyle-v1.css">
 </head>
 <body>
 <!-- <div id="announcement">Looking for a resource I sent you here for? <a href="/">Click here</a></div> -->

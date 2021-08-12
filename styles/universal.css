@@ -30,7 +30,6 @@
 		article {
 			display: inline-block;
 			text-align: left;
-			padding-bottom: 3em;
 			width: 100%;
 			max-width: 50em;
 			min-width: 10%;
@@ -45,6 +44,10 @@
 			width: 4em;
 			height:4em;
 			border-radius: 50%;
+		}
+		
+		blockquote:before {
+			content: ">";
 		}
 			
 		/* code highlighting rules */
@@ -120,11 +123,6 @@
 		@media (min-width: 80em) {
 			article {
 				margin-top: 2em;
-				padding: 1em;
-			}
-			article.feed {
-				border-radius: 25px;
-				border: solid .2em lightgrey;
 			}
 		}
 		#license #indiewebring {

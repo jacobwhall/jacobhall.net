@@ -29,8 +29,14 @@ $result = $sth->fetchAll();
 	foreach($result as $row) {
 		// Very important, reset the content for this entry!!
 		unset($content);
-
-		echo "<article class=\"h-entry feed\">\n";
+		
+		echo "<article class=\"h-entry feed\">";
+		if (isset($row['whostyle'])) {
+			echo "<link rel=\"stylesheet\" href=\"/styles/whostyles/" . $comment['whostyle'] . "/whostyle.css\">";
+			echo "<div class=\"whostyle-" . $comment['whostyle'] . "\">";
+		} else {
+			echo "<div class=\"whostyle-jacobhall-net\">";
+		}
 
 		if ($row['post_type'] == 1) {
 			echo "\t<a href=\"/kind/article\" class=\"kind\">🖋️ ARTICLE</a>\n";
@@ -168,7 +174,7 @@ $result = $sth->fetchAll();
 				if (count($commentresult) > 1) echo "s";
 				echo "</a>";
 			}
-			echo "\n</article>\n";
+			echo "\n</div></article>\n";
 		}
 
 		

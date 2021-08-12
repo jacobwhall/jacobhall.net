@@ -1,10 +1,27 @@
+/* Please style my <blockquote>s that way that you do 😘 */
+.whostyle-jacobhall-net,
+.whostyle-jacobhall-net *:not(blockquote, blockquote > *, .hidden-u-photo) {
+	all:revert;
+}
 .whostyle-jacobhall-net {
 	all: revert;
 	border-radius: 25px;
 	border: solid .2em lightgrey;
 	font-family: 'Work Sans', sans-serif;
-	padding: 0em 1em;
+	font-size: 100%;
+	font-size: max(100%, .4cm);
+	padding: 1em;
 	text-align: left;
+	overflow: auto;
+}
+.whostyle-jacobhall-net img {
+	width: 100%;
+	height: 100%;
+}
+.whostyle-jacobhall-net .watch img {
+	width: 8em;
+	padding-right: 1em;
+	float: left;
 }
 .whostyle-jacobhall-net,
 .whostyle-jacobhall-net h1,
@@ -13,9 +30,4 @@
 .whostyle-jacobhall-net h4,
 .whostyle-jacobhall-net h5, {
 	font-size-adjust: 0.5;
-}
-.whostyle-jacobhall-net blockquote {
-	border-left: 0.3em solid lightgrey;
-	margin-left: 2em;
-	padding-left: 0.4em;
 }

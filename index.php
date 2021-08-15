@@ -44,7 +44,7 @@
 		article {
 			display: inline-block;
 			text-align: left;
-			padding-bottom: 3em;
+			margin-top: 2em;
 			width: 100%;
 			max-width: 50em;
 			min-width: 10%;

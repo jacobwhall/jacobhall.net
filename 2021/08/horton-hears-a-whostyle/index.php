@@ -305,9 +305,11 @@
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
 	"headline": "🖌️ Horton Hears a Whostyle",
+	"image": "https://jacobhall.net/2021/08/horton-hears-a-whostyle/horton.webp",
 	"author": {
 		"@type": "Person",
-		"name": "Jacob Hall"
+		"name": "Jacob Hall",
+		"url": "https://jacobhall.net"
 	},
 	"dateModified": ""
 	}
@@ -334,7 +336,7 @@
 <span class="date">Published on August 6, 2021</span>
 <div class="e-content">
 <a class="u-category" href="https://news.indieweb.org/en"></a>
-<link rel="stylesheet" href="styles/whostyles/kickscondor-com/whostyle.css">
+<link rel="stylesheet" href="/styles/whostyles/kickscondor-com/whostyle.css">
 <link rel="stylesheet" href="whostyles/philosopher-life.css">
 <p>
 Back in 2018, <a class="u-category h-card" href="https://www.kickscondor.com/">Kicks Condor</a>, <a href="https://sphygm.us/">sphygmus</a>, and others came up with "<a href="https://www.kickscondor.com/whostyles/">whostyles</a>."
@@ -360,7 +362,7 @@ Back in 2018, <a class="u-category h-card" href="https://www.kickscondor.com/">K
 <h2>some example whostyles</h2>
 <p>
 	Importing my own style is redundant, so let's try importing someone else's whostyle: Kicks!
-	This is a reply to <a href="https://www.cyberneticforests.com/">Eryk Salvaggio</a> he posted <a href="https://twitter.com/kickscondor/status/1370092733390462976">on Twitter</a> a while back.
+	This is a reply to <a href="https://www.cyberneticforests.com/">Eryk Salvaggio</a> they posted <a href="https://twitter.com/kickscondor/status/1370092733390462976">on Twitter</a> a while back.
 	Hopefully they won't mind me re-posting this for demonstration purposes:
 </p>
 

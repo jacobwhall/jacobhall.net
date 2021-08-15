@@ -31,6 +31,7 @@
 			display: inline-block;
 			text-align: left;
 			width: 100%;
+			margin-top: 2em;
 			max-width: 50em;
 			min-width: 10%;
 		}
@@ -120,9 +121,9 @@
 		.hidden-u-photo {
 			display: none;
 		}
-		@media (min-width: 80em) {
-			article {
-				margin-top: 2em;
+		@media (max-width: 80em) {
+			article:first-child {
+				margin-top: 0em;
 			}
 		}
 		#license #indiewebring {

@@ -49,6 +49,9 @@
 		article img {
 			width: 100%;
 		}
+		.commentbox {
+			overflow: hidden;
+		}
 		.feed img {
 			width: 100%;
 		}

@@ -47,6 +47,7 @@ function displayComments($postID, $topPost) {
 	}
 	if (count($commentresult) > 0) {
 		foreach($commentresult as $comment) {
+			echo "<div class=\"commentbox\">";
 			if (isset($comment['whostyle'])) {
 				echo "<link rel=\"stylesheet\" href=\"/styles/whostyles/" . $comment['whostyle'] . "/whostyle.css\">";
 				echo "<article class=\"whostyle-" . $comment['whostyle'] . "\">";
@@ -83,6 +84,7 @@ function displayComments($postID, $topPost) {
 			}
 			echo "</span>";
 			echo "</article>";
+			echo "</div>";
 			// TODO: more gracefully pad comments
 			echo "<br><br>";
 			displayComments($comment['post_id'], False);

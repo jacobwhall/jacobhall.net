@@ -51,7 +51,7 @@ $result = $sth->fetchAll();
 		}
 		// TODO: Add plural if there are multiple photos
 		if ($row['post_type'] == 3) {
-			echo "\t<a href=\"/kind/article\" class=\"kind\">📷 PHOTO</a>\n";
+			echo "\t<a href=\"/kind/photo\" class=\"kind\">📷 PHOTO</a>\n";
 			// echo post_title if there is one
 			if (isset($row['post_title'])) echo "\t<h2>" . $row['post_title'] . "</h2>\n";
 			// if (isset($row['content'])) echo $row['content'];

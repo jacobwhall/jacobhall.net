@@ -159,6 +159,7 @@ $result = $sth->fetchAll();
 		}
 
 		if (isset($_GET['id'])) {
+			echo "\n</div></article>\n";
 			$postID = $_GET['id'];
 			include "comments.php";
 		} else {

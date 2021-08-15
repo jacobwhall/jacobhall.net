@@ -130,7 +130,6 @@
 		}
 		@media (min-width: 80em) {
 			article {
-				margin-top: 2em;
 				padding: 1em;
 			}
 			article.feed {

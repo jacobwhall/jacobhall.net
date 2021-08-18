@@ -1,0 +1,44 @@
+.whostyle-maxwelljoslyn-com .proclamation-start {
+	text-transform: uppercase;
+}	
+
+details > summary .whostyle-maxwelljoslyn-com {
+  cursor: pointer;
+}
+
+details > summary::after .whostyle-maxwelljoslyn-com {
+  content: " (click to open)";
+  /* same as .muted */
+  font-size: var(--s-1);
+  font-style: italic;
+}
+
+details[open] > summary::after .whostyle-maxwelljoslyn-com {
+  content: " (click to close)";
+  /* same as .muted */
+  font-size: var(--s-1);
+  font-style: italic;
+}
+.whostyle-maxwelljoslyn-com .muted {
+    font-size: var(--s-1);
+    font-style: italic;
+}
+
+.whostyle-maxwelljoslyn-com .muted em {
+    font-style: normal;
+}
+
+/* adding this line to fill background color into post background -jacob */
+.whostyle-maxwelljoslyn-com,
+.whostyle-maxwelljoslyn-com * {
+    background-color: #eeddaa;
+}
+
+.whostyle-maxwelljoslyn-com .hayleybloo {
+    color: cornflowerblue;
+}
+
+.whostyle-maxwelljoslyn-com a {
+    /* no underlines on links */
+    text-decoration: none;
+}

@@ -127,6 +127,8 @@
 	margin-right: auto;
 	margin-left: auto;
 	padding-top: 7px;
+	/* adding some top padding for extra style -jacob */
+	padding-top: calc(7px + 1em);
 	padding-bottom: 7px;
 	padding-right: 37px;
 	padding-left: 37px;

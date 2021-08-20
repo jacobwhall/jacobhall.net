@@ -1,0 +1,45 @@
+.whostyle-lohn-in,
+.whostyle-lohn-in * {
+  all: revert; 
+}
+.whostyle-lohn-in {
+  border: 1px solid #3b3333;
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  font: 1.125em Monaco,Bitstream Vera Sans Mono,Lucida Console,Terminal,monospace;
+  padding: 12px;
+  line-height:1.4;
+}
+.whostyle-lohn-in blockquote {
+  border-left: 5px solid #fedb02;
+  margin-left: 25px;
+  padding-left: 10px;
+}
+.whostyle-lohn-in a { 
+    color:#4caae1;
+    text-decoration:none;
+    text-shadow:0 0 5px rgba(104,182,255,.5)
+}
+.whostyle-lohn-in a:hover {
+    text-decoration: underline;
+}
+.whostyle-lohn-in h1 { 
+    margin-bottom: 1em
+}
+.whostyle-lohn-in h1, 
+.whostyle-lohn-in h2, 
+.whostyle-lohn-in h3,  
+.whostyle-lohn-in h4,  
+.whostyle-lohn-in h5,  
+.whostyle-lohn-in h6 {
+    color: #ed2f8b;
+    text-shadow: 0 0 5px rgba(237,47,139,.5)
+}
+.whostyle-lohn-in h2 { 
+    margin: 0 0 .5em
+}
+.whostyle-lohn-in h3 {
+  font-weight: normal;
+  color: #02A1D6;
+}

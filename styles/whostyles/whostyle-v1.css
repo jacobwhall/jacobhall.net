@@ -15,8 +15,11 @@
 	overflow: auto;
 }
 .whostyle-jacobhall-net img:not(.hidden-u-photo) {
+	display: block;
+	margin: auto;
 	width: 100%;
 	height: 100%;
+	max-width: 35em;
 }
 .whostyle-jacobhall-net .watch img {
 	width: 8em;

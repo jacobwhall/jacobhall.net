@@ -101,8 +101,17 @@ $result = $sth->fetchAll();
 		}
 		// TODO: properly link to original author's h-card and the original post
 		if ($row['post_type'] == 8) {
-			echo "<a href=\"/kind/reply\" class=\"kind\">🔄 REPOST</a> ";
-			// TODO: properly link to the event h-entry
+			echo "<a href=\"/kind/repost\" class=\"kind\">🔄 REPOST</a> ";
+			echo "<span class=\"u-in-reply-to h-cite\">";
+			echo "of <a class=\"p-author h-card\" href=\"". $row['reply_to_author_h_card'] . "\">" . $row['reply_to_author'] . "</a>'";
+			if (substr($row['reply_to_author'], -1) != "s") echo "s";
+				if (isset($row['reply_to_title'])) {
+					echo " post</span>";
+					echo "<h2><a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">";
+					echo "<span class=\"p-name\">" . $row['reply_to_title'] . "</span>\n</a>\n</h2>";
+				} else {
+					echo " <a class=\"u-url\" href=\"" . $row['reply_to_url'] . "\">post</a>\n</span>";
+				}
 		}			
 		if ($row['post_type'] == 9) {
 			echo "<a href=\"/kind/rsvp\" class=\"kind\">✉️ RSVP</a> ";

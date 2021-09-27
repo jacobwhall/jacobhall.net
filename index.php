@@ -228,7 +228,7 @@
 			&nbsp;&nbsp;
 			<a rel="me" title="my Couchsurfing profile" href="https://www.couchsurfing.com/people/jacob-hall-10">🛋️</a>
 			&nbsp;&nbsp;
-			<a rel="me" title="my Mastodon profile" href="https://fosstodon.org/@jacobhall">🐘</a>
+			<a rel="me" title="my Depop profile" href="https://www.depop.com/jacobwhall/">👕</a>
 		</p>
 		<p><a href="about.html">about</a> - <a href="links.html">linkroll</a> - <a href="dreams.html">ideas</a></p>
 	</div>

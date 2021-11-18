@@ -35,7 +35,7 @@
 			&nbsp;&nbsp;
 			<a rel="me" title="my Depop profile" href="https://www.depop.com/jacobwhall/">👕</a>
 		</p>
-		<p><a href="about.html">about</a> - <a href="links.html">linkroll</a> - <a href="dreams.html">ideas</a></p>
+		<p><a href="about.html">about</a> - <a href="links.html">linkroll</a> - <a href="/dreams">ideas</a></p>
 	</div>
 </div>
 <div id="contentbox">

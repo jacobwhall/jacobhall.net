@@ -5,6 +5,9 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#FFFFFF"/>
+		<meta property="og:title" content="🖌️ Horton Hears a Whostyle"/>
+		<meta property="og:image" content="https://jacobhall.net/2021/08/horton-hears-a-whostyle/horton-meta-image.png"/>
+		<meta property="og:url" content="https://jacobhall.net/2021/08/horton-hears-a-whostyle/"/>
 		<link rel="alternate" type="application/rss+xml" title="RSS Feed for jacobhall.net" href="/feeds/rss/v1.rss">
 		<link href="/styles/whostyles/whostyle-v1.css" rel="whostyle">
 		<link href="/webmention" rel="webmention">

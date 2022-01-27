@@ -226,7 +226,7 @@
 			&nbsp;&nbsp;
 			<a rel="me" title="my GitHub profile" href="https://github.com/jacobwhall">👨‍💻</a>
 			&nbsp;&nbsp;
-			<a rel="me" title="my Couchsurfing profile" href="https://www.couchsurfing.com/people/jacob-hall-10">🛋️</a>
+			<a rel="me" title="my recipes" href="https://recipes.jacobhall.net">🍳</a>
 			&nbsp;&nbsp;
 			<a rel="me" title="my Depop profile" href="https://www.depop.com/jacobwhall/">👕</a>
 		</p>

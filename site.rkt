@@ -1,18 +1,34 @@
 #lang racket
 
 (require db
+         web-server/dispatch
          web-server/servlet
          web-server/servlet-env
-         web-server/templates)
+         web-server/templates
+         "../pass.rkt")
 
-(define pgc
-  (postgresql-connect #:user "jhsite"
-                      #:database "jacobhall.net"
-                      #:password "TS^4jAgNo6#NBW"))
+(define (a key post)
+  (cdr (assoc key post)))
 
+(define (row->ass headers row)
+  (map (lambda (h r) make-hash (cons (cdr (first h)) (if (string? r) r ""))) headers (sequence->list row)))
 
-(define (my-app req)
-  (define posts "This is where the posts will go")
+(define (ass->post post-data)
+  (include-template "post.html"))
+
+(define (rows-result->posts result)
+  (foldl string-append ""
+         (map (lambda (r) (ass->post (row->ass (rows-result-headers result) r))) (rows-result-rows result))))
+
+(define posts (rows-result->posts (query pgc "SELECT *
+		FROM vPosts
+		WHERE type != 5
+		AND type != 6
+		AND type != 11
+		AND author = 'Jacob Hall'
+                LIMIT 5")))
+
+(define (homepage req)
   (http-response (include-template "index.html")))
 
 
@@ -26,12 +42,9 @@
     (list                ; Content (in bytes) to send to the browser.
       (string->bytes/utf-8 content))))
 
-;(serve/servlet
-; my-app
-; #:servlet-path "/"
-; #:extra-files-paths
-; (list
-;  (build-path "/home/jacob/Documents/jacobhall.net")))
-
-(define qseq (query pgc "SELECT post_type, post_title FROM entries"))
-qseq
+(serve/servlet;
+ homepage
+ #:servlet-path "/"
+ #:extra-files-paths
+ (list
+  (build-path "/home/jacob/Documents/jacobhall.net")))

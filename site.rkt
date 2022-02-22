@@ -70,9 +70,6 @@
 (define (article title content)
   (http-response (include-template "article.html")))
 
-(define (links req)
-  (http-response (port->string (open-input-file "links.html"))))
-
 (define (not-found req)
   (article "404" "<h1>Not Found</h1>")) ; TODO: use xexpr
 
@@ -88,15 +85,18 @@
    [("links") (λ (r)
                 (article "links"
                          (file->string "links.html")))]
+   [("links.html") (λ (r) ; TODO: match all top-level pages, .html or not
+                (article "links"
+                         (file->string "links.html")))]
    [("dreams") (λ (r)
                  (article "dreams"
                           (file->string "dreams.html")))]))
 
 (define stop
   (serve
-   #:dispatch (sequencer:make (dispatch/servlet main-dispatcher)
-                              (files:make #:url->path (make-url->path "."))
-                              (dispatch/servlet not-found))
+   #:dispatch (sequencer:make (dispatch/servlet main-dispatcher)            ; primary routes
+                              (files:make #:url->path (make-url->path ".")) ; if path exists, serve it
+                              (dispatch/servlet not-found))                 ; 404
    #:listen-ip "127.0.0.1"
    #:port 8000))
 

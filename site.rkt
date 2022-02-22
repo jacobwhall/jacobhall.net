@@ -39,7 +39,7 @@
        headers (sequence->list row)))
 
 (define (ass->post post-data)
-  (include-template "post.html"))
+  (include-template "post.txt"))
 
 (define (rows-result->posts result)
   (foldr string-append ""
@@ -81,16 +81,28 @@
                         (posts 25)))]
    [("about") (λ (r)
                 (article "about"
-                         (file->string "about.html")))]
+                         (file->string "top-level/about.txt")))]
    [("links") (λ (r)
                 (article "links"
-                         (file->string "links.html")))]
+                         (file->string "top-level/links.txt")))]
    [("links.html") (λ (r) ; TODO: match all top-level pages, .html or not
                 (article "links"
-                         (file->string "links.html")))]
+                         (file->string "top-level/links.txt")))]
    [("dreams") (λ (r)
                  (article "dreams"
-                          (file->string "dreams.html")))]))
+                          (file->string "top-level/dreams.txt")))]
+   [("now") (λ (r)
+                 (article "now"
+                          (file->string "top-level/now.txt")))]
+   [("software") (λ (r)
+                 (article "software i use"
+                          (file->string "top-level/software.txt")))]
+   [("webdev") (λ (r)
+                 (article "webdev"
+                          (file->string "top-level/webdev.txt")))]
+   [("webdev.html") (λ (r)
+                 (article "webdev"
+                          (file->string "top-level/software.txt")))]))
 
 (define stop
   (serve

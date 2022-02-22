@@ -1,0 +1,27 @@
+<h1>now</h1>
+<p>
+	What is Jacob up to these days?
+</p>
+<p>
+	I'm living in Williamsburg, VA studying at William &amp; Mary. I plan to move to San Francisco this year with my partner Alyssa.
+</p>
+<p>
+	I'm getting really excited about the <a href="https://indieweb.org/">IndieWeb</a>, and how I can design my own website to interact with others' comfortably
+</p>
+<p>
+	I'm splitting my time between the following jobs:
+</p>
+<ul>
+	<li>
+		<strong>Research Assistant at AidData</strong>
+		<p>
+			I am working under <a href="https://www.aiddata.org/people/seth-goodman">Seth Goodman</a> writing code that handles geospatial data for <a href="https://www.aiddata.org/geoquery">GeoQuery</a>
+		</p>
+	</li>
+	<li>
+		<strong>Radon Research Project</strong>
+		<p>
+			My undergraduate thesis at William &amp; Mary will be a video describing radon as a health hazard to Williamsburg homeowners. I am researching radon's presence in the area, and writing a script for the video
+		</p>
+	</li>
+</ul>

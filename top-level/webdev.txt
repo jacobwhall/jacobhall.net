@@ -1,32 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-		<title>Website Development</title>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="theme-color" content="#FFFFFF"/>
-		<link rel="stylesheet" type="text/css" href="articlestyle.css">
-</head>
-<body>
-        <div id="sidebar">
-                <a class="nostyle" href="/">
-                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flipper">
-                                <div class="front">
-                                        <img class="profilepic" id="backprofilepic" src="images/professional.jpg" alt="a (more) professional profile picture"/>
-                                </div>
-                                <div class="back">
-                                        <span>🏠</span>
-                                </div>
-                        </div>
-                </div>
-		<div id="byphoto">
-                        <h5>⬅️ Jacob Hall's weblog</h5>
-                </div>
-		</a>
-        </div>
-	<article>
-
 	<h1>Website Development</h1>
 
 <p>
@@ -49,5 +20,3 @@ A high school passion project, entitled <a href="https://thehbarchive.org">The H
 </p>
 <p>...but the website I work on most is my own. It has become my digital home: a place to share my thoughts, test my skills, and connect with new people. <a href="https://jacobhall.net">Let's be friends!</a>
 </p>
-</article>
-</html>

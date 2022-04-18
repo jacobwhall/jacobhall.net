@@ -36,9 +36,9 @@
 			&nbsp;&nbsp;
 			<a rel="me" title="my recipes" href="https://recipes.jacobhall.net">🍳</a>
 			&nbsp;&nbsp;
-			<a rel="me" title="my Depop profile" href="https://www.depop.com/jacobwhall/">👕</a>
+			<a rel="me" title="my OpenStreetMap profile" href="https://www.openstreetmap.org/user/jacobwhall">🗺️</a>
 		</p>
-		<p><a href="about">about</a> - <a href="links">linkroll</a> - <a href="/dreams">ideas</a></p>
+		<p><a title="about me" href="about">about</a> - <a title="websites i like" href="links">linkroll</a> - <a title="dreams of mine" href="/dreams">ideas</a></p>
 	</div>
 </div>
 <div id="contentbox">

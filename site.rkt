@@ -75,11 +75,11 @@
 
 ; The homepage gets its own template
 (define (homepage req)
-  (http-response (include-template "index.html")))
+  (http-response (include-template "index.txt")))
 
 ; Articles get their own template
 (define (article title content)
-  (http-response (include-template "article.html")))
+  (http-response (include-template "article.txt")))
 
 ; Output for 404 error
 (define (not-found req)

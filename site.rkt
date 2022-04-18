@@ -7,10 +7,12 @@
          net/url
          web-server/servlet-env
          web-server/http
+         web-server/http/request-structs
          web-server/templates
          web-server/web-server
          web-server/servlet-dispatch
          web-server/dispatch
+         web-server/dispatchers/dispatch
          web-server/dispatchers/filesystem-map
          (prefix-in sequencer: web-server/dispatchers/dispatch-sequencer)
          (prefix-in files: web-server/dispatchers/dispatch-files)
@@ -28,7 +30,7 @@
 
 (define (a key post)
   (cdr (assoc key post)))
-
+      
 (define (row->ass headers row)
   (map (λ (h r)
          make-hash
@@ -38,9 +40,12 @@
                    r)))
        headers (sequence->list row)))
 
+; Required argument post-data is used in the post.txt template to render post
 (define (ass->post post-data)
   (include-template "post.txt"))
 
+; Required argument result is the output of PostgreSQL view "vPosts" selection
+; e.g. from function "posts"
 (define (rows-result->posts result)
   (foldr string-append ""
          (map (λ (r)
@@ -49,9 +54,13 @@
               (rows-result-rows result))))
 
 (define posts
+  ; Required argument "limit" 
   (λ (limit
+      ; Optional argument only returns specific author
+      ; TODO: use Microformats standard author UID rather than name
       #:author [author "Jacob Hall"]
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
+    ; Convert the result of PostgreSQL view "vPosts" into embeddable HTML
     (rows-result->posts
                        (query
                         pgc
@@ -64,51 +73,60 @@
                         author
                         types))))
 
+; The homepage gets its own template
 (define (homepage req)
   (http-response (include-template "index.html")))
 
+; Articles get their own template
 (define (article title content)
   (http-response (include-template "article.html")))
 
+; Output for 404 error
 (define (not-found req)
-  (article "404" "<h1>Not Found</h1>")) ; TODO: use xexpr
+  (article "404" "<h1>Not Found</h1>")) ; TODO: use xexpr, or template
 
+; Dispatcher for rule-based pages like homepage and /kind
 (define-values (main-dispatcher _)
   (dispatch-rules
    [("") homepage]
+   [("all") (λ (r)
+               (article "all posts"
+                        (posts 25)))]
    [("kind") (λ (r)
                (article "all posts"
                         (posts 25)))]
-   [("about") (λ (r)
-                (article "about"
-                         (file->string "top-level/about.txt")))]
-   [("links") (λ (r)
-                (article "links"
-                         (file->string "top-level/links.txt")))]
-   [("links.html") (λ (r) ; TODO: match all top-level pages, .html or not
-                (article "links"
-                         (file->string "top-level/links.txt")))]
-   [("dreams") (λ (r)
-                 (article "dreams"
-                          (file->string "top-level/dreams.txt")))]
-   [("now") (λ (r)
-                 (article "now"
-                          (file->string "top-level/now.txt")))]
-   [("software") (λ (r)
-                 (article "software i use"
-                          (file->string "top-level/software.txt")))]
-   [("webdev") (λ (r)
-                 (article "webdev"
-                          (file->string "top-level/webdev.txt")))]
-   [("webdev.html") (λ (r)
-                 (article "webdev"
-                          (file->string "top-level/software.txt")))]))
+   [("few") (λ (r)
+               (article "all posts"
+                        (posts
+                         ; What I imagine you'd like to follow
+                         ; articles, notes, photos, etc.
+                         #:types (list 1 2 3 4)
+                         25)))]
+   [("many") (λ (r)
+               (article "all posts"
+                        (posts
+                         ; What I imagine you might want to follow
+                         ; + bookmarks, movie watches, etc.
+                         #:types (list 1 2 3 4 5 6 7 8 9 10)
+                         25)))]))
+
+; Dispatcher for top-level pages like /about and /links
+(define (top-level-dispatcher req)
+  (let ([path (path/param-path (list-ref (url-path (request-uri req)) 0))])
+    (let ([rel-path (string-append "top-level/" (string-trim path ".html") ".txt")])
+      (if (file-exists? rel-path)
+          (article
+           rel-path
+           (file->string rel-path))
+          (next-dispatcher)))))
 
 (define stop
-  (serve
-   #:dispatch (sequencer:make (dispatch/servlet main-dispatcher)            ; primary routes
-                              (files:make #:url->path (make-url->path ".")) ; if path exists, serve it
-                              (dispatch/servlet not-found))                 ; 404
+  (serve                                                                    ; Dispatcher Order
+   #:dispatch (sequencer:make (dispatch/servlet main-dispatcher)            ; 1. primary routes
+                              (dispatch/servlet top-level-dispatcher)       ; 2. top-level pages
+                                                                            ; TODO: article slugs with dates
+                              (files:make #:url->path (make-url->path ".")) ; 3. if path exists, serve it
+                              (dispatch/servlet not-found))                 ; 4. 404
    #:listen-ip "127.0.0.1"
    #:port 8000))
 

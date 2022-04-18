@@ -1,9 +1,15 @@
 <article class="h-entry feed"><div class="whostyle-jacobhall-net">	<a href="/kind/note" class="kind">@(a "type_name" post-data)</a>@(cond
-		[(equal? (a "type" post-data) 7) (string-append " to <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>")]
+		[(equal? (a "type" post-data) 6) (string-append " of <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
+
+		[(equal? (a "type" post-data) 7) (string-append " of <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
 		[(equal? (a "type" post-data) 8) (string-append " of <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
 		)
-<h2 class="p-name">@(a "post_title" post-data)</h2>	<div class="e-content">
+@(if (equal? (a "type" post-data) 5) (string-append "<a href=\"" (a "bookmark_of" post-data) "\">") "")
+<h2 class="p-name">@(a "post_title" post-data)</h2>
+@(if (equal? (a "type" post-data) 5) "</a>" "")
+<div class="e-content">
 	@(a "content" post-data)
+	@(if (equal? (a "type" post-data) 3) (string-append "<img src=\"" (a "content_location" post-data) "\">") "")
 	</div>
 	<span class="entry-data">
 		Posted <time class="dt-published" datetime="@(a "published_date" post-data)"><a class="u-url" href="https://jacobhall.net/2022/01/29/000177">@(a "published_date_disp" post-data)</a></time> by <img class="u-photo hidden-u-photo" src="https://jacobhall.net/images/toothbrush_profile_small.jpg" alt="Profile picture of Jacob" /><a class="p-author h-card" href="@(a "author_h_card" post-data)">@(a "author" post-data)</a>

@@ -18,7 +18,7 @@
          (prefix-in files: web-server/dispatchers/dispatch-files)
          "../pass.rkt")
 
-(define (http-response content)
+(define (http-200 content)
   (response/full
     200                  ; HTTP response code.
     #"OK"                ; HTTP response message.
@@ -75,12 +75,13 @@
 
 ; The homepage gets its own template
 (define (homepage req)
-  (http-response (include-template "index.txt")))
+  (http-200 (include-template "index.txt")))
 
 ; Articles get their own template
 (define (article title content)
-  (http-response (include-template "article.txt")))
+  (http-200 (include-template "article.txt")))
 
+; TODO: proper HTTP response code!
 ; Output for 404 error
 (define (not-found req)
   (article "404" "<h1>Not Found</h1>")) ; TODO: use xexpr, or template
@@ -120,13 +121,30 @@
            (file->string rel-path))
           (next-dispatcher)))))
 
+; TODO: redirect to "article-title/" if the user requests ".../article-title"
+;       this will make sure browsers load relative paths correctly
+; TODO: support URL formats from 2019 and before that didn't have months in their paths
+; TODO: load in likes, comments. this should be broken out into a post-building function
+(define (article-dispatcher req)
+  (let ([path-params (filter non-empty-string? (map path/param-path (url-path (request-uri req))))])
+    (if (and (equal? (length path-params) 3)
+             (regexp-match? #px"^[0-9]{4}$" (first path-params))
+             (regexp-match? #px"^[0-9]{2}$" (second path-params))
+             (regexp-match? #px"^[a-z]+(\\-[a-z]+)*$" (third path-params)))
+        (let ([html-path (apply build-path (append (take path-params 3) (list 'same (string-append (third path-params) ".html"))))])
+          (if (file-exists? html-path)
+              (article "TITLE" (file->string html-path))
+              (next-dispatcher)))
+        (next-dispatcher))))
+
 (define stop
   (serve                                                                    ; Dispatcher Order
    #:dispatch (sequencer:make (dispatch/servlet main-dispatcher)            ; 1. primary routes
                               (dispatch/servlet top-level-dispatcher)       ; 2. top-level pages
-                                                                            ; TODO: article slugs with dates
-                              (files:make #:url->path (make-url->path ".")) ; 3. if path exists, serve it
-                              (dispatch/servlet not-found))                 ; 4. 404
+                              (dispatch/servlet article-dispatcher)         ; 3. article slugs with dates
+                                                                            ; TODO: post slugs
+                              (files:make #:url->path (make-url->path ".")) ; 4. if path exists, serve it
+                              (dispatch/servlet not-found))                 ; 5. 404
    #:listen-ip "127.0.0.1"
    #:port 8000))
 

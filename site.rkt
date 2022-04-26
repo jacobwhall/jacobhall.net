@@ -54,25 +54,31 @@
                                      r)))
               (rows-result-rows result))))
 
-(define posts
-  ; Required argument "limit" 
+(define post-query
+  ; Required argument limit sets upper limit of returned posts
   (λ (limit
       ; Optional argument only returns specific author
       ; TODO: use Microformats standard author UID rather than name
+      #:author [author "*"] ; TODO: * is invalid
+      #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
+    (query pgc
+           (prepare pgc "SELECT *
+                         FROM vPosts
+                         WHERE author = $2
+                         AND type=ANY($3::int[])
+                         LIMIT $1")
+           limit
+           author
+           types)))
+
+; This is a wrapper function for post-query above
+(define posts
+  (λ (limit
       #:author [author "Jacob Hall"]
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
     ; Convert the result of PostgreSQL view "vPosts" into embeddable HTML
-    (rows-result->posts
-                       (query
-                        pgc
-                        (prepare pgc "SELECT *
-                                      FROM vPosts
-                                      WHERE author = $2
-                                      AND type=ANY($3::int[])
-                                      LIMIT $1")
-                        limit
-                        author
-                        types))))
+    (rows-result->posts (post-query limit
+                                    #:author author))))
 
 ; The homepage gets its own template
 (define (homepage req)

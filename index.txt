@@ -48,9 +48,14 @@
 	<div class="list">
 		<h2>articles i've written</h2>
 		<ul>
-			<li>
-				<a href="https://jacobhall.net/2021/08/horton-hears-a-whostyle/">🖌️ Horton Hears a Whostyle</a>
-			</li>
+			@(let ([post-rows-result (post-query 5 #:author "Jacob Hall" #:types (list 1))])
+			  (map (λ (r)
+			    (string-append "<li>"
+                                           (a "post_title"
+					      (row->ass (rows-result-headers post-rows-result)
+                                              r))
+                            "</li>\n"))
+                          (rows-result-rows post-rows-result)))
 		</ul>
 		<!-- TODO: Add all articles to entries database, and then change this link to /kind/article -->
 		<a href="articles.html">view all articles ➡️</a>

@@ -7,6 +7,7 @@
          net/url
          web-server/servlet-env
          web-server/http
+         web-server/http/redirect
          web-server/http/request-structs
          web-server/templates
          web-server/web-server
@@ -121,30 +122,57 @@
            (file->string rel-path))
           (next-dispatcher)))))
 
-; TODO: redirect to "article-title/" if the user requests ".../article-title"
-;       this will make sure browsers load relative paths correctly
-; TODO: support URL formats from 2019 and before that didn't have months in their paths
-; TODO: load in likes, comments. this should be broken out into a post-building function
-(define (article-dispatcher req)
-  (let ([path-params (filter non-empty-string? (map path/param-path (url-path (request-uri req))))])
-    (if (and (equal? (length path-params) 3)
-             (regexp-match? #px"^[0-9]{4}$" (first path-params))
-             (regexp-match? #px"^[0-9]{2}$" (second path-params))
-             (regexp-match? #px"^[a-z]+(\\-[a-z]+)*$" (third path-params)))
-        (let ([html-path (apply build-path (append (take path-params 3) (list 'same (string-append (third path-params) ".html"))))])
-          (if (file-exists? html-path)
-              (article "TITLE" (file->string html-path))
-              (next-dispatcher)))
-        (next-dispatcher))))
+(define (dir-redirect-dispatcher req)
+  (let ([req-path (path->string (simplify-path (url->path (request-uri req))))]
+        [dir-path (path->string (simplify-path (path->directory-path (url->path (request-uri req)))))])
+    (if (equal? req-path dir-path)
+        (next-dispatcher)
+        (redirect-to dir-path permanently))))
+
+(define (title-slug? slug)
+  (regexp-match? #px"^[a-z]+(\\-[a-z]+)*$" slug))
+
+(define (valid-dir-dispatcher req)
+  ; Make path relative, remove trailing /
+  ; TODO: cleaner way to do this?
+  (let ([req-path (string-trim (path->string (url->path (request-uri req)))
+                               "/")])
+    ; Does path refer to a real directory on the filesystem?
+    (if (directory-exists? req-path)
+        (let ([index-path (build-path req-path "index.html")])
+          (if (file-exists? index-path)
+              ; Path/index.html exists, serve that
+              (file->string index-path)
+              ; Path /index.html does not exist, do we have valid article files?
+              (let ([article-path (build-path req-path "article.txt")]
+                    [title-path (build-path req-path "title.txt")])
+                (if (and (file-exists? article-path)
+                         (file-exists? title-path))
+                    ; Article files exist, build article
+                    ; TODO: inject title into page, load in likes / comments.
+                    (article (file->string title-path)
+                             (file->string article-path))
+                    (next-dispatcher)))))
+        (let ([path-elements (explode-path (string->path req-path))])
+          ; Does the path slug match that of a post?
+          (if (and (regexp-match? #px"^[0-9]{4}$" (first path-elements))
+                   (regexp-match? #px"^[0-9]{2}$" (second path-elements))
+                   (regexp-match? #px"^[0-9]{2}$" (third path-elements))
+                   (regexp-match? #px"^[0-9]{6}$" (fourth path-elements)))
+              ; Path slug does match, build post!
+              (print "this is a post that should be built")
+              ; Path slug does not match, next-dispatcher
+              (next-dispatcher))))))
 
 (define stop
   (serve                                                                    ; Dispatcher Order
    #:dispatch (sequencer:make (dispatch/servlet main-dispatcher)            ; 1. primary routes
                               (dispatch/servlet top-level-dispatcher)       ; 2. top-level pages
-                              (dispatch/servlet article-dispatcher)         ; 3. article slugs with dates
-                                                                            ; TODO: post slugs
-                              (files:make #:url->path (make-url->path ".")) ; 4. if path exists, serve it
-                              (dispatch/servlet not-found))                 ; 5. 404
+                              (files:make #:url->path (make-url->path ".")) ; 3. if path exists, serve it
+                              (dispatch/servlet dir-redirect-dispatcher)    ; 4. redirect /abc to /abc/
+                              (dispatch/servlet valid-dir-dispatcher)       ; 5. dirs with indexes or articles
+                              ; (dispatch/servlet slug-dispatcher)          ; 6. post slugs
+                              (dispatch/servlet not-found))                 ; 7. 404
    #:listen-ip "127.0.0.1"
    #:port 8000))
 

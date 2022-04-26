@@ -48,14 +48,17 @@
 	<div class="list">
 		<h2>articles i've written</h2>
 		<ul>
-			@(let ([post-rows-result (post-query 5 #:author "Jacob Hall" #:types (list 1))])
-			  (map (λ (r)
-			    (string-append "<li>"
-                                           (a "post_title"
-					      (row->ass (rows-result-headers post-rows-result)
-                                              r))
-                            "</li>\n"))
-                          (rows-result-rows post-rows-result)))
+			@(let ([post-rows-result (posts-query 3 #:author "Jacob Hall" #:types (list 1))])
+    (let ([row-headers (rows-result-headers post-rows-result)])
+                          (map (λ (r)
+                            (string-append "<li><a href=\""
+                                           (a "permalink"
+                                              (row->ass row-headers r))
+                                           "\">"
+                                            (a "post_title"
+                                              (row->ass row-headers r))
+                             "</li>\n"))
+                          (rows-result-rows post-rows-result))))
 		</ul>
 		<!-- TODO: Add all articles to entries database, and then change this link to /kind/article -->
 		<a href="articles.html">view all articles ➡️</a>

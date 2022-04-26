@@ -46,7 +46,7 @@
   (include-template "post.txt"))
 
 ; Required argument result is the output of PostgreSQL view "vPosts" selection
-; e.g. from function "posts"
+; e.g. from function "post-from-id" or "posts-query"
 (define (rows-result->posts result)
   (foldr string-append ""
          (map (λ (r)
@@ -54,12 +54,21 @@
                                      r)))
               (rows-result-rows result))))
 
-(define post-query
+(define (post-from-id post-id)
+    (query pgc
+           (prepare pgc "SELECT *
+                         FROM vPosts
+                         WHERE post_id = $1
+                         LIMIT 1")
+           post-id))
+
+(define posts-query
   ; Required argument limit sets upper limit of returned posts
   (λ (limit
       ; Optional argument only returns specific author
       ; TODO: use Microformats standard author UID rather than name
       #:author [author "*"] ; TODO: * is invalid
+      #:post-id [post-id "*"] ; ""
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
     (query pgc
            (prepare pgc "SELECT *
@@ -71,13 +80,23 @@
            author
            types)))
 
-; This is a wrapper function for post-query above
+(define (replies-query reply-to-id limit)
+    (query pgc
+           (prepare pgc "SELECT *
+                         FROM vPosts
+                         WHERE post_type = 7
+                         AND reply_to_id = $1
+                         LIMIT $2")
+           reply-to-id
+           limit))
+
+; This is a wrapper function for posts-query above
 (define posts
   (λ (limit
       #:author [author "Jacob Hall"]
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
     ; Convert the result of PostgreSQL view "vPosts" into embeddable HTML
-    (rows-result->posts (post-query limit
+    (rows-result->posts (posts-query limit
                                     #:author author))))
 
 ; The homepage gets its own template

@@ -1,87 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-		<title>All Articles</title>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="theme-color" content="#FFFFFF"/>
-		<link rel="stylesheet" type="text/css" href="articlestyle.css">
-</head>
-<body>
-        <div id="sidebar">
-                <a class="nostyle" href="/">
-                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                        <div class="flipper">
-                                <div class="front">
-                                        <img class="profilepic" id="backprofilepic" src="images/toothbrush_profile_small.jpg" alt="sexy mirror selfie"/>
-                                </div>
-                                <div class="back">
-                                        <span>🏠</span>
-                                </div>
-                        </div>
-                </div>
-                        <h5>⬅️ Jacob Hall's weblog</h5>
-                </a>
-        </div>
+<h1>all my posts</h1>
+<h2>2021</h2>
+<ul>
+	<li>
+		<a href="/2021/01/barefoot-faq">👣 Barefoot FAQs</a>
+	</li>
+</ul>
+<h2>2020</h2>
+<ul>
+	<li>
+		<a href="/2020/code-highlighting-vim">⌨️ Simple HTML code highlighting workflow with vim</a>
+	</li>
+	<li>
+		<a href="/2020/mapping-education-afghanistan">📍 Mapping Education Development Projects in Afghanistan</a>
+	</li>
+</ul>
+<h2>2019</h2>
+<ul>
+	<li>
+		<a href="/2019/social-media-online-art">✏️ Some thoughts on social media and online art</a>
+	</li>
+	<li>
+		<a href="/2019/what-to-pack">✏️ What to Pack?</a>
+	</li>
+	<li>
+		<a href="/2019/read-everything-free">✏️ How to Read Everything for Free</a>
+	<li>
+		<a href="/2019/american-city-dialects-qgis">📍 Mapping dialect variation among US cities in QGIS</a>
+	</li>
+	<li>
+		<a href="/2019/named-houses-harrisonburg">Named Houses of Harrisonburg</a>
+	</li>
+</ul>
+<h2>2018</h2>
+<ul>
+	<li>
+		<a href="/2018/ceilings-instead-of-skies">Ceilings Instead of Skies</a>
+	</li>
+	<li>
+		<a href="/2018/notebook.nb.html">learning to write an R notebook</a>
+	</li>
 
-  <article>
-    <h1>all my posts</h1>
-	<h2>2021</h2>
-	<ul>
-		<li>
-			<a href="/2021/01/barefoot-faq">👣 Barefoot FAQs</a>
-		</li>
-	</ul>
-	<h2>2020</h2>
-	<ul>
-		<li>
-			<a href="/2020/code-highlighting-vim">⌨️ Simple HTML code highlighting workflow with vim</a>
-		</li>
-		<li>
-			<a href="/2020/mapping-education-afghanistan">📍 Mapping Education Development Projects in Afghanistan</a>
-		</li>
-	</ul>
-	<h2>2019</h2>
-	<ul>
-		<li>
-			<a href="/2019/social-media-online-art">✏️ Some thoughts on social media and online art</a>
-		</li>
-		<li>
-			<a href="/2019/what-to-pack">✏️ What to Pack?</a>
-		</li>
-		<li>
-			<a href="/2019/read-everything-free">✏️ How to Read Everything for Free</a>
-		<li>
-			<a href="/2019/american-city-dialects-qgis">📍 Mapping dialect variation among US cities in QGIS</a>
-		</li>
-		<li>
-			<a href="/2019/named-houses-harrisonburg">Named Houses of Harrisonburg</a>
-		</li>
-	</ul>
-	<h2>2018</h2>
-	<ul>
-		<li>
-			<a href="/2018/ceilings-instead-of-skies">Ceilings Instead of Skies</a>
-		</li>
-		<li>
-			<a href="/2018/notebook.nb.html">learning to write an R notebook</a>
-		</li>
-
-		<li>
-			<a href="/2018/discrete-rv-distributions">Discrete RV Distributions</a>
-		</li>
-		<li>
-			<a href="/2018/hb-archive">The H-B Archive</a>
-		</li>
-	</ul>
-	<h2>2017</h2>
-	<ul>
-		<li>
-			<a href="/2017/essay2017.pdf">An essay I wrote mostly in 2017</a>
-		</li>
-		<li>
-			<a href="/2017/tech-theatre-work">Technical Theatre Work</a>
-		</li>
-	</ul>
-</article>
-</html>
+	<li>
+		<a href="/2018/discrete-rv-distributions">Discrete RV Distributions</a>
+	</li>
+	<li>
+		<a href="/2018/hb-archive">The H-B Archive</a>
+	</li>
+</ul>
+<h2>2017</h2>
+<ul>
+	<li>
+		<a href="/2017/essay2017.pdf">An essay I wrote mostly in 2017</a>
+	</li>
+	<li>
+		<a href="/2017/tech-theatre-work">Technical Theatre Work</a>
+	</li>
+</ul>

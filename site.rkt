@@ -19,6 +19,16 @@
          (prefix-in files: web-server/dispatchers/dispatch-files)
          "../pass.rkt")
 
+(define (server-error message)
+  (response/full
+   500
+   #"Internal Server Error"
+   (current-seconds)
+   #"text/plain; charset=utf-8"
+   '()
+   (list
+    (string->bytes/utf-8 message))))
+
 (define (bad-request message)
   (response/full
    400
@@ -29,14 +39,38 @@
    (list
     (string->bytes/utf-8 message))))
 
+(define (insert-webmention source target)
+  (query pgc
+         (prepare pgc "INSERT INTO wm_log
+                       (source, target)
+                       VALUES
+                       ($1, $2)")
+           source
+           target))
+
 (define (process-webmention req)
   (let ([source (bindings-assq (string->bytes/utf-8 "source") (request-bindings/raw req))]
         [target (bindings-assq (string->bytes/utf-8 "target") (request-bindings/raw req))])
     (if (and source target)
-        (let ([target-url (string->url (bytes->string/utf-8 (binding:form-value target)))])
-          (if (equal? (url-host target-url) "jacobhall.net")
-              (print "good request") ; TODO: now, insert target and source URLs into DB table for future processing
-              (bad-request "Target URL must point to jacobhall.net")))
+        (let ([target-url (string->url (bytes->string/utf-8 (binding:form-value target)))]
+              [source-url (string->url (bytes->string/utf-8 (binding:form-value source)))]
+              [schemes (list "http" "https")])
+          (if (and (member (url-scheme source-url) schemes)
+                   (member (url-scheme target-url) schemes))
+              (if (equal? (url-host target-url) "jacobhall.net")
+                (if (simple-result? (insert-webmention (url->string source-url) ; TODO: more thoroughly validate insertion?
+                                              (url->string target-url)))
+                    (response/full
+                     202
+                     #"Accepted"
+                     (current-seconds)
+                     #"text/plain; charset=utf-8"
+                     '()
+                     (list
+                      (string->bytes/utf-8 "Thanks for the webmention! I have queued it for processing.")))
+                    (server-error "An unknown error occured when inserting your webmention into my database."))
+                (bad-request "Target URL must point to jacobhall.net"))
+            (bad-request "Source and target URLs must have either HTTP or HTTPS schemes.")))
         (bad-request "Webmention request must include both source and target!"))))
 
 (define (http-200 content)

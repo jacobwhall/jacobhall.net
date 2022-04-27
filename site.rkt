@@ -19,6 +19,26 @@
          (prefix-in files: web-server/dispatchers/dispatch-files)
          "../pass.rkt")
 
+(define (bad-request message)
+  (response/full
+   400
+   #"Bad Request"
+   (current-seconds)
+   #"text/plain; charset=utf-8"
+   '()
+   (list
+    (string->bytes/utf-8 message))))
+
+(define (process-webmention req)
+  (let ([source (bindings-assq (string->bytes/utf-8 "source") (request-bindings/raw req))]
+        [target (bindings-assq (string->bytes/utf-8 "target") (request-bindings/raw req))])
+    (if (and source target)
+        (let ([target-url (string->url (bytes->string/utf-8 (binding:form-value target)))])
+          (if (equal? (url-host target-url) "jacobhall.net")
+              (print "good request") ; TODO: now, insert target and source URLs into DB table for future processing
+              (bad-request "Target URL must point to jacobhall.net")))
+        (bad-request "Webmention request must include both source and target!"))))
+
 (define (http-200 content)
   (response/full
     200                  ; HTTP response code.
@@ -135,7 +155,8 @@
                          ; What I imagine you might want to follow
                          ; + bookmarks, movie watches, etc.
                          #:types (list 1 2 3 4 5 6 7 8 9 10)
-                         25)))]))
+                         25)))]
+   [("webmention") #:method "post" process-webmention]))
 
 ; Dispatcher for top-level pages like /about and /links
 (define (top-level-dispatcher req)

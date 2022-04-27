@@ -3,8 +3,11 @@
 You've found my website's source code! Thanks for stopping by.
 
 This website has been years in the making, and I have huge dreams for what it might become.
-So far I've added a lot of original content, and refined the styling.
-Now I'm building a set of [IndieWeb](https://indieweb.org/) services so that I can interact with other personal sites socially.
+It started out as a static site, and grew over time to do increasingly complex things.
+In 2022 things had gotten too disorganized, so I rewrote the whole thing in [Racket](https://racket-lang.org/).
+
+Next on the roadmap are a series of social features.
+I'm building a set of [IndieWeb](https://indieweb.org/) services so that I can interact with other personal sites, and I might also add Fediverse support.
 
 Someday, I want to make this project available as a template for others to use.
 The building blocks will all be open-source and customizable, from the database to the HTML.

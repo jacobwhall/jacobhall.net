@@ -2,6 +2,9 @@
 <h2>2021</h2>
 <ul>
 	<li>
+		<a href="/2021/08/horton-hears-a-whostyle/">🖌️ Horton Hears a Whostyle</a>
+	</li>
+	<li>
 		<a href="/2021/01/barefoot-faq">👣 Barefoot FAQs</a>
 	</li>
 </ul>
@@ -22,8 +25,6 @@
 	<li>
 		<a href="/2019/what-to-pack">✏️ What to Pack?</a>
 	</li>
-	<li>
-		<a href="/2019/read-everything-free">✏️ How to Read Everything for Free</a>
 	<li>
 		<a href="/2019/american-city-dialects-qgis">📍 Mapping dialect variation among US cities in QGIS</a>
 	</li>

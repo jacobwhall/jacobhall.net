@@ -1,4 +1,4 @@
-        <p>Ebooks sound like the ultimate freedom: any book, downloaded immediately to your device at the tap of a finger.
+<p>Ebooks sound like the ultimate freedom: any book, downloaded immediately to your device at the tap of a finger.
 I remember Kindles being a hot holiday gift back when I was in 8th grade (2012), but after only a few months I rarely saw anyone reading one.
 Sure enough, e-reader sales peaked in 2011 and have been declining ever since.<sup><a href="https://www.statista.com/statistics/272740/global-shipments-of-e-book-readers/">1</a></sup>
 There seem to be a few reasons why e-readers lost their popularity.

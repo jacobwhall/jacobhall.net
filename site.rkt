@@ -158,6 +158,7 @@
   (http-200 (include-template "index.txt")))
 
 ; Articles get their own template
+; TODO: optionally disable likes/comments
 (define (article title content)
   (http-200 (include-template "article.txt")))
 

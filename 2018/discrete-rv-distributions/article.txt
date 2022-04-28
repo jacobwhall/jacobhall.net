@@ -1,5 +1,13 @@
-<article>
-<h1>Discrete RV Distribution Functions</h1>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+		messageStyle: "none",
+		CommonHTML: { linebreaks: { automatic: true } },
+		"HTML-CSS": { linebreaks: { automatic: true } },
+		SVG: { linebreaks: { automatic: true } }
+	});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async>
+</script>
 September 19-21, 2018
 <p><i>"Maybe if I force myself to write an article about this math concept, I'll start to understand it"</i></p>
 <p>This is the first of a series of articles I plan to write, for the sole purpose of reviewing the material in
@@ -137,4 +145,3 @@ September 19-21, 2018
       <img class="graph" src="function-plots/normal-distributions.svg"></img>
     </div>
   </div> -->
-  </article>

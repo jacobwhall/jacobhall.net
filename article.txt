@@ -27,6 +27,7 @@
                 </a>
         </div>
 <article>
+	@(if insert-title (string-append "<h2>" title "</h2>") "")
 	@content
 </article>
 </html>

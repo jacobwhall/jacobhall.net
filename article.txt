@@ -26,8 +26,8 @@
                         <h5>⬅️ Jacob Hall's weblog</h5>
                 </a>
         </div>
-<article>
-	@(if insert-title (string-append "<h2>" title "</h2>") "")
-	@content
-</article>
+@(if article-tags "<article>" "")
+@(if insert-title (string-append "<h2>" title "</h2>") "")
+@content
+@(if article-tags "</article>" "")
 </html>

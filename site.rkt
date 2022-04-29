@@ -45,8 +45,8 @@
                        (source, target)
                        VALUES
                        ($1, $2)")
-           source
-           target))
+         source
+         target))
 
 (define (process-webmention req)
   (let ([source (bindings-assq (string->bytes/utf-8 "source") (request-bindings/raw req))]
@@ -58,30 +58,30 @@
           (if (and (member (url-scheme source-url) schemes)
                    (member (url-scheme target-url) schemes))
               (if (equal? (url-host target-url) "jacobhall.net")
-                (if (simple-result? (insert-webmention (url->string source-url) ; TODO: more thoroughly validate insertion?
-                                              (url->string target-url)))
-                    (response/full
-                     202
-                     #"Accepted"
-                     (current-seconds)
-                     #"text/plain; charset=utf-8"
-                     '()
-                     (list
-                      (string->bytes/utf-8 "Thanks for the webmention! I have queued it for processing.")))
-                    (server-error "An unknown error occured when inserting your webmention into my database."))
-                (bad-request "Target URL must point to jacobhall.net"))
-            (bad-request "Source and target URLs must have either HTTP or HTTPS schemes.")))
+                  (if (simple-result? (insert-webmention (url->string source-url) ; TODO: more thoroughly validate insertion?
+                                                         (url->string target-url)))
+                      (response/full
+                       202
+                       #"Accepted"
+                       (current-seconds)
+                       #"text/plain; charset=utf-8"
+                       '()
+                       (list
+                        (string->bytes/utf-8 "Thanks for the webmention! I have queued it for processing.")))
+                      (server-error "An unknown error occured when inserting your webmention into my database."))
+                  (bad-request "Target URL must point to jacobhall.net"))
+              (bad-request "Source and target URLs must have either HTTP or HTTPS schemes.")))
         (bad-request "Webmention request must include both source and target!"))))
 
 (define (http-200 content)
   (response/full
-    200                  ; HTTP response code.
-    #"OK"                ; HTTP response message.
-    (current-seconds)    ; Timestamp.
-    TEXT/HTML-MIME-TYPE  ; MIME type for content.
-    '()                  ; Additional HTTP headers.
-    (list                ; Content (in bytes) to send to the browser.
-      (string->bytes/utf-8 content))))
+   200                  ; HTTP response code.
+   #"OK"                ; HTTP response message.
+   (current-seconds)    ; Timestamp.
+   TEXT/HTML-MIME-TYPE  ; MIME type for content.
+   '()                  ; Additional HTTP headers.
+   (list                ; Content (in bytes) to send to the browser.
+    (string->bytes/utf-8 content))))
 
 (define (a key post)
   (cdr (assoc key post)))
@@ -109,12 +109,12 @@
               (rows-result-rows result))))
 
 (define (post-from-id post-id)
-    (query pgc
-           (prepare pgc "SELECT *
-                         FROM vPosts
-                         WHERE post_id = $1
-                         LIMIT 1")
-           post-id))
+  (query pgc
+         "SELECT *
+            FROM vPosts
+            WHERE post_id = $1
+            LIMIT 1"
+         post-id))
 
 (define posts-query
   ; Required argument limit sets upper limit of returned posts
@@ -125,24 +125,38 @@
       #:post-id [post-id "*"] ; ""
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
     (query pgc
-           (prepare pgc "SELECT *
-                         FROM vPosts
-                         WHERE author = $2
-                         AND type=ANY($3::int[])
-                         LIMIT $1")
-           limit
+           "SELECT *
+            FROM vPosts
+            WHERE author = $1
+            AND type=ANY($2::int[])
+            LIMIT $3"
            author
-           types)))
+           types
+           limit)))
 
 (define (replies-query reply-to-id limit)
-    (query pgc
-           (prepare pgc "SELECT *
-                         FROM vPosts
-                         WHERE post_type = 7
-                         AND reply_to_id = $1
-                         LIMIT $2")
-           reply-to-id
-           limit))
+  (query pgc
+         "SELECT *
+          FROM vPosts
+          WHERE post_type = 7
+          AND reply_to_id = $1
+          LIMIT $2"
+         reply-to-id
+         limit))
+
+(define (specific-post-query year month day post-id)
+  (query pgc
+         "SELECT *
+          FROM vPosts
+          WHERE post_id = $1
+          AND date_part('year', published_date) = $2
+          AND date_part('month', published_date) = $3
+          AND date_part('day', published_date) = $4
+          LIMIT 1"
+         post-id
+         year
+         month
+         day))
 
 ; This is a wrapper function for posts-query above
 (define posts
@@ -151,7 +165,7 @@
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
     ; Convert the result of PostgreSQL view "vPosts" into embeddable HTML
     (rows-result->posts (posts-query limit
-                                    #:author author))))
+                                     #:author author))))
 
 ; The homepage gets its own template
 (define (homepage req)
@@ -159,8 +173,12 @@
 
 ; Articles get their own template
 ; TODO: optionally disable likes/comments
-(define (article title content)
-  (http-200 (include-template "article.txt")))
+(define article
+  (λ (title
+      content
+      #:article-tags [article-tags #t]
+      #:insert-title [insert-title #f]) ; TODO: optional post-id argument to load comments, likes
+    (http-200 (include-template "article.txt"))))
 
 ; TODO: proper HTTP response code!
 ; Output for 404 error
@@ -172,18 +190,18 @@
   (dispatch-rules
    [("") homepage]
    [("all") (λ (r)
-               (article "all posts"
-                        (posts 25)))]
+              (article "all posts"
+                       (posts 25)))]
    [("kind") (λ (r)
                (article "all posts"
                         (posts 25)))]
    [("few") (λ (r)
-               (article "all posts"
-                        (posts
-                         ; What I imagine you'd like to follow
-                         ; articles, notes, photos, etc.
-                         #:types (list 1 2 3 4)
-                         25)))]
+              (article "all posts"
+                       (posts
+                        ; What I imagine you'd like to follow
+                        ; articles, notes, photos, etc.
+                        #:types (list 1 2 3 4)
+                        25)))]
    [("many") (λ (r)
                (article "all posts"
                         (posts
@@ -195,11 +213,11 @@
 
 ; Dispatcher for top-level pages like /about and /links
 (define (top-level-dispatcher req)
-  (let ([path (path/param-path (list-ref (url-path (request-uri req)) 0))])
-    (let ([rel-path (string-append "top-level/" (string-trim path ".html") ".txt")])
+  (let ([path (string-trim (path/param-path (list-ref (url-path (request-uri req)) 0)) ".html")])
+    (let ([rel-path (string-append "top-level/" path ".txt")])
       (if (file-exists? rel-path)
           (article
-           rel-path
+           path
            (file->string rel-path))
           (next-dispatcher)))))
 
@@ -230,9 +248,10 @@
                 (if (and (file-exists? article-path)
                          (file-exists? title-path))
                     ; Article files exist, build article
-                    ; TODO: inject title into page, load in likes / comments.
+                    ; TODO: load in likes / comments.
                     (article (file->string title-path)
-                             (file->string article-path))
+                             (file->string article-path)
+                             #:insert-title #t)
                     (next-dispatcher)))))
         (let ([path-elements (explode-path (string->path req-path))])
           ; Does the path slug match that of a post?
@@ -241,7 +260,14 @@
                    (regexp-match? #px"^[0-9]{2}$" (third path-elements))
                    (regexp-match? #px"^[0-9]{6}$" (fourth path-elements)))
               ; Path slug does match, build post!
-              (print "this is a post that should be built")
+              (let ([post-result (specific-post-query (string->number (path->string (first path-elements)))
+                                                      (string->number (path->string (second path-elements)))
+                                                      (string->number (path->string (third path-elements)))
+                                                      (string->number (path->string (fourth path-elements))))])
+                (article "post"
+                         (ass->post (row->ass (rows-result-headers post-result)
+                                              (first (rows-result-rows post-result))))
+                         #:article-tags #f))
               ; Path slug does not match, next-dispatcher
               (next-dispatcher))))))
 

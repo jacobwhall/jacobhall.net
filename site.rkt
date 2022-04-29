@@ -1,6 +1,9 @@
 #lang racket
 
-; Thanks to Bogdan Popa for their helpful guide to racket's web server
+; Thanks to Matthew Butterick for his book Beautiful Racket
+; https://beautifulracket.com/
+;
+; and to Bogdan Popa for their helpful guide to racket's web server
 ; https://defn.io/2020/02/12/racket-web-server-guide/
 
 (require db

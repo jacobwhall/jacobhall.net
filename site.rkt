@@ -147,7 +147,7 @@
          reply-to-id
          limit))
 
-(define (specific-post-query year month day post-id)
+(define (post-date-id-query year month day post-id)
   (query pgc
          "SELECT *
           FROM vPosts
@@ -160,6 +160,14 @@
          year
          month
          day))
+
+(define (post-permalink-query permalink)
+  (query pgc
+         "SELECT *
+          FROM vPosts
+          WHERE permalink = $1
+          LIMIT 1"
+         permalink))
 
 ; This is a wrapper function for posts-query above
 (define posts
@@ -254,7 +262,14 @@
                     ; TODO: load in likes / comments.
                     (article (file->string title-path)
                              (file->string article-path)
-                             #:insert-title #t)
+                             #:insert-title #t
+                             ; If this article is in the database, let's pass along the post id
+                             #:post-id (let ([article-results (post-permalink-query
+                                                               "URL of this post")]) ; TODO, also this whole thing should be more concise
+                                         (if (empty? (rows-result-rows article-results))
+                                             #f
+                                             (a "post_id" (row->ass (rows-result-headers article-results)
+                                                                    (first (rows-result-rows article-results)))))))
                     (next-dispatcher)))))
         (let ([path-elements (explode-path (string->path req-path))])
           ; Does the path slug match that of a post?
@@ -263,10 +278,10 @@
                    (regexp-match? #px"^[0-9]{2}$" (third path-elements))
                    (regexp-match? #px"^[0-9]{6}$" (fourth path-elements)))
               ; Path slug does match, build post!
-              (let ([post-result (specific-post-query (string->number (path->string (first path-elements)))
-                                                      (string->number (path->string (second path-elements)))
-                                                      (string->number (path->string (third path-elements)))
-                                                      (string->number (path->string (fourth path-elements))))])
+              (let ([post-result (post-date-id-query (string->number (path->string (first path-elements)))
+                                                     (string->number (path->string (second path-elements)))
+                                                     (string->number (path->string (third path-elements)))
+                                                     (string->number (path->string (fourth path-elements))))])
                 (article "post"
                          (ass->post (row->ass (rows-result-headers post-result)
                                               (first (rows-result-rows post-result))))

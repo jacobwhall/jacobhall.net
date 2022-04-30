@@ -13,6 +13,9 @@
 			text-align: left;
 			line-height: 2em;
 		}
+		#contentbox {
+			text-align: left;
+		}
 		.date {
 			color: gray;
 			font-style: italic;

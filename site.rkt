@@ -137,15 +137,14 @@
            types
            limit)))
 
-(define (replies-query reply-to-id limit)
+(define (replies-query reply-to-id)
   (query pgc
          "SELECT *
           FROM vPosts
-          WHERE post_type = 7
+          WHERE type != 6
           AND reply_to_id = $1
-          LIMIT $2"
-         reply-to-id
-         limit))
+          ORDER BY published_date ASC"    ; TODO: use "type = 7", because all replies should be that type
+         reply-to-id))
 
 (define (post-date-id-query year month day post-id)
   (query pgc
@@ -178,6 +177,18 @@
     (rows-result->posts (posts-query limit
                                      #:author author))))
 
+(define (build-comments post-id)
+  (let ([this-post-result (replies-query post-id)])
+    (foldr string-append ""
+    (map (λ (r)
+           (let ([this-ass (row->ass (rows-result-headers
+                                      this-post-result)
+                                     r)])
+             (string-append (ass->post this-ass)
+                            (build-comments (a "post_id" this-ass)))))
+         (rows-result-rows this-post-result)))
+                 ))
+
 ; The homepage gets its own template
 (define (homepage req)
   (http-200 (include-template "index.txt")))
@@ -188,7 +199,8 @@
   (λ (title
       content
       #:article-tags [article-tags #t]
-      #:insert-title [insert-title #f]) ; TODO: optional post-id argument to load comments, likes
+      #:insert-title [insert-title #f]
+      #:post-id [post-id #f]) ; TODO: load in comments, likes
     (http-200 (include-template "article.txt"))))
 
 ; TODO: proper HTTP response code!
@@ -265,7 +277,8 @@
                              #:insert-title #t
                              ; If this article is in the database, let's pass along the post id
                              #:post-id (let ([article-results (post-permalink-query
-                                                               "URL of this post")]) ; TODO, also this whole thing should be more concise
+                                                               (string-trim (string-append "https://jacobhall.net/" req-path)
+                                                             "."))])
                                          (if (empty? (rows-result-rows article-results))
                                              #f
                                              (a "post_id" (row->ass (rows-result-headers article-results)
@@ -285,7 +298,8 @@
                 (article "post"
                          (ass->post (row->ass (rows-result-headers post-result)
                                               (first (rows-result-rows post-result))))
-                         #:article-tags #f))
+                         #:article-tags #f
+                         #:post-id (fourth path-elements)))
               ; Path slug does not match, next-dispatcher
               (next-dispatcher))))))
 

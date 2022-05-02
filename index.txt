@@ -133,7 +133,7 @@
   <a rel="dct:publisher"
      href="https://jacobhall.net">
     <span property="dct:title">Jacob Hall</span></a>
-  has waived all copyright and related or neighboring rights to his work on
+  has waived all copyright and related or neighboring rights to their work on
   <span property="dct:title">jacobhall.net</span>. Content adapted from other sources may be © its creators as noted.
 <br>
 This work is published from:

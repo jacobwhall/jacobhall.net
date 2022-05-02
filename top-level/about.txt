@@ -27,7 +27,7 @@
 </p>
 	<h1>about me</h1>
 	<ul>
-		<li>i usually use the pronouns he/him and they/them</li>
+		<li>i usually use the pronouns they/them</li>
 		<li>i was born in december 1999</li>
 		<li>i'm usually barefoot</li>
 		<li>i'm a notary public for the commonwealth of virginia</li>

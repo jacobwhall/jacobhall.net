@@ -141,9 +141,9 @@
   (query pgc
          "SELECT *
           FROM vPosts
-          WHERE type != 6
+          WHERE type = 7
           AND reply_to_id = $1
-          ORDER BY published_date ASC"    ; TODO: use "type = 7", because all replies should be that type
+          ORDER BY published_date ASC"
          reply-to-id))
 
 (define (post-date-id-query year month day post-id)
@@ -180,14 +180,14 @@
 (define (build-comments post-id)
   (let ([this-post-result (replies-query post-id)])
     (foldr string-append ""
-    (map (λ (r)
-           (let ([this-ass (row->ass (rows-result-headers
-                                      this-post-result)
-                                     r)])
-             (string-append (ass->post this-ass)
-                            (build-comments (a "post_id" this-ass)))))
-         (rows-result-rows this-post-result)))
-                 ))
+           (map (λ (r)
+                  (let ([this-ass (row->ass (rows-result-headers
+                                             this-post-result)
+                                            r)])
+                    (string-append (ass->post this-ass)
+                                   (build-comments (a "post_id" this-ass)))))
+                (rows-result-rows this-post-result)))
+    ))
 
 ; The homepage gets its own template
 (define (homepage req)
@@ -282,7 +282,7 @@
                              ; If this article is in the database, let's pass along the post id
                              #:post-id (let ([article-results (post-permalink-query
                                                                (string-trim (string-append "https://jacobhall.net/" req-path)
-                                                             "."))])
+                                                                            "."))])
                                          (if (empty? (rows-result-rows article-results))
                                              #f
                                              (a "post_id" (row->ass (rows-result-headers article-results)
@@ -303,7 +303,7 @@
                          (ass->post (row->ass (rows-result-headers post-result)
                                               (first (rows-result-rows post-result))))
                          #:article-tags #f
-                         #:post-id (fourth path-elements)))
+                         #:post-id (string->number (path->string (fourth path-elements)))))
               ; Path slug does not match, next-dispatcher
               (next-dispatcher))))))
 

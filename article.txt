@@ -31,7 +31,7 @@
 @(if insert-title (string-append "<h2>" title "</h2>") "")
 @content
 @(if article-tags "</article>" "")
-@(if post-id (build-comments post-id) "")
+@(if post-id (string-append (likes-query post-id) "<h2>Comments</h2><p>You can leave a comment here via webmention! Note that I moderate webmentions manually, so it may take a few days to appear.</p>" (build-comments post-id)) "")
 </div>
 </body>
 </html>

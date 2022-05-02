@@ -146,6 +146,30 @@
           ORDER BY published_date ASC"
          reply-to-id))
 
+(define (likes-query reply-to-id)
+  (let ([these-likes (query pgc
+                            "SELECT *
+          FROM vPosts
+          WHERE type = 6
+          AND reply_to_id = $1
+          ORDER BY published_date DESC"
+                            reply-to-id)])
+    (let ([facepile (foldr string-append ""
+           (map (λ (r)
+                  (let ([like-data (row->ass (rows-result-headers these-likes)
+                                             r)])
+                    (string-append "<a href=\""
+                                   (a "original_url" like-data)
+                                   "\"><img src=\""
+                                   (a "author_photo" like-data)
+                                   "\" alt=\"Photo of "
+                                   (a "author" like-data)
+                                   "\"></a>")))
+                (rows-result-rows these-likes)))])
+      (if (equal? facepile "")
+          ""
+          (string-append "<h2>Likes</h2><div class=\"facepile\">" facepile "</div>")))))
+
 (define (post-date-id-query year month day post-id)
   (query pgc
          "SELECT *
@@ -186,8 +210,7 @@
                                             r)])
                     (string-append (ass->post this-ass)
                                    (build-comments (a "post_id" this-ass)))))
-                (rows-result-rows this-post-result)))
-    ))
+                (rows-result-rows this-post-result)))))
 
 ; The homepage gets its own template
 (define (homepage req)

@@ -214,24 +214,28 @@
    [("") homepage]
    [("all") (λ (r)
               (article "all posts"
-                       (posts 25)))]
+                       (posts 25)
+                       #:article-tags #f))]
    [("kind") (λ (r)
                (article "all posts"
-                        (posts 25)))]
+                        (posts 25)
+                        #:article-tags #f))]
    [("few") (λ (r)
               (article "all posts"
                        (posts
                         ; What I imagine you'd like to follow
                         ; articles, notes, photos, etc.
                         #:types (list 1 2 3 4)
-                        25)))]
+                        25)
+                       #:article-tags #f))]
    [("many") (λ (r)
                (article "all posts"
                         (posts
                          ; What I imagine you might want to follow
                          ; + bookmarks, movie watches, etc.
                          #:types (list 1 2 3 4 5 6 7 8 9 10)
-                         25)))]
+                         25)
+                        #:article-tags #f))]
    [("webmention") #:method "post" process-webmention]))
 
 ; Dispatcher for top-level pages like /about and /links

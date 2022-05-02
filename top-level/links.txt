@@ -3,6 +3,12 @@
 <p>
 	I have this page set as my browser's home page, and use it to remember sites that I like. Feel free to <a href="mailto:jacobhall.net">email me suggestions!</a>
 </p>
+<h3>the biggies</h3>
+<ul>
+	<li><a href="https://openstreetmap.org">OpenStreetMap</a> - the best map, in my opinion</li>
+	<li><a href="https://en.wikipedia.org/">Wikipedia</a></li>
+	<li><a href="https://curlie.org/">Curlie</a> - a really comprehensive directory</li>
+</ul>
 <h3>directories</h3>
 <ul>
 	<li><a href="https://curlie.org/">Curlie</a> - a really comprehensive directory</li>

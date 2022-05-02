@@ -120,8 +120,8 @@
 			font-size: 3em;
 		}
 		@media (min-width: 80em) {
-			article {
-				margin-top: 5em;
+			#contentbox {
+				margin-top: 3em;
 			}
 			#backprofilepic {
 				height: 8em;

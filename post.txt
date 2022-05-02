@@ -1,18 +1,23 @@
-<article class="h-entry feed"><div class="whostyle-jacobhall-net">	<a href="/kind/note" class="kind">@(a "type_name" post-data)</a>@(cond
+@(if (equal? (a "whostyle" post-data) "jacobhall-net") "" (string-append "<link rel=\"stylesheet\" href=\"/styles/whostyles/" (a "whostyle" post-data) "/whostyle.css\">"))
+<article class="h-entry feed"><div class="whostyle-@(a "whostyle" post-data)">	<a href="/kind/@(a "type_slug" post-data)" class="kind">@(a "type_name" post-data)</a>@(cond
 		[(equal? (a "type" post-data) 6) (string-append " of <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
 
-		[(equal? (a "type" post-data) 7) (string-append " of <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
+		[(equal? (a "type" post-data) 7) (string-append (if (equal? (a "author_h_card" post-data) "https://jacobhall.net") "" (string-append " from <a href=\"" (a "author_h_card" post-data) "\">" (a "author" post-data) "</a> ")) " to <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
 		[(equal? (a "type" post-data) 8) (string-append " of <a href=\"" (a "reply_to_author_h_card" post-data) "\">" (a "reply_to_author" post-data) "</a>'s <a href=\"" (a "reply_to_url" post-data) "\">post</a>")]
 		)
 @(if (equal? (a "type" post-data) 5) (string-append "<a href=\"" (a "bookmark_of" post-data) "\">") "")
-<h2 class="p-name">@(a "post_title" post-data)</h2>
 @(if (equal? (a "type" post-data) 5) "</a>" "")
 <div class="e-content">
-	@(a "content" post-data)
+	@(cond [(equal? (a "type" post-data) 1) (string-append (if (equal? (a "post_title" post-data) "") "" (string-append"<a href=\"" (a "permalink" post-data) "\"><h2>" (a "post_title" post-data) "</h2></a>")) (a "content_summary" post-data) "<p><a href=\"" (a "permalink" post-data) "\">Read article &gt;&gt;</a></p>")]
+	       [(equal? (a "type" post-data) 5) (string-append "<h2><a class=\"u-bookmark-of\" href=\"" (a "bookmark_of" post-data) "\"><span class=\"p-name\">" (a "post_title" post-data) "</span></a></h2>")]
+	       [(equal? (a "type" post-data) 8) (string-append "<h2><a class=\"u-url\" href=\"" (a "reply_to_url" post-data) "\"><span class=\"p-name\">" (a "reply_to_title" post-data) "</span></a></h2>")]
+	       [else (string-append (if (equal? (a "post_title" post-data) "") "" (string-append "<h2 class=\"p-name\">" (a "post_title" post-data) "</h2>")) (a "content" post-data))])
 	@(if (equal? (a "type" post-data) 3) (string-append "<img src=\"" (a "content_location" post-data) "\">") "")
+	@(if (equal? (a "type" post-data) 10) (string-append "<a href=\"" (a "content_location" post-data) "\" download>📎 <strong>" (a "post_title" post-data) "</strong></a>") "")
 	</div>
-	<span class="entry-data">
-		Posted <time class="dt-published" datetime="@(a "published_date_iso" post-data)"><a class="u-url" href="@(a "permalink" post-data)">@(a "published_date_disp" post-data)</a></time> by <img class="u-photo hidden-u-photo" src="https://jacobhall.net/images/toothbrush_profile_small.jpg" alt="Profile picture of Jacob" /><a class="p-author h-card" href="@(a "author_h_card" post-data)">@(a "author" post-data)</a>
-	</span>
+	<p class="entry-data">
+	@(if (a "display_location" post-data) (string-append "📍 " (a "location" post-data) "<br>") "")
+		Posted <time class="dt-published" datetime="@(a "published_date_iso" post-data)"><a class="u-url" href="@(if (equal? (a "original_url" post-data) "") (a "permalink" post-data) (a "original_url" post-data))">@(a "published_date_disp" post-data)</a></time> by @(if (equal? (a "author_h_card" post-data) "https://jacobhall.net") "<img class=\"u-photo hidden-u-photo\" src=\"https://jacobhall.net/images/toothbrush_profile_small.jpg\" alt=\"Profile picture of Jacob\" />" "")<a class="p-author h-card" href="@(a "author_h_card" post-data)">@(a "author" post-data)</a>
+	</p>
 
 </div></article>

@@ -2,8 +2,8 @@
 		body {
 			text-align: center;
 			font-family: 'Work Sans', sans-serif;
-			font-size: 100%;
-			font-size: max(100%, .4cm);
+			font-size: 14pt;
+			font-size: max(14pt, .4cm);
 		}
 
 		@media (max-aspect-ratio: 1/1) {

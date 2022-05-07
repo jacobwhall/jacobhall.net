@@ -20,6 +20,8 @@
          web-server/dispatchers/filesystem-map
          (prefix-in sequencer: web-server/dispatchers/dispatch-sequencer)
          (prefix-in files: web-server/dispatchers/dispatch-files)
+         splitflap
+         xml
          "../pass.rkt")
 
 (define (server-error message)
@@ -102,6 +104,26 @@
 (define (ass->post post-data)
   (include-template "post.txt"))
 
+(define (ass->feed-item post-data this-tag-uri)
+  (let ([this-title (if (equal? "" (a "post_title" post-data))
+                        (number->string (a "post_id" post-data))
+                        (a "post_title" post-data))]
+        [this-content (if (equal? "" (a "content_summary" post-data))
+                          (a "content" post-data)
+                          (a "content_summary" post-data))])
+    (feed-item
+     (append-specific this-tag-uri (string-downcase (string-normalize-spaces this-title
+                                                                             #px"[^\\w]+"
+                                                                             "-")))
+     (a "permalink" post-data)
+     this-title
+     (person "Jacob Hall" "email@jacobhall.net")
+     (infer-moment "1912-06-21")
+     (infer-moment "1912-06-21")
+     this-content
+     )))
+   
+
 ; Required argument result is the output of PostgreSQL view "vPosts" selection
 ; e.g. from function "post-from-id" or "posts-query"
 (define (rows-result->posts result)
@@ -155,17 +177,17 @@
           ORDER BY published_date DESC"
                             reply-to-id)])
     (let ([facepile (foldr string-append ""
-           (map (λ (r)
-                  (let ([like-data (row->ass (rows-result-headers these-likes)
-                                             r)])
-                    (string-append "<a href=\""
-                                   (a "original_url" like-data)
-                                   "\"><img src=\""
-                                   (a "author_photo" like-data)
-                                   "\" alt=\"Photo of "
-                                   (a "author" like-data)
-                                   "\"></a>")))
-                (rows-result-rows these-likes)))])
+                           (map (λ (r)
+                                  (let ([like-data (row->ass (rows-result-headers these-likes)
+                                                             r)])
+                                    (string-append "<a href=\""
+                                                   (a "original_url" like-data)
+                                                   "\"><img src=\""
+                                                   (a "author_photo" like-data)
+                                                   "\" alt=\"Photo of "
+                                                   (a "author" like-data)
+                                                   "\"></a>")))
+                                (rows-result-rows these-likes)))])
       (if (equal? facepile "")
           ""
           (string-append "<h2>Likes</h2><div class=\"facepile\">" facepile "</div>")))))
@@ -211,6 +233,31 @@
                     (string-append (ass->post this-ass)
                                    (build-comments (a "post_id" this-ass)))))
                 (rows-result-rows this-post-result)))))
+
+(define (build-feed this-dialect)
+  (response/full
+   200
+   #"OK"
+   (current-seconds)
+   #"application/rss+xml; charset=utf-8"
+   '()
+   (list
+    (string->bytes/utf-8
+     (let ([result (posts-query 25
+                                #:author "Jacob Hall")]
+           [my-tag-uri (mint-tag-uri "jacobhall.net" "2022" "blog")])
+       (express-xml
+        (feed
+         my-tag-uri
+         "https://jacobhall.net"
+         "Jacob Hall's Blog"
+         (map (λ (r)
+                (ass->feed-item (row->ass (rows-result-headers result)
+                                          r)
+                                my-tag-uri))
+              (rows-result-rows result)))
+        this-dialect
+        "https://jacobhall.net/rss"))))))
 
 ; The homepage gets its own template
 (define (homepage req)
@@ -259,7 +306,9 @@
                          #:types (list 1 2 3 4 5 6 7 8 9 10)
                          25)
                         #:article-tags #f))]
-   [("webmention") #:method "post" process-webmention]))
+   [("webmention") #:method "post" process-webmention]
+   [("rss") (λ (r) (build-feed 'rss))]
+   [("atom") (λ (r) (build-feed 'atom))]))
 
 ; Dispatcher for top-level pages like /about and /links
 (define (top-level-dispatcher req)
@@ -278,10 +327,7 @@
         (next-dispatcher)
         (redirect-to dir-path permanently))))
 
-(define (title-slug? slug)
-  (regexp-match? #px"^[a-z]+(\\-[a-z]+)*$" slug))
-
-(define (valid-dir-dispatcher req)
+(define (dir-dispatcher req)
   ; Make path relative, remove trailing /
   ; TODO: cleaner way to do this?
   (let ([req-path (string-trim (path->string (url->path (request-uri req)))
@@ -336,8 +382,7 @@
                               (dispatch/servlet top-level-dispatcher)       ; 2. top-level pages
                               (files:make #:url->path (make-url->path ".")) ; 3. if path exists, serve it
                               (dispatch/servlet dir-redirect-dispatcher)    ; 4. redirect /abc to /abc/
-                              (dispatch/servlet valid-dir-dispatcher)       ; 5. dirs with indexes or articles
-                              ; (dispatch/servlet slug-dispatcher)          ; 6. post slugs
+                              (dispatch/servlet dir-dispatcher)             ; 5. dirs with indexes, articles; post slugs
                               (dispatch/servlet not-found))                 ; 7. 404
    #:listen-ip "127.0.0.1"
    #:port 8000))

@@ -7,6 +7,7 @@
 ; https://defn.io/2020/02/12/racket-web-server-guide/
 
 (require db
+         gregor
          net/url
          web-server/servlet-env
          web-server/http
@@ -104,6 +105,18 @@
 (define (ass->post post-data)
   (include-template "post.txt"))
 
+(define (sql-timestamp->moment ts)
+  (moment (sql-timestamp-year ts)
+          (sql-timestamp-month ts)
+          (sql-timestamp-day ts)
+          (sql-timestamp-hour ts)
+          (sql-timestamp-minute ts)
+          (sql-timestamp-second ts)
+          (sql-timestamp-nanosecond ts)
+          #:tz (if (sql-timestamp-tz ts)
+                   (sql-timestamp-tz ts)
+                   0)))
+
 (define (ass->feed-item post-data this-tag-uri)
   (let ([this-title (if (equal? "" (a "post_title" post-data))
                         (number->string (a "post_id" post-data))
@@ -118,11 +131,10 @@
      (a "permalink" post-data)
      this-title
      (person "Jacob Hall" "email@jacobhall.net")
-     (infer-moment "1912-06-21")
-     (infer-moment "1912-06-21")
+     (sql-timestamp->moment (a "published_date" post-data))
+     (sql-timestamp->moment (a "updated_date" post-data))
      this-content
      )))
-   
 
 ; Required argument result is the output of PostgreSQL view "vPosts" selection
 ; e.g. from function "post-from-id" or "posts-query"
@@ -244,7 +256,8 @@
    (list
     (string->bytes/utf-8
      (let ([result (posts-query 25
-                                #:author "Jacob Hall")]
+                                #:author "Jacob Hall"
+                                #:types (list 1 2 3 4 10))]
            [my-tag-uri (mint-tag-uri "jacobhall.net" "2022" "blog")])
        (express-xml
         (feed
@@ -257,7 +270,10 @@
                                 my-tag-uri))
               (rows-result-rows result)))
         this-dialect
-        "https://jacobhall.net/rss"))))))
+        (cond [(equal? this-dialect 'rss)
+               "https://jacobhall.net/feeds/rss/v1.rss"]
+              [(equal? this-dialect 'atom)
+               "https://jacobhall.net/feeds/atom/v1/atom"])))))))
 
 ; The homepage gets its own template
 (define (homepage req)
@@ -307,8 +323,8 @@
                          25)
                         #:article-tags #f))]
    [("webmention") #:method "post" process-webmention]
-   [("rss") (λ (r) (build-feed 'rss))]
-   [("atom") (λ (r) (build-feed 'atom))]))
+   [("feeds" "rss" "v1.rss") (λ (r) (build-feed 'rss))]
+   [("feeds" "atom" "v1.atom") (λ (r) (build-feed 'atom))]))
 
 ; Dispatcher for top-level pages like /about and /links
 (define (top-level-dispatcher req)

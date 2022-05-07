@@ -9,6 +9,7 @@
 	<link href="/styles/universal.css" rel="stylesheet">
 	<link href="/styles/homepage.css" rel="stylesheet">
 	<link rel="alternate" type="application/rss+xml" title="RSS Feed for jacobhall.net" href="/feeds/rss/v1.rss">
+	<link rel="alternate" type="application/atom+xml" title="Atom Feed for jacobhall.net" href="/feeds/atom/v1.atom">
 	<link href="/styles/whostyles/whostyle-v1.css" rel="whostyle">
 	<link href="/webmention" rel="webmention">
 	<link href="/indieweb/micropub.php" rel="micropub">

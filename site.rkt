@@ -209,14 +209,8 @@
          "SELECT *
           FROM vPosts
           WHERE post_id = $1
-          AND date_part('year', published_date) = $2
-          AND date_part('month', published_date) = $3
-          AND date_part('day', published_date) = $4
           LIMIT 1"
-         post-id
-         year
-         month
-         day))
+         post-id))
 
 (define (post-permalink-query permalink)
   (query pgc
@@ -384,11 +378,13 @@
                                                      (string->number (path->string (second path-elements)))
                                                      (string->number (path->string (third path-elements)))
                                                      (string->number (path->string (fourth path-elements))))])
-                (article "post"
+                (if (null? (rows-result-rows post-result))
+                    (not-found #f)
+                    (article "post"
                          (ass->post (row->ass (rows-result-headers post-result)
                                               (first (rows-result-rows post-result))))
                          #:article-tags #f
-                         #:post-id (string->number (path->string (fourth path-elements)))))
+                         #:post-id (string->number (path->string (fourth path-elements))))))
               ; Path slug does not match, next-dispatcher
               (next-dispatcher))))))
 

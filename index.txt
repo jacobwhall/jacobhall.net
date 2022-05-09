@@ -43,7 +43,7 @@
 	</div>
 </div>
 <div id="contentbox">
-	@(posts 5 #:types (list 1 2 3 7 8 9 10))
+	@(posts 3 #:types (list 1 2 3 7 8 9 10))
 <h2><a href="/kind">view more posts ➡️</a></h2>
 <div id="subsequentbox">
 	<div class="list">

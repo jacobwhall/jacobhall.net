@@ -85,7 +85,7 @@
 				<a href="https://thehbarchive.org">The H-B Archive</a>
 			</li>
 			<li>
-				<a href="blurred-fonts-project.html">Blurred Fonts Project</a>
+				<a href="/scifair">Blurred Fonts Project</a>
 			</li>
 		</ul>
 	</div>

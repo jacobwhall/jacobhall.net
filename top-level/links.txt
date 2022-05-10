@@ -7,7 +7,6 @@
 <ul>
 	<li><a href="https://openstreetmap.org">OpenStreetMap</a> - the best map, in my opinion</li>
 	<li><a href="https://en.wikipedia.org/">Wikipedia</a></li>
-	<li><a href="https://curlie.org/">Curlie</a> - a really comprehensive directory</li>
 </ul>
 <h3>directories</h3>
 <ul>
@@ -20,13 +19,11 @@
 	<li><a href="https://www.electrictrash.com/">Electric Trash</a> - "dedicated to the electronic flotsam and jetsam of the open web"</li>
 	<li><a href="https://indieseek.xyz/links/">indieseek.xyz</a> - directory of indie websites</li>
 	<li><a href="https://pointers.dailywebthing.com/">dailywebthing daily pointers</a> - this whole site is worth poking around</li>
-	<li><a href="https://www.wikiart.org/">WikiArt</a> - a visual art encyclopedia</li>
-	<li><a href="https://monoskop.org">Monoskop</a> - "a wiki for the arts, media and humanities."</li>
 	<li><a href="https://districts.neocities.org/">neocities districts</a> - directory of <a href="https://neocities.org/">neocities</a> pages</li>
 	<li><a href="https://yesterwebring.neocities.org/linkdirectory/">The Yesterweb Link Directory</a> - website creation, digital art, and other gems</li>
-	<li><a href="https://allthearchitects.com">All the Architects</a> - directory of architects' websites</li>
+	<!-- <li><a href="https://allthearchitects.com">All the Architects</a> - directory of architects' websites</li> -->
 </ul>
-<h3>art 🖌️</h3>
+<h3>art 🖌️</h3
 <ul>
 	<li><a href="https://www.nowness.com/">NOWNESS</a> - endless feed of stunning new art</li>
 	<li><a href="https://www.itsnicethat.com">It's Nice That</a> - articles on current digital art</li>
@@ -145,6 +142,7 @@
 <ul>
 	<li><a href="https://wordways.us">wordways</a> - my friend Aidan's poetry</li>
 	<li><a href="https://jacobhall.net/secret_message.html">Jacob and Leah's Secret Message Page</a> - still the raddest page on the internet. thanks Uncle John! archived with permission from johnlorenz.net</li>
+	<li><a href="https://veryla.io">VERYLA DOT IO</a> - "a curated list of stuff in los angeles"</li>
 	<li><a href="https://buntspechtband.at/">buntspechtband.at</a> - unique website for an Austrian band</li>
 	<li><a href="https://toki.increpare.com/">lipu pi jan Inkepa</a> - projects about Toki Pona by jan Inkepa</li>
 	<li><a href="https://restorativland.org/">restorativland</a> - a project to revive lost "web ruins"</li>

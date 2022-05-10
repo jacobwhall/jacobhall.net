@@ -1,4 +1,3 @@
-  <article>
 <h2>Let's test some Skype URIs on MacOS!</h2>
 <p>
 It seems that Skype removed their Applescript functionality a few years back. I can't find an official announcement, but <a href="https://answers.microsoft.com/en-us/skype/forum/all/skype-8-not-scriptable/0a5e4fe4-87d9-4e45-86c0-ce00d224087f">this Microsoft Community thread</a> and almost no posts about the topic from the last ~5 years has me convinced.
@@ -29,4 +28,3 @@ open skype://live:.cid.8e05c6f8360ed2c7?call&amp;video=true
 <p>
 This might work; I don't have a Mac of my own to fully test it out. If it does, you could use the Run Shell Script action in Automator to run this code within any Automator workflow.
 </p>
-</article>

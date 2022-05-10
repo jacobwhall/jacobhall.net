@@ -16,7 +16,7 @@
                 <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                         <div class="flipper">
                                 <div class="front">
-                                        <img class="profilepic" id="backprofilepic" src="/images/toothbrush_profile_small.jpg" alt="sexy mirror selfie"/>
+                                        <img class="profilepic" id="backprofilepic" src="/profile.jpg" alt="profile pic of Jacob Hall"/>
                                 </div>
                                 <div class="back">
                                         <span>🏠</span>

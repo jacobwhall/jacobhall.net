@@ -1,45 +1,34 @@
-	<h1>about this site</h1>
-
+<h1>about me</h1>
 <p>
-	i've designed this website for myself, as a record of things i like and ideas i'm excited about<br>
-	here are some principles i try to follow in its development:
+	Hi! My name is Jacob Hall.
+	I use they/them pronouns.
+<p>
+<p>
+	I think a lot about how people use technology to enrich their lives.
+	From the maps we use to navigate, to our favorite recipes, digital tools help us remember and share the information that's most valuable to us.
+	One of my biggest aspirations is to help build those tools.
+</p>
+<p>
+	This summer 2022, I graduate from William &amp; Mary with a geology degree.
+	I couldn't be more excited to explore a career that will likely incorporate my interests in science, technology, and the natural world.
+	My long-term goal is to become a teacher, bringing my media and communication skills into the classroom.
+</p>
+<p>
+	A few fun facts about me:
 </p>
 	<ul>
-		<li>write all code by hand</li>
-		<li>write content directly onto the site: unfinished work is public</li>
-		<li>articles are living documents, update them whenever</li>
-		<li>decrease file sizes where possible</li>
-		<li>avoid loading resources from third-parties</li>
-		<li>avoid using client-side scripts</li>
+		<li>I was born in december 1999</li>
+		<li>I'm a notary public for the commonwealth of virginia</li>
+		<li>I starred as a starfish in a <a href="https://www.youtube.com/watch?v=p2SBlWhh7hE">short movie musical</a></li>
 	</ul>
 <p>
-	i hope for this website to represent how i feel about the internet and what it should look like<br>
-	the most popular websites that people spend most of their day looking at are intentionally designed using homogenous style conventions<br>
-	i don't think there's anything wrong with that per se, but i also feel like we all deserve an internet experience designed to our tastes<br>
-	(i'd be happy to design your website 😉)
+	The primary goal of this website is to connect with other people, so please be in touch!
+	Whether you just want to say hi, or would like to collaborate on a project, I'd love to hear from you.
 </p>
 <p>
-	i'm still figuring out how i want to organize this site.<br>
-	i'm thinking there will be a separate page for my favorite links, and another for blog-style posts<br>
+Oh! and I love listening to music<br>
+Here's an incomplete list of artists I like:
 </p>
-<p>
-	i've developed a roadmap for this website available <a href="https://github.com/jacobwhall/jacobhall.net/milestones">here</a>
-</p>
-	<h1>about me</h1>
-	<ul>
-		<li>i usually use the pronouns they/them</li>
-		<li>i was born in december 1999</li>
-		<li>i'm usually barefoot</li>
-		<li>i'm a notary public for the commonwealth of virginia</li>
-		<li>i'm a student at william &amp; mary studying geology</li>
-		<li>i starred as a starfish in a <a href="https://www.youtube.com/watch?v=p2SBlWhh7hE">short movie musical</a></li>
-	</ul>
-<p>
-i also made the websites <a href="https://wordways.us">wordways.us</a> and <a href="https://thehbarchive.org">The H-B Archive</a>
-</p>
-<p>
-oh! and i love listening to music<br>
-here's an incomplete list of artists i like:
 <ul>
 	<li>The Avalanches</li>
 	<li>Big Thief</li>
@@ -71,3 +60,17 @@ here's an incomplete list of artists i like:
 	<li>Toro y Moi</li>
 	<li>The Uncluded</li>
 </ul>
+	<h1>about this site</h1>
+
+<p>
+	I've designed this website for myself, as a record of things I like and ideas I'm excited about.
+	Its larger goal is to be a sort of interface with the internet, helping me to connect with interesting people Out There.
+</p>
+<p>
+	The site's vision has changed a lot over the years.
+	At first I built it as simply as possible, with entirely inline styles and no dynamic elements.
+	Nowadays it's a lot more complex, with a custom Racket backend that allows me to define its behavior.
+	Most of my posts are organized in a database, and pages like this one are generated using templates.
+	But everything is still meticulously handcrafted; this site represents my opinion of what a blog should be.
+	I feel that everyone deserves an internet experience designed to their tastes!
+</p>

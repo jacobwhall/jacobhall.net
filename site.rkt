@@ -121,9 +121,12 @@
   (let ([this-title (if (equal? "" (a "post_title" post-data))
                         (number->string (a "post_id" post-data))
                         (a "post_title" post-data))]
-        [this-content (if (equal? "" (a "content_summary" post-data))
-                          (a "content" post-data)
-                          (a "content_summary" post-data))])
+        [this-content (if (equal? "" (a "content" post-data))
+                          (string-append (a "content_summary" post-data)
+                                         "<p><a href=\""
+                                         (a "permalink" post-data)
+                                         "\">read full article &gt;&gt;</a></p>")
+                          (a "content" post-data))])
     (feed-item
      (append-specific this-tag-uri (string-downcase (string-normalize-spaces this-title
                                                                              #px"[^\\w]+"
@@ -257,7 +260,7 @@
         (feed
          my-tag-uri
          "https://jacobhall.net"
-         "Jacob Hall's Blog"
+         "Jacob Hall"
          (map (λ (r)
                 (ass->feed-item (row->ass (rows-result-headers result)
                                           r)

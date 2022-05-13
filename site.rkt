@@ -230,7 +230,8 @@
       #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
     ; Convert the result of PostgreSQL view "vPosts" into embeddable HTML
     (rows-result->posts (posts-query limit
-                                     #:author author))))
+                                     #:author author
+                                     #:types types))))
 
 (define (build-comments post-id)
   (let ([this-post-result (replies-query post-id)])

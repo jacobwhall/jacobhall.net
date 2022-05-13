@@ -1,7 +1,7 @@
 <!-- When I transferred this article from the home page it ended up with just <h1> and <h3> tags. I should probably fix that -->
 <h1>🔗 running list of my favorite links</h1>
 <p>
-	I have this page set as my browser's home page, and use it to remember sites that I like. Feel free to <a href="mailto:jacobhall.net">email me suggestions!</a>
+	I have this page set as my browser's home page, and use it to remember sites that I like. Feel free to <a href="mailto:email@jacobhall.net">email me suggestions!</a>
 </p>
 <h3>the biggies</h3>
 <ul>
@@ -35,6 +35,7 @@
 </ul>
 <h3>blogs / mags ✏️</h3>
 <ul>
+	<li><a href="https://ciechanow.ski/">Bartosz Ciechanowski</a> - interactive articles "about physics, math, and engineering"</li>
 	<li><a href="https://solar.lowtechmagazine.com/">LOW←TECH MAGAZINE</a> - doubts on progress and technology (solar-powered website! ☀️)</li>
 	<li><a href="https://atlasofplaces.com">Atlas of Places</a> - a "public educational collection" about places</li>
 	<li><a href="https://earlyretirementextreme.com/">Early Retirement Extreme</a> - financial advice blog</li>
@@ -62,12 +63,14 @@
 	<li><a href="https://www.cameronsworld.net/">Cameron's World</a></li>
 	<li><a href="https://www.windows93.net/">WINDOWS93</a> - idk man, see for yourself</li>
 	<li><a href="http://alienmelon.com/">ALIENMELON</a> - "net-art, experimental games, and strange desktop apps..."</li>
+	<li><a href="https://dreamcult.xyz/">dreamcult</a> - "click around, see what you find. . . ."</li>
 </ul>
 <h3>gaming 🕹️</h3>
 <ul>
 	<li><a href="https://candybox2.github.io/">Candy Box 2</a> - if you haven't played this before, you're in for a treat!</li>
 	<li><a href="https://emulation.gametechwiki.com">the emulation general wiki</a> - a great resource for keeping up with video game emulation</li>
 	<li><a href="https://vimm.net/">Vimm's Lair</a> - thousands of high-quality video game roms for classic consoles</li>
+	<li><a href="https://dos.zone"> - "ultimate collection of online dos games"</a></li>
 </ul>
 <h3>museum collections 🖼️</h3>
 <ul>
@@ -110,6 +113,7 @@
 	<li><a href="https://kylemcdonald.net/">Kyle McDonald</a> - art projects involving humans, technology, and the natural world</li>
 	<li><a href="https://kalilhaddad.com/">Kalil Haddad</a> - site for filmmaker Kalil Haddad with navigation using icons from Mac OS</li>
 	<li><a href="https://lingdong.works/">Lingdong's Project Links</a> - advanced programming projects, many of which create art and visualizations</li>
+	<li><a href="https://mollywhite.net/">Molly White</a> - software engineer, Wikipedian, blogger</li>
 </ul>
 <h3>webrings 💍</h3>
 <ul>
@@ -119,6 +123,7 @@
 	<li><a href="https://hotlinewebring.club/">Hotline Webring</a></li>
 	<li><a href="https://geekring.net/">geekring</a></li>
 	<li><a href="https://yesterwebring.neocities.org/">The Yesterweb Ring</a> (<a href="https://yesterwebring.neocities.org/members.html">directory</a>)- "for anyone who is tired of how boring and same-y the internet is today"</li>
+	<li><a href="https://fediring.net/">Fediring</a> - "for the personal sites of any member of the fediverse"</li>
 </ul>
 <h3>icons / stock images</h3>
 <ul>
@@ -142,6 +147,7 @@
 <ul>
 	<li><a href="https://wordways.us">wordways</a> - my friend Aidan's poetry</li>
 	<li><a href="https://jacobhall.net/secret_message.html">Jacob and Leah's Secret Message Page</a> - still the raddest page on the internet. thanks Uncle John! archived with permission from johnlorenz.net</li>
+	<li><a href="https://www.sliderules.org/">Slide Rule Simulator Emulator Replica Collection</a></li>
 	<li><a href="https://veryla.io">VERYLA DOT IO</a> - "a curated list of stuff in los angeles"</li>
 	<li><a href="https://buntspechtband.at/">buntspechtband.at</a> - unique website for an Austrian band</li>
 	<li><a href="https://toki.increpare.com/">lipu pi jan Inkepa</a> - projects about Toki Pona by jan Inkepa</li>

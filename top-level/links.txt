@@ -45,7 +45,7 @@
 <ul>
 	<li><a href="https://www.shortoftheweek.com/">Short of the Week</a> - fantastic short films, every week</li>
 	<li><a href="https://vimeo.com/channels/staffpicks">Vimeo Staff Picks</a> - great films curated by Vimeo</li>
-	<li><a href="https://hearteyesmag.com/music-videos-we-love">Heart Eyes Magazine <i>Music Videos We Love</i></a> - as described</li>
+	<!-- <li><a href="https://hearteyesmag.com/music-videos-we-love">Heart Eyes Magazine <i>Music Videos We Love</i></a> - as described</li> -->
 	<li><a href="https://www.lawebdecanada.com/">CANADA</a> - probably my favorite film production studio. everything they make is breathtaking</li>
 
 </ul>
@@ -70,7 +70,7 @@
 	<li><a href="https://candybox2.github.io/">Candy Box 2</a> - if you haven't played this before, you're in for a treat!</li>
 	<li><a href="https://emulation.gametechwiki.com">the emulation general wiki</a> - a great resource for keeping up with video game emulation</li>
 	<li><a href="https://vimm.net/">Vimm's Lair</a> - thousands of high-quality video game roms for classic consoles</li>
-	<li><a href="https://dos.zone"> - "ultimate collection of online dos games"</a></li>
+	<li><a href="https://dos.zone">DOS Zone</a> - "ultimate collection of online dos games"</li>
 </ul>
 <h3>museum collections 🖼️</h3>
 <ul>
@@ -105,7 +105,7 @@
 	<li><a href="https://thedigitaldiarist.ca/">the digital diarist</a> - alicia's digital garden</li>
 	<li><a href="https://www.kickscondor.com/">Kicks Condor</a> - "FORMER COMPUTER EXPERT" Kicks Condor shares so many great things on this eclectic site</li>
 	<li><a href="https://aaronparecki.com/">Aaron Parecki</a> a legend in the IndieWeb!</li>
-	<li><a href="https://stanford.edu/~vbauer/">Vincent Bauer</a> - a really slick personal site compiled in R, with lots of great resources for using R, particularly in regard to political science research</li>
+	<!-- <li><a href="https://stanford.edu/~vbauer/">Vincent Bauer</a> - a really slick personal site compiled in R, with lots of great resources for using R, particularly in regard to political science research</li> -->
 	<!--	<li><a href="http://jayweingarten.site/">🔓 Jay's New Site</a> - Jay Weingarten</li> -->
 	<li><a href="https://billwurtz.com/">billwurtz</a> - Bill Wurtz, the guy who made <a href="https://www.youtube.com/watch?v=Mh5LY4Mz15o">history of japan</a> and <a href="https://www.youtube.com/watch?v=xuCn8ux2gbs">history of the entire world, i guess</a></li>
 	<li><a href="https://simone.computer">Simone's Computer</a> - in the style of Windows 95, with a fab linkroll!</li>
@@ -150,10 +150,15 @@
 	<li><a href="https://www.sliderules.org/">Slide Rule Simulator Emulator Replica Collection</a></li>
 	<li><a href="https://veryla.io">VERYLA DOT IO</a> - "a curated list of stuff in los angeles"</li>
 	<li><a href="https://buntspechtband.at/">buntspechtband.at</a> - unique website for an Austrian band</li>
-	<li><a href="https://toki.increpare.com/">lipu pi jan Inkepa</a> - projects about Toki Pona by jan Inkepa</li>
+	<!-- <li><a href="https://toki.increpare.com/">lipu pi jan Inkepa</a> - projects about Toki Pona by jan Inkepa</li> -->
 	<li><a href="https://restorativland.org/">restorativland</a> - a project to revive lost "web ruins"</li>
 	<li><a href="https://www.tasteatlas.com/">World Food Atlas</a></li>
 	<li><a href="https://www.plugsocketmuseum.nl/Overview.html">Digital Museum of Plugs and Sockets</a></li>
 	<li><a href="https://www.freecycle.org/">The Freecycle Network</a> - "people giving (and getting) stuff for free"</li>
 	<li><a href="https://mschf.xyz/">MSCHF</a> - mysterious mischievous internet projects</li>
 </ul>
+<p>
+I have been curating this page for a few years now; it has been lovely to grow up with you.
+In that time, some of these sites have stayed the same, others have renovated, still more have quietly gone offline.
+I'll be here for as long as I can ❤️
+</p>

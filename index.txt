@@ -58,7 +58,7 @@
                                            "\">"
                                             (a "post_title"
                                               (row->ass row-headers r))
-                             "</li>\n"))
+					      "</a></li>\n"))
                           (rows-result-rows post-rows-result))))
 		</ul>
 		<!-- TODO: Add all articles to entries database, and then change this link to /kind/article -->

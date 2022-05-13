@@ -23,7 +23,7 @@
 	<li><a href="https://yesterwebring.neocities.org/linkdirectory/">The Yesterweb Link Directory</a> - website creation, digital art, and other gems</li>
 	<!-- <li><a href="https://allthearchitects.com">All the Architects</a> - directory of architects' websites</li> -->
 </ul>
-<h3>art 🖌️</h3
+<h3>art 🖌️</h3>
 <ul>
 	<li><a href="https://www.nowness.com/">NOWNESS</a> - endless feed of stunning new art</li>
 	<li><a href="https://www.itsnicethat.com">It's Nice That</a> - articles on current digital art</li>

@@ -7,7 +7,7 @@
 		)
 @(if (equal? (a "type" post-data) 5) (string-append "<a href=\"" (a "bookmark_of" post-data) "\">") "")
 @(if (equal? (a "type" post-data) 5) "</a>" "")
-<div class="e-content">
+<div class="e-content@(if (equal? (a "type" post-data) 11) " watch" "")">
 	@(cond [(equal? (a "type" post-data) 1) (string-append (if (equal? (a "post_title" post-data) "") "" (string-append"<a href=\"" (a "permalink" post-data) "\"><h2>" (a "post_title" post-data) "</h2></a>")) (a "content_summary" post-data) "<p><a href=\"" (a "permalink" post-data) "\">Read article &gt;&gt;</a></p>")]
 	       [(equal? (a "type" post-data) 5) (string-append "<h2><a class=\"u-bookmark-of\" href=\"" (a "bookmark_of" post-data) "\"><span class=\"p-name\">" (a "post_title" post-data) "</span></a></h2>")]
 	       [(equal? (a "type" post-data) 8) (string-append "<h2><a class=\"u-url\" href=\"" (a "reply_to_url" post-data) "\"><span class=\"p-name\">" (a "reply_to_title" post-data) "</span></a></h2>")]

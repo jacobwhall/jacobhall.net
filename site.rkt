@@ -163,7 +163,7 @@
       ; TODO: use Microformats standard author UID rather than name
       #:author [author "*"] ; TODO: * is invalid
       #:post-id [post-id "*"] ; ""
-      #:types [types (list 1 2 3 4 5 6 7 8 9 10 11 12)])
+      #:types [types (list 1 2 3 4 5 6 7 8 9 10 11)])
     (query pgc
            "SELECT *
             FROM vPosts

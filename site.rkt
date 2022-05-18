@@ -186,10 +186,10 @@
 (define (likes-query reply-to-id)
   (let ([these-likes (query pgc
                             "SELECT *
-          FROM vPosts
-          WHERE type = 6
-          AND reply_to_id = $1
-          ORDER BY published_date DESC"
+                             FROM vPosts
+                             WHERE type = 6
+                             AND reply_to_id = $1
+                             ORDER BY published_date DESC"
                             reply-to-id)])
     (let ([facepile (foldr string-append ""
                            (map (λ (r)
@@ -237,8 +237,7 @@
   (let ([this-post-result (replies-query post-id)])
     (foldr string-append ""
            (map (λ (r)
-                  (let ([this-ass (row->ass (rows-result-headers
-                                             this-post-result)
+                  (let ([this-ass (row->ass (rows-result-headers this-post-result)
                                             r)])
                     (string-append (ass->post this-ass)
                                    (build-comments (a "post_id" this-ass)))))
@@ -292,6 +291,26 @@
 (define (not-found req)
   (article "404" "<h1>Not Found</h1>")) ; TODO: use xexpr, or template
 
+(define (kind-dispatch req kind)
+  (if (non-empty-string? kind)
+      (let ([type-result (query pgc
+                                "SELECT type, type_name
+                                 FROM types
+                                 WHERE slug = $1
+                                 LIMIT 1"
+                                kind)])
+        (if (empty? (rows-result-rows type-result))
+            (not-found req)
+            (let ([this-ass (row->ass (rows-result-headers type-result)
+                                      (first (rows-result-rows type-result)))])
+              (article (a "type_name" this-ass)
+                       (posts 25
+                              #:types (list (a "type" this-ass)))
+                       #:article-tags #f))))
+      (article "all posts"
+               (posts 25)
+               #:article-tags #f)))
+
 ; Dispatcher for rule-based pages like homepage and /kind
 (define-values (main-dispatcher _)
   (dispatch-rules
@@ -300,10 +319,6 @@
               (article "all posts"
                        (posts 25)
                        #:article-tags #f))]
-   [("kind") (λ (r)
-               (article "all posts"
-                        (posts 25)
-                        #:article-tags #f))]
    [("few") (λ (r)
               (article "all posts"
                        (posts
@@ -320,6 +335,7 @@
                          #:types (list 1 2 3 4 5 6 7 8 9 10)
                          25)
                         #:article-tags #f))]
+   [("kind" (string-arg)) kind-dispatch]
    [("webmention") #:method "post" process-webmention]
    [("feeds" "rss" "v1.rss") (λ (r) (build-feed 'rss))]
    [("feeds" "atom" "v1.atom") (λ (r) (build-feed 'atom))]))
@@ -385,10 +401,10 @@
                 (if (null? (rows-result-rows post-result))
                     (not-found #f)
                     (article "post"
-                         (ass->post (row->ass (rows-result-headers post-result)
-                                              (first (rows-result-rows post-result))))
-                         #:article-tags #f
-                         #:post-id (string->number (path->string (fourth path-elements))))))
+                             (ass->post (row->ass (rows-result-headers post-result)
+                                                  (first (rows-result-rows post-result))))
+                             #:article-tags #f
+                             #:post-id (string->number (path->string (fourth path-elements))))))
               ; Path slug does not match, next-dispatcher
               (next-dispatcher))))))
 

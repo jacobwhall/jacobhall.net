@@ -53,6 +53,8 @@
 <ul>
 	<li><a href="https://indieweb.org/">IndieWeb</a> - "a community of individual personal websites, connected by simple standards, based on the principles of owning your domain, using it as your primary identity, to publish on your own site, and own your data"</li>
 	<li><a href="https://tildeverse.org/">tildeverse</a> - unix servers that have communities of users, many of whom host personal pages</li>
+	<li><a href="https://rawtext.club/">rawtextclub</a> - "The slow social network"</li>
+	<li><a href="https://sdf.org/">SDF Public Access UNIX System</a></li>
 	<li><a href="https://news.ycombinator.com">Hacker News</a> - one of my most reliable sources of interesting reads</li>
 	<li><a href="https://www.reddit.com/r/ultralight">/r/ultralight</a> - friendly community of ultralight backpackers</li>
 	<li><a href="https://www.reddit.com/r/selfhosted">/r/selfhosted</a> - community of self-hosters</li>

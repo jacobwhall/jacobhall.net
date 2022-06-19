@@ -12,9 +12,7 @@
 	<link rel="alternate" type="application/atom+xml" title="Atom Feed for jacobhall.net" href="/feeds/atom/v1.atom">
 	<link href="/styles/whostyles/whostyle-v1.css" rel="whostyle">
 	<link href="/webmention" rel="webmention">
-	<link href="/indieweb/micropub.php" rel="micropub">
-	<link rel="authorization_endpoint" href="https://indieauth.com/auth">
-	<link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+	<link href="/auth/metadata" rel="indieauth-metadata">
 		<link rel="stylesheet" href="/styles/whostyles/whostyle-v1.css">
 </head>
 <body>

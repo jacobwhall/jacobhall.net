@@ -8,6 +8,7 @@
 
 (require db
          gregor
+         json
          net/url
          web-server/servlet-env
          web-server/http
@@ -88,6 +89,21 @@
    '()                  ; Additional HTTP headers.
    (list                ; Content (in bytes) to send to the browser.
     (string->bytes/utf-8 content))))
+
+(define (process-auth req action)
+  (cond
+    [(equal? action "metadata") (response/full
+                                 200
+                                 #"OK"
+                                 (current-seconds)
+                                 #"application/json; charset=utf-8"
+                                 '()
+                                 (list
+                                  (string->bytes/utf-8 (jsexpr->string #hasheq((issuer . "https://jacobhall.net")
+                                                                               (authorization_endpoint . "https://indieauth.com/auth")
+                                                                               (token_endpoint . "https://tokens.indieauth.com/token")
+                                                                               (code_challenge_methods_supported . ("S256")))))))]
+    [else (server-error "auth action not found")]))
 
 (define (a key post)
   (cdr (assoc key post)))
@@ -338,7 +354,8 @@
    [("kind" (string-arg)) kind-dispatch]
    [("webmention") #:method "post" process-webmention]
    [("feeds" "rss" "v1.rss") (λ (r) (build-feed 'rss))]
-   [("feeds" "atom" "v1.atom") (λ (r) (build-feed 'atom))]))
+   [("feeds" "atom" "v1.atom") (λ (r) (build-feed 'atom))]
+   [("auth" (string-arg)) process-auth] ))
 
 ; Dispatcher for top-level pages like /about and /links
 (define (top-level-dispatcher req)

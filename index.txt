@@ -95,7 +95,8 @@
 	An IndieWeb Webring 🕸💍
 	<a href="https://xn--sr8hvo.ws/%F0%9F%9A%84%F0%9F%8F%8B%F0%9F%94%A7/next">→</a>
 </div>
-<p><a href="https://github.com/jacobwhall/jacobhall.net">read this site's source on GitHub</a></p>
+<p>this site is written in <a href="https://racket-lang.org">Racket</a><br>
+<a href="https://github.com/jacobwhall/jacobhall.net">read its source on GitHub</a></p>
 </footer>
 </body>
 </html>

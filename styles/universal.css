@@ -106,9 +106,6 @@
 			color: #d38aea;
 		}	
 		/* h-card, h-entry rules */
-		.p-note {
-			display: none;
-		}
 		.kind {
 			font-family: monospace;
 			color: black;

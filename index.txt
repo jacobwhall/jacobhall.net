@@ -24,8 +24,7 @@
 	</div>
 	<div id="bottom">
 		<h1 class="p-name">Jacob Hall</h1>
-		<data class="p-note">Student at William &amp; Mary studying geology and coding in his free time</data>
-		<p><i>howdy! this is my weblog.<br>please leave your shoes by the door</i></p>
+		<p class="p-note"><i>my handcrafted internet home<br>please leave your shoes by the door</i></p>
 		<p id="socials">
 			<a class="u-email" title="email me" href="mailto:email@"@"jacobhall.net">📧</a>
 			&nbsp;&nbsp;

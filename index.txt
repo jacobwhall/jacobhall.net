@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="/styles/whostyles/whostyle-v1.css">
 </head>
 <body>
-<!-- <div id="announcement">Looking for a resource I sent you here for? <a href="/">Click here</a></div> -->
+<!-- <div id="announcement">insert important announcement here...<a href="/">click here</a></div> -->
 <div class="h-card" id="firstbox">
 	<a class="u-url u-uid" href="https://jacobhall.net/"></a>
 	<div id="top">

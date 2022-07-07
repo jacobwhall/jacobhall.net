@@ -4,6 +4,7 @@
 			font-family: 'Work Sans', sans-serif;
 			font-size: 14pt;
 			font-size: max(14pt, .4cm);
+			margin: 0px;
 		}
 
 		@media (max-aspect-ratio: 1/1) {

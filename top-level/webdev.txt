@@ -1,5 +1,4 @@
-	<h1>Website Development</h1>
-
+<h1>Website Development</h1>
 <p>
 Hi, my name is Jacob Hall, and sometimes I develop websites!
 </p>
@@ -7,10 +6,10 @@ Hi, my name is Jacob Hall, and sometimes I develop websites!
 I started learning PHP way back in 7th grade, and I'd like to think my skills have improved since then 😄
 </p>
 <p>
-I specialize in simple, handcrafted user experiences that deliver content in innovative ways. If that sounds interesting to you, <a href="mailto:totallyuneekemail@gmail.com">let's talk</a>!
+I specialize in simple, handcrafted user experiences that deliver content in innovative ways. If that sounds interesting to you, <a href="mailto:email@jacobhall.net">let's talk</a>!
 </p>
 <p>
-Most recently, I built the <a href="http://173.73.66.236/">🔓 Challenging Racism Secondary Curriculum site</a>, a platform for the nonprofit to share lesson materials with their licensees. I was the sole front-end developer for the project, working with Drupal.
+For example, I built the <a href="https://challengingracismonline.org/">Challenging Racism Secondary Curriculum site</a>, a platform for the nonprofit to share lesson materials with their licensees. I was the sole front-end developer for the project, working with Drupal.
 </p>
 <p>
 My friend Aidan has been publishing his hypertext poetry projects on a site I've helped build entitled <a href="https://wordways.us">wordways</a>. It's been a great way to hone my JavaScript skills as he devises new ways to weave together each collection.

@@ -98,7 +98,7 @@ If you would like to style your comment from scratch, there is a CSS property ca
 </p>
 <h3>updating whostyles</h3>
 <p>
-	An I've often heard within the IndieWeb has to do with the historical "look" of one's site, and if it should be maintained in old posts even after a new style has been adopted.
+	A debate I've often heard within the IndieWeb has to do with the historical "look" of one's site, and if it should be maintained in old posts even after a new style has been adopted.
 	I plan to re-theme this site from time to time, and when I do so I will intentionally leave this article with the CSS it was written in, for example.
 	I don't want to force people to support all of their previous comments with their current whostyle!
 	Over years of reimagining ourselves online, it would be very complex to create styles that properly support everything we've written.

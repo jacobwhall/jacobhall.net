@@ -8,6 +8,9 @@
 	<meta name="Description" content="Jacob Hall's personal website">
 	<link href="/styles/universal.css" rel="stylesheet">
 	<link href="/styles/homepage.css" rel="stylesheet">
+	<link rel="alternate" type="text/mf2+html" title="All my posts" href="/all">
+	<link rel="alternate" type="text/mf2+html" title="Many of my posts" href="/many">
+	<link rel="alternate" type="text/mf2+html" title="Just my best posts" href="/few">
 	<link rel="alternate" type="application/rss+xml" title="RSS Feed for jacobhall.net" href="/feeds/rss/v1.rss">
 	<link rel="alternate" type="application/atom+xml" title="Atom Feed for jacobhall.net" href="/feeds/atom/v1.atom">
 	<link href="/styles/whostyles/whostyle-v1.css" rel="whostyle">

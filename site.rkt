@@ -48,7 +48,7 @@
 
 (define (insert-webmention source target)
   (query pgc
-         (prepare pgc "INSERT INTO wm_log
+         (virtual-statement "INSERT INTO wm_log
                        (source, target)
                        VALUES
                        ($1, $2)")

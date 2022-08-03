@@ -9,6 +9,7 @@
 		<link href="/styles/article.css" rel="stylesheet">
 		<link href="/styles/whostyles/whostyle-v1.css" rel="stylesheet">
 		<link href="/styles/whostyles/whostyle-v1.css" rel="whostyle">
+		<link href="/webmention" rel="webmention">
 </head>
 <body>
         <div id="sidebar">

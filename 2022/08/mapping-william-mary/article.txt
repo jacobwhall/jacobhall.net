@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-compare/dist/leaflet-compare.css" />
+<script src="https://unpkg.com/leaflet-compare/dist/leaflet-compare.js"></script>
+<link rel="stylesheet" href="style.css" />
+<p>
+This week, I take the final exam of my undergraduate degree. Wish me luck!
+</p>
+<p>
+To celebrate, I'd like to tell you about a side-project I took on this spring.
+</p>
+<h3>The state of W&M's map</h3>
+<p>
+Here is a real screenshot I took of Google Maps today, in August 2022:
+</p>
+<img src="google-maps-critique.svg" alt="Screenshot of Google Maps on campus with critical annotations" />
+<p>
+These are just a few examples that caught my eye.
+Google Maps is littered with nonexistent POIs, long-demolished buildings, and messy shapes.
+It doesn't represent our campus well at all, and confuses current students as well as visitors.
+</p>
+<p>
+The <a href="https://www.wm.edu/about/visiting/_documents/map_11x17.pdf">official campus map</a> is cool, and Facilities keeps it up-to-date as buildings change each year.
+But, it is not a good map for navigating campus: it is slow to decode building numbers, there is little info for pedestrians, and the PDF format is inaccessible for many.
+</p>
+<p>
+<a href="https://openstreetmap.org">OpenStreetMap</a> (OSM) is a platform that integrates my mapping work with millions of others', and allows anyone to build upon my work.
+I decided to help clean up and build upon OSM data around the William & Mary campus.
+The rest of this article is about how I did that!
+</p>
+<h3>What I did</h3>
+<p>
+Here is a non-exhaustive list of things I did to improve the map:
+</p>
+<ul>
+<li>adjusted or added roads and trails across campus using original GPS data</li>
+<li>corrected street addresses for buildings on campus</li>
+<li>reworked the boundary of Matoaka Woods to be a cohesive area in OSM</li>
+<li>added most statues around campus</li>
+<li>added most bike parking around campus</li>
+<li>addes many benches, trash cans around campus</li>
+</ul>
+<p>
+Much of the edits I made were more technical, taking previously overlapping and haphazard shapes and piecing them together into clearer map elements.
+I've touched just about every path on campus, adjusting relative positions to better match GPS, satellite, and local GIS data.
+</p>
+<p>
+Perhaps most importantly, I advocated for William & Mary and the City of Williamsburg to release their data.
+More on that in a bit!
+</p>
+<p>
+A few weeks in to this project I walked into the Center for Geospatial Analysis, and asked to borrow a GPS receiver.
+They hooked me up with a very fancy <a href="https://eos-gnss.com/products/hardware/arrow-100">Eos Arrow 100</a>, which allowed me to create my own high-resolution GPS traces of trails around campus.
+I set up my phone to use the receiver's location as a "mock location" at the system level so that all apps would use its precise reading without any fuss.
+<a href="https://github.com/geopaparazzi/smash">SMASH</a> became a favorite app of mine for recording tracks and marking POIs as I marched around campus.
+</p>
+<div id="gps-photo-wrapper">
+<img id="gps-photo" src="eos.jpg" alt="Picture of me wearing the Eos Arrow GPS receiver" />
+<p>
+Where <em>am</em> I?!
+</p>
+</div>
+<h3>The friends I made along the way</h3>
+<p>
+The most rewarding part of this project was getting to engage with community members in and around campus that I otherwise would have never met.
+</p>
+<p>
+One night while poking around old changesets, I discovered that <a href="https://macwright.com/">Tom MacWright</a> helped import much of the original data for campus while he studied here.
+Tom has since become a well-known geospatial developer, having helped build <a href="https://www.mapbox.com/">Mapbox</a> and many of the tools I used in this project. He was pleased to hear that the campus mapped had improved since his time here.
+</p>
+<p>
+The kind folks at the Center for Geospatial Analysis were so supportive of this project, letting me use their computers to work on my edits and putting me in touch with the right people.
+If you find yourself in Swem Library, I recommend stopping by the CGA!
+</p>
+<p>
+I got in touch with the University Space Manager, who shared my enthusiasm for mapping campus and helped put me in touch with the City (see below).
+I am so grateful for his support, and I hope that Facilities will consider freely licensing more of William & Mary's GIS assets in the future.
+</p>
+<p>
+As my project started to spill over into the City of Williamsburg, I got in touch with the city engineer to request that their geospatial data be released into the public domain.
+He was so supportive of my project, and helped confirm for me that I could import City data into OpenStreetMap without any licensing issues.
+I <a href="https://wiki.openstreetmap.org/wiki/Contributors#City_of_Williamsburg">documented this on the OSM wiki</a>, so future contributers will have an easier time updating roads and building footprints.
+</p>
+<p>
+My friend Clare Hogan shared drone footage she shot around campus, which was immensely helpful when mapping Reveley Garden.
+Thanks Clare!
+</p>
+<h3>Then vs. Now</h3>
+<p>
+Here is an interactive comparison of OpenStreetMap around William & Mary's campus in January (left) vs. August (right).
+Virtually every change seen here was mine. Zoom all the way in around Swem Library and Sunken Gardens to see all the details!
+</p>
+<div id="map"></div>
+<h3>How to use the map</h3>
+<p>
+If you're on your computer, this map is immediately available at <a href="https://www.openstreetmap.org/#map=17/37.27085/-76.71558">https://openstreetmap.org</a>.
+</p>
+<p>
+If you're on mobile, I recommend <a href="https://organicmaps.app/">Organic Maps</a>. It's a well-maintained OSM app that includes navigation features and allows you to save maps offline.
+</p>
+<p>
+There are <a href="https://wiki.openstreetmap.org/wiki/List_of_OSM-based_services">countless other OSM apps</a>, so if you're interested, I recommend poking around!
+</p>
+<h3>What's next?</h3>
+<p>
+I'm proud of this work, and I'm confident OSM is now the highest-quality public map of campus.
+That said, there is so much left to be done.
+Perhaps you'd be interested in carrying the torch?
+Here is a to-do list that has been bouncing around in my head:
+</p>
+<ul>
+<li>Add Hearth: Memorial to the Enslaved</li>
+<li>Add the new patio at Swem library</li>
+<li>Add Sadler West expansion</li>
+<li>Improve accessibility info for buildings across campus</li>
+<li>Finish filling in trees around the Sunken Gardens</li>
+<li>Improve area around Botetourt</li>
+<li>Trace walking paths around Sorority Court</li>
+<li>Add statues, paths around Alumni House</li>
+<li>Add emergency phone stations</li>
+<li>Improve woods boundary behind Dupont</li>
+<li>Expand trail coverage in Motoaka Woods</li>
+</ul>
+<p>
+I have added many of these as notes to OpenStreetMap.
+If you'd like to discuss how to accomplish any of them, please reach out!
+</p>
+<script src="render_map.js"></script>

@@ -1,0 +1,13 @@
+ #map {
+	 height: 50em;
+	 min-height: 3in;
+	 max-height: 85vh;
+}
+#gps-photo-wrapper {
+	text-align: center;
+	font-style: italic;
+}
+#gps-photo {
+	width:50%;
+}
+

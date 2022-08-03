@@ -86,7 +86,7 @@ He was so supportive of my project, and helped confirm for me that I could impor
 I <a href="https://wiki.openstreetmap.org/wiki/Contributors#City_of_Williamsburg">documented this on the OSM wiki</a>, so future contributers will have an easier time updating roads and building footprints.
 </p>
 <p>
-My friend Clare Hogan shared drone footage she shot around campus, which was immensely helpful when mapping Reveley Garden.
+My friend <a href="https://claireahogan.com/">Claire Hogan</a> shared drone footage she shot around campus, which was immensely helpful when mapping Reveley Garden.
 Thanks Clare!
 </p>
 <h3>Then vs. Now</h3>

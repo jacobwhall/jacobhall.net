@@ -20,7 +20,7 @@ Here is a real screenshot I took of Google Maps today, in August 2022:
 <img src="google-maps-critique.svg" alt="Screenshot of Google Maps on campus with critical annotations" />
 <p>
 These are just a few examples that caught my eye.
-Google Maps is littered with nonexistent POIs, long-demolished buildings, and messy shapes.
+Google Maps is littered with nonexistent points of interest (POIs), long-demolished buildings, and messy shapes.
 It doesn't represent our campus well at all, and confuses current students as well as visitors.
 </p>
 <p>

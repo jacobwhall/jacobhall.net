@@ -17,7 +17,9 @@ To celebrate, I'd like to tell you about a side-project I took on this spring.
 <p>
 Here is a real screenshot I took of Google Maps today, in August 2022:
 </p>
-<img src="google-maps-critique.svg" alt="Screenshot of Google Maps on campus with critical annotations" />
+<div class="photo-wrapper">
+<img id="critique" src="google-maps-critique.svg" alt="Screenshot of Google Maps on campus with critical annotations" />
+</div>
 <p>
 These are just a few examples that caught my eye.
 Google Maps is littered with nonexistent points of interest (POIs), long-demolished buildings, and messy shapes.
@@ -58,7 +60,7 @@ They hooked me up with a very fancy <a href="https://eos-gnss.com/products/hardw
 I set up my phone to use the receiver's location as a "mock location" at the system level so that all apps would use its precise reading without any fuss.
 <a href="https://github.com/geopaparazzi/smash">SMASH</a> became a favorite app of mine for recording tracks and marking POIs as I marched around campus.
 </p>
-<div id="gps-photo-wrapper">
+<div class="photo-wrapper">
 <img id="gps-photo" src="eos.jpg" alt="Picture of me wearing the Eos Arrow GPS receiver" />
 <p>
 Where <em>am</em> I?!

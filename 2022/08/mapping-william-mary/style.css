@@ -1,13 +1,17 @@
- #map {
-	 height: 50em;
-	 min-height: 3in;
-	 max-height: 85vh;
-}
-#gps-photo-wrapper {
+.photo-wrapper {
 	text-align: center;
 	font-style: italic;
+}
+#critique {
+	width: 80%;
+	min-width: 2in;
+	max-width: 100%;
 }
 #gps-photo {
 	width:50%;
 }
-
+#map {
+	 height: 50em;
+	 min-height: 3in;
+	 max-height: 85vh;
+}

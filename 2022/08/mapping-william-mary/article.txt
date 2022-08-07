@@ -107,11 +107,24 @@ If you're on mobile, I recommend <a href="https://organicmaps.app/">Organic Maps
 <p>
 There are <a href="https://wiki.openstreetmap.org/wiki/List_of_OSM-based_services">countless other OSM apps</a>, so if you're interested, I recommend poking around!
 </p>
+<p>
+William & Mary could adopt this as their "official" map, and I hope they will.
+The univerity's official app could feature a slick OSM interface, helping students to find their way around campus and discover its hidden treasures.
+We could hire students to thoroughly tag wheelchair accessibility across campus, so that visitors could use <a href="https://wheelmap.org">Wheelmap</a> and similar services to navigate more effectively.
+I would love to see Intro to GIS course assignments involving improvements to OSM data on campus.
+</p>
 <h3>What's next?</h3>
 <p>
 I'm proud of this work, and I'm confident OSM is now the highest-quality public map of campus.
 That said, there is so much left to be done.
 Perhaps you'd be interested in carrying the torch?
+</p>
+<p>
+The easiest way for you to conntribute to the map, if you so desire, is to download the app <a href="https://github.com/streetcomplete/StreetComplete#readme">StreetComplete</a>.
+It's a fun way to get improve the map without any background knowledge about the inner workings of OpenStreetMap.
+Be careful though, next thing you know you'll be up all night adding benches to a park on the other side of the globe!
+</p>
+<p>
 Here is a to-do list that has been bouncing around in my head:
 </p>
 <ul>

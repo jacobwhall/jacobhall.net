@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-compare/dist/leaflet-compare.css" />
 <script src="https://unpkg.com/leaflet-compare/dist/leaflet-compare.js"></script>
 <link rel="stylesheet" href="style.css" />
+<span class="date">Published on August 3, 2022</span>
 <p>
 This week, I take the final exam of my undergraduate degree. Wish me luck!
 </p>

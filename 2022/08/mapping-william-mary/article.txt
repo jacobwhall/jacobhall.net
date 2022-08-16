@@ -32,10 +32,10 @@ It doesn't represent our campus well at all, and confuses current students as we
 </p>
 <p>
 The <a href="https://www.wm.edu/about/visiting/_documents/map_11x17.pdf">official campus map</a> is cool, and Facilities keeps it up-to-date as buildings change each year.
-But, it is not a good map for navigating campus: it is slow to decode building numbers, there is little info for pedestrians, and the PDF format is inaccessible for many.
+But, it is not a good map for navigating campus: it takes a while to decode building numbers, there is little info for pedestrians, and the PDF format is inaccessible for many.
 </p>
 <p>
-<a href="https://openstreetmap.org">OpenStreetMap</a> (OSM) is a platform that integrates my mapping work with millions of others', and allows anyone to build upon my work.
+<a href="https://openstreetmap.org">OpenStreetMap</a> (OSM) is a platform that integrates my mapping work with millions of others', and allows anyone to build upon it, kind of like Wikipedia.
 I decided to help clean up and build upon OSM data around the William & Mary campus.
 The rest of this article is about how I did that!
 </p>
@@ -44,16 +44,16 @@ The rest of this article is about how I did that!
 Here is a non-exhaustive list of things I did to improve the map:
 </p>
 <ul>
-<li>adjusted or added roads and trails across campus using original GPS data</li>
+<li>adjusted or added roads and trails across campus using my own GPS data</li>
 <li>corrected street addresses for buildings on campus</li>
 <li>reworked the boundary of Matoaka Woods to be a cohesive area in OSM</li>
 <li>added most statues around campus</li>
 <li>added most bike parking around campus</li>
-<li>addes many benches, trash cans around campus</li>
+<li>added many benches, trash cans, trees around campus</li>
 </ul>
 <p>
-Much of the edits I made were more technical, taking previously overlapping and haphazard shapes and piecing them together into clearer map elements.
-I've touched just about every path on campus, adjusting relative positions to better match GPS, satellite, and local GIS data.
+A majority of the edits I made were more technical, taking previously overlapping and haphazard shapes and piecing them together into clearer map elements.
+I've touched just about every path on campus, adjusting relative positions to better match GPS data, satellite imagery, and local GIS data.
 </p>
 <p>
 Perhaps most importantly, I advocated for William & Mary and the City of Williamsburg to release their data.
@@ -64,6 +64,7 @@ A few weeks in to this project I walked into the Center for Geospatial Analysis,
 They hooked me up with a very fancy <a href="https://eos-gnss.com/products/hardware/arrow-100">Eos Arrow 100</a>, which allowed me to create my own high-resolution GPS traces of trails around campus.
 I set up my phone to use the receiver's location as a "mock location" at the system level so that all apps would use its precise reading without any fuss.
 <a href="https://github.com/geopaparazzi/smash">SMASH</a> became a favorite app of mine for recording tracks and marking POIs as I marched around campus.
+Many of the traces I recorded are now available for future mappers <a href="https://www.openstreetmap.org/#map=18/37.27058/-76.71133&layers=G">on OpenStreetMap</a>.
 </p>
 <div class="photo-wrapper">
 <img id="gps-photo" src="eos.jpg" alt="Picture of me wearing the Eos Arrow GPS receiver" />
@@ -94,7 +95,7 @@ I <a href="https://wiki.openstreetmap.org/wiki/Contributors#City_of_Williamsburg
 </p>
 <p>
 My friend <a href="https://claireahogan.com/">Claire Hogan</a> shared drone footage she shot around campus, which was immensely helpful when mapping Reveley Garden.
-Thanks Clare!
+Thanks Claire!
 </p>
 <h3>Then vs. Now</h3>
 <p>
@@ -126,7 +127,7 @@ Perhaps you'd be interested in carrying the torch?
 </p>
 <p>
 The easiest way for you to conntribute to the map, if you so desire, is to download the app <a href="https://github.com/streetcomplete/StreetComplete#readme">StreetComplete</a>.
-It's a fun way to get improve the map without any background knowledge about the inner workings of OpenStreetMap.
+It's a fun way to improve the map without any background knowledge about the inner workings of OpenStreetMap.
 Be careful though, next thing you know you'll be up all night adding benches to a park on the other side of the globe!
 </p>
 <p>

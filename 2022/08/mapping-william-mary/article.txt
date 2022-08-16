@@ -1,3 +1,7 @@
+<meta property='og:title' content='🗺️ How I made the best map of William & Mary'/>
+<meta property='og:image' content='https://jacobhall.net/2022/08/mapping-william-mary/featured-image.jpg'/>
+<meta property='og:description' content='How I improved OpenStreetMap around the William & Mary campus'/>
+<meta property='og:url' content='https://jacobhall.net/2022/08/mapping-william-mary/'/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>

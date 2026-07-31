@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<title>@title </title>
+		<title>{{ title }} </title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#FFFFFF"/>
@@ -28,11 +28,11 @@
                 </a>
         </div>
 <div id="contentbox">
-@(if article-tags "<article class=\"e-content\">" "")
-@(if insert-title (string-append "<h2>" title "</h2>") "")
-@content
-@(if article-tags "</article>" "")
-@(if post-id (string-append (likes-query post-id) "<h2>Comments</h2><p>You can leave a comment here via webmention! Note that I moderate webmentions manually, so it may take a few days to appear.</p>" (build-comments post-id)) "")
+{% if article_tags %}<article class="e-content">{% endif %}
+{% if insert_title %}<h2>{{ title }}</h2>{% endif %}
+{{ content }}
+{% if article_tags %}</article>{% endif %}
+{% if has_post_id %}{{ likes_html }}<h2>Comments</h2><p>You can leave a comment here via webmention! Note that I moderate webmentions manually, so it may take a few days to appear.</p>{{ comments_html }}{% endif %}
 </div>
 </body>
 </html>

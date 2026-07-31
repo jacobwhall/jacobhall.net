@@ -29,7 +29,7 @@
 		<h1 class="p-name">Jacob Hall</h1>
 		<p class="p-note"><i>my handcrafted internet home<br>please leave your shoes by the door</i></p>
 		<p id="socials">
-			<a class="u-email" title="email me" href="mailto:email@"@"jacobhall.net">📧</a>
+			<a class="u-email" title="email me" href="mailto:email@jacobhall.net">📧</a>
 			&nbsp;&nbsp;
 			<a rel="me" title="my Instagram profile" href="https://www.instagram.com/jacobwhall/">📷</a>
 			&nbsp;&nbsp;
@@ -39,27 +39,18 @@
 			&nbsp;&nbsp;
 			<a rel="me" title="my OpenStreetMap profile" href="https://www.openstreetmap.org/user/jacobwhall">🗺️</a>
 		</p>
-		<p><a title="about me" href="about">about</a> - <a title="websites i like" href="links">linkroll</a> - <a title="dreams of mine" href="/dreams">ideas</a></p>
+		<p><a title="about me" href="about">about</a> - <a title="websites i like" href="links">linkroll</a></p>
 	</div>
 </div>
 <div id="contentbox">
-	@(posts 3 #:types (list 1 2 3 7 8 9 10))
+	{{ recent_posts }}
 <h2><a href="/kind">view more posts ➡️</a></h2>
 <div id="subsequentbox">
 	<div class="list">
 		<h2>articles i've written</h2>
 		<ul>
-			@(let ([post-rows-result (posts-query 3 #:author "Jacob Hall" #:types (list 1))])
-    (let ([row-headers (rows-result-headers post-rows-result)])
-                          (map (λ (r)
-                            (string-append "<li><a href=\""
-                                           (a "permalink"
-                                              (row->ass row-headers r))
-                                           "\">"
-                                            (a "post_title"
-                                              (row->ass row-headers r))
-					      "</a></li>\n"))
-                          (rows-result-rows post-rows-result))))
+			{% for a in articles %}<li><a href="{{ a.permalink }}">{{ a.post_title }}</a></li>
+{% endfor %}
 		</ul>
 		<!-- TODO: Add all articles to entries database, and then change this link to /kind/article -->
 		<a href="articles">view all articles ➡️</a>
@@ -97,8 +88,7 @@
 	An IndieWeb Webring 🕸💍
 	<a href="https://xn--sr8hvo.ws/%F0%9F%9A%84%F0%9F%8F%8B%F0%9F%94%A7/next">→</a>
 </div>
-<p>this site is written in <a href="https://racket-lang.org">Racket</a><br>
-<a href="https://github.com/jacobwhall/jacobhall.net">read its source on GitHub</a></p>
+<p><a href="https://github.com/jacobwhall/jacobhall.net">read this site's source on GitHub</a></p>
 </footer>
 </body>
 </html>

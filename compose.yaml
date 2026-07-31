@@ -1,0 +1,65 @@
+# Local development environment: the Rust server + PostgreSQL.
+#
+#   docker compose up --build
+#
+# Site:     http://127.0.0.1:8000
+# Postgres: postgres://jacobhall:devpassword@127.0.0.1:5434/jacobhall
+#           (handy for psql, or for running the server on the host with
+#            plain `cargo run` against the same database)
+#
+# The FIRST start initializes Postgres from server/db/schema-baseline.sql +
+# server/db/data.sql into ./.dev-data/postgres (gitignored, persists between
+# sessions). data.sql is a production dump and is NOT in git — on a fresh
+# clone, place one at server/db/data.sql before the first `up` (otherwise
+# Docker will create an empty directory at that path and Postgres will start
+# with the schema but no data). To reset the database from the dumps again:
+#   docker compose down && sudo rm -rf .dev-data && docker compose up
+# (sudo because the data files belong to the postgres container's uid.)
+#
+# sqlx migrations run automatically before the server starts.
+#
+# The repo is mounted read-only as the docroot, so edits to content, styles,
+# and templates are picked up without a rebuild (templates need a
+# `docker compose restart server` — the release binary caches them).
+# Rust code changes need `docker compose up --build`.
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: jacobhall
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: jacobhall
+    volumes:
+      - ./.dev-data/postgres:/var/lib/postgresql/data:Z
+      - ./server/db/schema-baseline.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro,z
+      - ./server/db/data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro,z
+    ports:
+      - "127.0.0.1:5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jacobhall -d jacobhall"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  server:
+    build:
+      context: server
+    command: ["sh", "-c", "jacobhall-net migrate && exec jacobhall-net serve"]
+    environment:
+      DATABASE_URL: postgres://jacobhall:devpassword@db:5432/jacobhall
+      BIND_ADDR: 0.0.0.0:8000
+      DOCROOT: /site
+      TEMPLATES_DIR: /site/server/templates
+      BASE_URL: https://jacobhall.net
+      RUST_LOG: info
+      # Uncomment to use the /admin moderation area locally:
+      ADMIN_PASSWORD: dev-admin
+      COOKIE_KEY: local-development-cookie-key-0123456789
+    volumes:
+      - .:/site:ro,z
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy

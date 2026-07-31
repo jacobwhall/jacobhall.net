@@ -1,0 +1,15 @@
+{% if whostyle != "jacobhall-net" %}<link rel="stylesheet" href="/styles/whostyles/{{ whostyle }}/whostyle.css">{% endif %}
+<article class="h-entry feed"><div class="whostyle-{{ whostyle }}">	<a href="/kind/{{ type_slug }}" class="kind">{{ type_name }}</a>{% if type == 6 %} of <a href="{{ reply_to_author_h_card }}">{{ reply_to_author }}</a>'s <a href="{{ reply_to_url }}">post</a>{% elif type == 7 %}{% if author_h_card != "https://jacobhall.net" %} from <a href="{{ author_h_card }}">{{ author }}</a> {% endif %} to <a href="{{ reply_to_author_h_card }}">{{ reply_to_author }}</a>'s <a href="{{ reply_to_url }}">post</a>{% elif type == 8 %} of <a href="{{ reply_to_author_h_card }}">{{ reply_to_author }}</a>'s <a href="{{ reply_to_url }}">post</a>{% endif %}
+{% if type == 5 %}<a href="{{ bookmark_of }}">
+</a>{% endif %}
+<div class="e-content{% if type == 11 %} watch{% endif %}">
+	{% if type == 1 %}{% if post_title != "" %}<a href="{{ permalink }}"><h2>{{ post_title }}</h2></a>{% endif %}{{ content_summary }}<p><a href="{{ permalink }}">Read article &gt;&gt;</a></p>{% elif type == 5 %}<h2><a class="u-bookmark-of" href="{{ bookmark_of }}"><span class="p-name">{{ post_title }}</span></a></h2>{% elif type == 8 %}<h2><a class="u-url" href="{{ reply_to_url }}"><span class="p-name">{{ reply_to_title }}</span></a></h2>{% else %}{% if post_title != "" %}<h2 class="p-name">{{ post_title }}</h2>{% endif %}{% endif %}
+	{{ content }}
+	{% if type == 3 %}<img src="{{ content_location }}">{% endif %}{% if type == 10 %}<a href="{{ content_location }}" download>📎 <strong>{{ post_title }}</strong></a>{% endif %}
+	</div>
+	<p class="entry-data">
+	{% if display_location %}📍 {{ location }}<br>{% endif %}
+		Posted <time class="dt-published" datetime="{{ published_date_iso }}"><a class="u-url" href="{% if original_url == "" %}{{ permalink }}{% else %}{{ original_url }}{% endif %}">{{ published_date_disp }}</a></time> by {% if author_h_card == "https://jacobhall.net" %}<img class="u-photo hidden-u-photo" src="https://jacobhall.net/images/toothbrush_profile_small.jpg" alt="Profile picture of Jacob" />{% endif %}<a class="p-author h-card" href="{{ author_h_card }}">{{ author }}</a>
+	</p>
+
+</div></article>

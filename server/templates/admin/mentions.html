@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>webmention moderation</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex">
+	<link href="/styles/universal.css" rel="stylesheet">
+	<link href="/styles/article.css" rel="stylesheet">
+	<link href="/styles/whostyles/whostyle-v1.css" rel="stylesheet">
+	<style>
+		body { max-width: 60em; margin: 0 auto; padding: 1em; }
+		.mention { border: 1px solid #999; border-radius: 4px; margin: 1.5em 0; padding: 1em; }
+		.mention .meta { font-size: 0.9em; color: #444; word-break: break-all; }
+		.mention .preview { border-left: 3px solid #ccc; padding-left: 1em; margin: 1em 0; }
+		.mention form { display: inline-block; margin-right: 1em; }
+		.warn { color: #a00; }
+	</style>
+</head>
+<body>
+	<h1>🕸️ webmentions</h1>
+	<p>{{ pending_count }} pending verification (the worker retries with backoff).</p>
+
+	<h2>awaiting moderation ({{ verified|length }})</h2>
+	{% for m in verified %}
+	<div class="mention">
+		<p class="meta"><strong>{{ m.kind }}</strong> — <a href="{{ m.source }}">{{ m.source }}</a><br>→ <a href="{{ m.target }}">{{ m.target }}</a></p>
+		{% if not m.has_target_post %}<p class="warn">⚠ target has no database post — a comment/like on it won't display until the target is added to entries</p>{% endif %}
+		<div class="preview">{{ m.preview }}</div>
+		<form method="post" action="/admin/mentions/{{ m.id }}/approve">
+			<label>kind: <select name="post_type">
+				{% for t in types %}<option value="{{ t.id }}"{% if t.id == m.default_type %} selected{% endif %}>{{ t.name }}</option>{% endfor %}
+			</select></label>
+			<label>whostyle: <select name="whostyle">
+				{% for w in whostyles %}<option{% if w == "jacobhall-net" %} selected{% endif %}>{{ w }}</option>{% endfor %}
+			</select></label>
+			<button type="submit">✅ approve</button>
+		</form>
+		<form method="post" action="/admin/mentions/{{ m.id }}/reject">
+			<button type="submit">🗑️ reject</button>
+		</form>
+	</div>
+	{% endfor %}
+
+	<h2>failed verification ({{ failed|length }})</h2>
+	{% for m in failed %}
+	<p class="meta">{{ m.source }} → {{ m.target }}<br><em>{{ m.error }}</em> (attempts: {{ m.attempts }})</p>
+	{% endfor %}
+
+	<h2>recent decisions</h2>
+	{% for m in decided %}
+	<p class="meta"><strong>{{ m.status }}</strong>: {{ m.source }} → {{ m.target }}{% if m.created_post_id %} (post {{ m.created_post_id }}){% endif %}</p>
+	{% endfor %}
+</body>
+</html>

@@ -1,0 +1,4 @@
+target/
+.env
+tests/golden/*/
+db/data.sql

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>outgoing webmentions</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex">
+	<link href="/styles/universal.css" rel="stylesheet">
+	<style>
+		body { max-width: 70em; margin: 0 auto; padding: 1em; }
+		table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+		td, th { border: 1px solid #999; padding: 0.4em; word-break: break-all; }
+	</style>
+</head>
+<body>
+	<h1>📤 outgoing webmentions</h1>
+	<p><a href="/admin/mentions">← incoming moderation</a></p>
+	<form method="post" action="/admin/webmentions/send">
+		<label>send webmentions for page:
+			<input type="url" name="source_url" placeholder="https://jacobhall.net/2022/01/29/000177" size="50" required>
+		</label>
+		<button type="submit">extract links &amp; send</button>
+	</form>
+	<table>
+		<tr><th>status</th><th>source → target</th><th>endpoint</th><th>attempts</th><th>response</th><th>updated</th></tr>
+		{% for r in rows %}
+		<tr>
+			<td>{{ r.status }}</td>
+			<td>{{ r.source }}<br>→ {{ r.target }}</td>
+			<td>{{ r.endpoint }}</td>
+			<td>{{ r.attempts }}</td>
+			<td>{{ r.response_status }} {{ r.snippet }}</td>
+			<td>{{ r.updated }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>

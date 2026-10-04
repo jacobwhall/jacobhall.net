@@ -1,5 +1,7 @@
 mod config;
 mod db;
+#[cfg(feature = "dev-reload")]
+mod dev_reload;
 mod feeds;
 mod jobs;
 mod mf2;
@@ -108,6 +110,9 @@ async fn serve() {
     let bind_addr = cfg.bind_addr.clone();
     let state = make_state(cfg);
     jobs::spawn(state.clone());
+    #[cfg(feature = "dev-reload")]
+    let app = dev_reload::wrap(build_router(state.clone()), &state.cfg);
+    #[cfg(not(feature = "dev-reload"))]
     let app = build_router(state);
 
     let listener = tokio::net::TcpListener::bind(&bind_addr)
@@ -117,7 +122,17 @@ async fn serve() {
             std::process::exit(1);
         });
     tracing::info!("listening on {bind_addr}");
-    axum::serve(listener, app)
+    let server = axum::serve(listener, app);
+    // Live-reload event streams never end on their own, so graceful shutdown
+    // would wait on them forever. Just stop; browsers reconnect to the next
+    // server and reload.
+    #[cfg(feature = "dev-reload")]
+    tokio::select! {
+        res = std::future::IntoFuture::into_future(server) => res.expect("server error"),
+        _ = shutdown_signal() => {}
+    }
+    #[cfg(not(feature = "dev-reload"))]
+    server
         .with_graceful_shutdown(shutdown_signal())
         .await
         .expect("server error");

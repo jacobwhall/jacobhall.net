@@ -1,7 +1,8 @@
 //! Template rendering. minijinja with auto-escaping off everywhere
 //!
-//! In debug builds the environment is rebuilt per render so hand-edited
-//! templates reload without recompiling. Release builds cache it.
+//! In debug builds (and with the dev-reload feature) the environment is
+//! rebuilt per render so hand-edited templates reload without recompiling.
+//! Release builds cache it.
 
 use std::path::PathBuf;
 use std::sync::OnceLock;
@@ -33,11 +34,11 @@ impl Templates {
     }
 
     pub fn render(&self, name: &str, ctx: Value) -> Result<String, minijinja::Error> {
-        #[cfg(debug_assertions)]
+        #[cfg(any(debug_assertions, feature = "dev-reload"))]
         {
             self.build_env().get_template(name)?.render(ctx)
         }
-        #[cfg(not(debug_assertions))]
+        #[cfg(not(any(debug_assertions, feature = "dev-reload")))]
         {
             self.cached
                 .get_or_init(|| self.build_env())

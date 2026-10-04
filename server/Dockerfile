@@ -9,12 +9,17 @@ WORKDIR /build
 COPY Cargo.toml Cargo.lock ./
 COPY migrations migrations
 COPY src src
+# Production builds use the defaults. compose.yaml overrides both for local
+# development (dev-container profile, dev-reload feature); never ship an
+# image built with dev-reload.
+ARG CARGO_PROFILE=release
+ARG CARGO_FEATURES=""
 # Cache mounts keep the registry and incremental build artifacts across
 # image rebuilds; the binary is copied out because the cache is not a layer.
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/build/target \
-    cargo build --release \
-    && cp target/release/jacobhall-net /usr/local/bin/jacobhall-net
+    cargo build --profile "$CARGO_PROFILE" --features "$CARGO_FEATURES" \
+    && cp "target/$CARGO_PROFILE/jacobhall-net" /usr/local/bin/jacobhall-net
 
 # Nothing but the static binary and the fallback templates: no shell, libc,
 # or CA store (TLS roots are compiled in via webpki-root-certs). Commands must

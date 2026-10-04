@@ -1,6 +1,6 @@
 # Local development environment: the Rust server + PostgreSQL.
 #
-#   docker compose up --build
+#   docker compose up --build --watch
 #
 # Site:     http://127.0.0.1:8000
 # Postgres: postgres://jacobhall:devpassword@127.0.0.1:5434/jacobhall
@@ -19,10 +19,21 @@
 # sqlx migrations run automatically (the one-shot `migrate` service) before
 # the server starts.
 #
-# The repo is mounted read-only as the docroot, so edits to content, styles,
-# and templates are picked up without a rebuild (templates need a
-# `docker compose restart server` — the release binary caches them).
-# Rust code changes need `docker compose up --build`.
+# Live reload: the server image is built with the dev-reload feature, so
+# open browser tabs refresh by themselves. The repo is mounted read-only as
+# the docroot; edits to content, styles, and templates reload the page
+# immediately. With --watch, Rust changes (server/src, Cargo.toml,
+# migrations) rebuild and restart the server container, and the page reloads
+# once it's back. Without --watch, use `docker compose up --build` for those.
+# The image uses the unoptimized dev-container profile; production images are
+# built from server/Dockerfile with its defaults (release, no dev-reload).
+#
+# Faster Rust iteration: run only the database here and the server on the
+# host, from the repo root (needs `cargo install watchexec-cli`):
+#   docker compose up -d db
+#   DATABASE_URL=postgres://jacobhall:devpassword@127.0.0.1:5434/jacobhall \
+#     watchexec -r -w server/src -w server/Cargo.toml -- \
+#     cargo run --manifest-path server/Cargo.toml --features dev-reload -- serve
 
 services:
   db:
@@ -48,6 +59,19 @@ services:
   migrate:
     build:
       context: server
+      args:
+        CARGO_PROFILE: dev-container
+        CARGO_FEATURES: dev-reload
+    develop:
+      watch:
+        - path: server/src
+          action: rebuild
+        - path: server/Cargo.toml
+          action: rebuild
+        - path: server/Cargo.lock
+          action: rebuild
+        - path: server/migrations
+          action: rebuild
     command: ["/usr/local/bin/jacobhall-net", "migrate"]
     environment:
       DATABASE_URL: postgres://jacobhall:devpassword@db:5432/jacobhall
@@ -58,6 +82,19 @@ services:
   server:
     build:
       context: server
+      args:
+        CARGO_PROFILE: dev-container
+        CARGO_FEATURES: dev-reload
+    develop:
+      watch:
+        - path: server/src
+          action: rebuild
+        - path: server/Cargo.toml
+          action: rebuild
+        - path: server/Cargo.lock
+          action: rebuild
+        - path: server/migrations
+          action: rebuild
     environment:
       DATABASE_URL: postgres://jacobhall:devpassword@db:5432/jacobhall
       BIND_ADDR: 0.0.0.0:8000

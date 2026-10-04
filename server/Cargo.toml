@@ -34,6 +34,8 @@ sha2 = "0.11.0"
 axum-extra = { version = "0.12.6", features = ["cookie-signed"] }
 reqwest = { version = "0.13.4", features = ["form", "gzip"] }
 webpki-root-certs = "1"
+tower-livereload = { version = "0.10.3", optional = true }
+notify = { version = "8.2.0", optional = true }
 
 # musl's allocator is slow under tokio's multi-threaded load; the Docker
 # image is a static musl build, so swap in mimalloc there.
@@ -44,3 +46,14 @@ mimalloc = "0.1"
 codegen-units = 1
 lto = true
 strip = true
+
+# Fast incremental builds for the compose dev stack, so `docker compose up
+# --watch` rebuilds after Rust edits don't wait on release LTO.
+[profile.dev-container]
+inherits = "dev"
+
+[features]
+# Development-only: browser live reload on content/template/style changes.
+# Never enable for production builds (it injects a script into every HTML
+# page). compose.yaml turns it on via the Dockerfile's CARGO_FEATURES arg.
+dev-reload = ["dep:tower-livereload", "dep:notify"]

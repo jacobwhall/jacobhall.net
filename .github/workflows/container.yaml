@@ -3,9 +3,6 @@ name: container
 on:
   push:
     branches: [main]
-    paths:
-      - server/**
-      - .github/workflows/container.yaml
   workflow_dispatch:
 
 concurrency:

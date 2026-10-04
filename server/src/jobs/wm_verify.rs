@@ -26,13 +26,7 @@ const BACKOFF_SECS: [i64; 4] = [60, 900, 7200, 43200];
 const POLL_INTERVAL: Duration = Duration::from_secs(30);
 
 pub async fn run(state: Arc<AppState>) {
-    let client = match reqwest::Client::builder()
-        .user_agent("jacobhall.net-webmention (+https://jacobhall.net/webmention)")
-        .timeout(Duration::from_secs(30))
-        .connect_timeout(Duration::from_secs(10))
-        .redirect(reqwest::redirect::Policy::limited(5))
-        .build()
-    {
+    let client = match super::wm_send::client() {
         Ok(c) => c,
         Err(e) => {
             tracing::error!("webmention worker: could not build HTTP client: {e}");

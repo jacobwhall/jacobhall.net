@@ -33,7 +33,14 @@ scraper = "0.27.0"
 sha2 = "0.11.0"
 axum-extra = { version = "0.12.6", features = ["cookie-signed"] }
 reqwest = { version = "0.13.4", features = ["form", "gzip"] }
+webpki-root-certs = "1"
+
+# musl's allocator is slow under tokio's multi-threaded load; the Docker
+# image is a static musl build, so swap in mimalloc there.
+[target.'cfg(target_env = "musl")'.dependencies]
+mimalloc = "0.1"
 
 [profile.release]
-lto = true
 codegen-units = 1
+lto = true
+strip = true

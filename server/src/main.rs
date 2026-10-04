@@ -15,6 +15,10 @@ use clap::{Parser, Subcommand};
 
 use routes::AppState;
 
+#[cfg(target_env = "musl")]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 #[derive(Parser)]
 #[command(name = "jacobhall-net", about = "jacobhall.net web server")]
 struct Cli {

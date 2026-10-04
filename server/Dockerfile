@@ -1,10 +1,10 @@
-# Builder and runtime must share a Debian release (glibc compatibility).
-FROM rust:1-slim-trixie AS builder
-# aws-lc-sys (rustls' crypto provider, via sqlx/reqwest) compiles C sources
-# with cmake; perl is used by its assembly generation.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends cmake perl \
-    && rm -rf /var/lib/apt/lists/*
+# Alpine's Rust targets musl and links statically by default, so the binary
+# needs nothing from the runtime image (which is FROM scratch).
+FROM rust:1-alpine AS builder
+# aws-lc-sys (rustls' crypto provider, via reqwest) compiles C sources with
+# cmake; perl is used by its assembly generation. musl-dev and gcc build it
+# and mimalloc.
+RUN apk add --no-cache cmake perl make gcc musl-dev
 WORKDIR /build
 COPY Cargo.toml Cargo.lock ./
 COPY migrations migrations
@@ -16,18 +16,16 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry \
     cargo build --release \
     && cp target/release/jacobhall-net /usr/local/bin/jacobhall-net
 
-FROM debian:trixie-slim
-# CA roots so the webmention workers can fetch https sources/targets.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd --system --uid 10001 --create-home site
+# Nothing but the static binary and the fallback templates: no shell, libc,
+# or CA store (TLS roots are compiled in via webpki-root-certs). Commands must
+# use exec form. Runs as an unprivileged uid; scratch has no /etc/passwd, so
+# it is numeric.
+FROM scratch
 COPY --from=builder /usr/local/bin/jacobhall-net /usr/local/bin/jacobhall-net
 # Templates are baked in as a fallback; deployments normally mount the site
 # tree and point TEMPLATES_DIR/DOCROOT at it (see compose.yaml).
 COPY templates /app/templates
 ENV TEMPLATES_DIR=/app/templates
-USER site
-WORKDIR /home/site
+USER 65532:65532
 EXPOSE 8000
-CMD ["jacobhall-net", "serve"]
+CMD ["/usr/local/bin/jacobhall-net", "serve"]

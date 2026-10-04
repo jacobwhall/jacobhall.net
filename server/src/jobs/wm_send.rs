@@ -18,7 +18,14 @@ const POLL_INTERVAL: Duration = Duration::from_secs(60);
 const SNIPPET_LEN: usize = 500;
 
 pub fn client() -> reqwest::Result<reqwest::Client> {
+    // Trust only the Mozilla roots compiled into the binary, so the image
+    // needs no system CA store (the runtime image is FROM scratch).
+    let roots = webpki_root_certs::TLS_SERVER_ROOT_CERTS
+        .iter()
+        .map(|der| reqwest::Certificate::from_der(der))
+        .collect::<reqwest::Result<Vec<_>>>()?;
     reqwest::Client::builder()
+        .tls_certs_only(roots)
         .user_agent("jacobhall.net-webmention (+https://jacobhall.net/webmention)")
         .timeout(Duration::from_secs(30))
         .connect_timeout(Duration::from_secs(10))

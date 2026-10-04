@@ -16,7 +16,8 @@
 #   docker compose down && sudo rm -rf .dev-data && docker compose up
 # (sudo because the data files belong to the postgres container's uid.)
 #
-# sqlx migrations run automatically before the server starts.
+# sqlx migrations run automatically (the one-shot `migrate` service) before
+# the server starts.
 #
 # The repo is mounted read-only as the docroot, so edits to content, styles,
 # and templates are picked up without a rebuild (templates need a
@@ -42,10 +43,21 @@ services:
       timeout: 3s
       retries: 20
 
+  # One-shot: applies migrations and exits. Separate from `server` because the
+  # distroless image has no shell to chain `migrate && serve`.
+  migrate:
+    build:
+      context: server
+    command: ["/usr/local/bin/jacobhall-net", "migrate"]
+    environment:
+      DATABASE_URL: postgres://jacobhall:devpassword@db:5432/jacobhall
+    depends_on:
+      db:
+        condition: service_healthy
+
   server:
     build:
       context: server
-    command: ["sh", "-c", "jacobhall-net migrate && exec jacobhall-net serve"]
     environment:
       DATABASE_URL: postgres://jacobhall:devpassword@db:5432/jacobhall
       BIND_ADDR: 0.0.0.0:8000
@@ -61,5 +73,5 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
-      db:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully

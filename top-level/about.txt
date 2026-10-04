@@ -1,76 +1,25 @@
 <h1>about me</h1>
 <p>
 	Hi! My name is Jacob Hall.
-	I use they/them pronouns.
 <p>
 <p>
-	I think a lot about how people use technology to enrich their lives.
-	From the maps we use to navigate, to our favorite recipes, digital tools help us remember and share the information that's most valuable to us.
-	One of my biggest aspirations is to help build those tools.
+	I grew up as a military brat moving between Air Force installations, until my family settled in Arlington, Virginia when I was eight.
+	There I attended <a href="https://en.wikipedia.org/wiki/H-B_Woodlawn">H-B Woodlawn Secondary Program</a>, a democratic public school which somehow survived beyond the 1970s and gave me an incredible community to grow up in.
+	I spent my high school years running around barefoot, helping run the school's governing body including budget allocations and hiring committees, and even teaching my own class.
+	It was awesome.
 </p>
 <p>
-	This summer 2022, I graduate from William &amp; Mary with a geology degree.
-	I couldn't be more excited to explore a career that will likely incorporate my interests in science, technology, and the natural world.
-	My long-term goal is to become a teacher, bringing my media and communication skills into the classroom.
+    In 2018 I started college at James Madison University, and the next year I tranferred to William &amp; Mary—both public universities in Virginia.
+    I started studying biology and public policy, then switched to geology.
+    To be honest my undergraduate experience was hampered by COVID-19, but I still managed to walk away with new friends and experience bartending at a meadery.
 </p>
 <p>
-	A few fun facts about me:
-</p>
-	<ul>
-		<li>I was born in december 1999</li>
-		<li>I'm a notary public for the commonwealth of virginia</li>
-		<li>I starred as a starfish in a <a href="https://www.youtube.com/watch?v=p2SBlWhh7hE">short movie musical</a></li>
-	</ul>
-<p>
-	The primary goal of this website is to connect with other people, so please be in touch!
-	Whether you just want to say hi, or would like to collaborate on a project, I'd love to hear from you.
+    After graduation I stayed at William &amp; Mary to continue working for <a href="https://www.aiddata.org/">AidData</a>, a research lab studying international development.
+    Through that work I've co-authored papers on geospatial analysis to understand development impact, traveled to coffee plots in Honduras and Ethiopia to train survey teams, and developed terabyte-scale data analysis systems.
+    Alongside that position, I'm a part-time PhD student studying Computational Geography.
 </p>
 <p>
-Oh! and I love listening to music<br>
-Here's an incomplete list of artists I like:
-</p>
-<ul>
-	<li>The Avalanches</li>
-	<li>Big Thief</li>
-	<li>Boards of Canada</li>
-	<li>BROCKHAMPTON</li>
-	<li>Childish Gambino</li>
-	<li>Chumbawamba</li>
-	<li>Cro</li>
-	<li>Death Grips</li>
-	<li>Die Antwoord</li>
-	<li>Fatboy Slim</li>
-	<li>フィッシュマンズ (Fishmans)</li>
-	<li>FKA Twigs</li>
-	<li>The Flaming Lips</li>
-	<li>Gorillaz</li>
-	<li>Grimes</li>
-	<li>Hobo Johnson</li>
-	<li>Injury Reserve</li>
-	<li>Joey Purp</li>
-	<li>JPEGMAFIA</li>
-	<li>Kendrick Lamar</li>
-	<li>Mac Demarco</li>
-	<li>MF DOOM</li>
-	<li>Only Real</li>
-	<li>Peter Cat Recording Co.</li>
-	<li>Princess Nokia</li>
-	<li>Ricky Eat Acid</li>
-	<li>Salut C'est Cool</li>
-	<li>Toro y Moi</li>
-	<li>The Uncluded</li>
-</ul>
-	<h1>about this site</h1>
-
-<p>
-	I've designed this website for myself, as a record of things I like and ideas I'm excited about.
-	Its larger goal is to be a sort of interface with the internet, helping me to connect with interesting people Out There.
-</p>
-<p>
-	The site's vision has changed a lot over the years.
-	At first I built it as simply as possible, with entirely inline styles and no dynamic elements.
-	Nowadays it's a lot more complex, with a custom Racket backend that allows me to define its behavior.
-	Most of my posts are organized in a database, and pages like this one are generated using templates.
-	But everything is still meticulously handcrafted; this site represents my opinion of what a blog should be.
-	I feel that everyone deserves an internet experience designed to their tastes!
+    My partner Alyssa and I now live in downtown Richmond, Virginia.
+    We've both become deeply involved with mapping, as part of <a href="https://maprva.org/">MapRVA</a> and the broader OpenStreetMap community in the U.S. and beyond.
+    Mapping Richmond with friends led to the development of <a href="https://yesterdays.today/">Yesterdays</a>, a site which helps users find historical photos and place them on a map.
 </p>

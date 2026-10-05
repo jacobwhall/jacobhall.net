@@ -58,7 +58,10 @@ services:
   # distroless image has no shell to chain `migrate && serve`.
   migrate:
     build:
-      context: server
+      context: .
+      dockerfile: server/Dockerfile
+      # No baked-in content; the working tree is mounted as the docroot.
+      target: server
       args:
         CARGO_PROFILE: dev-container
         CARGO_FEATURES: dev-reload
@@ -81,7 +84,10 @@ services:
 
   server:
     build:
-      context: server
+      context: .
+      dockerfile: server/Dockerfile
+      # No baked-in content; the working tree is mounted as the docroot.
+      target: server
       args:
         CARGO_PROFILE: dev-container
         CARGO_FEATURES: dev-reload

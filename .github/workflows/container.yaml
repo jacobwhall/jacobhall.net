@@ -36,7 +36,10 @@ jobs:
 
       - uses: docker/build-push-action@v7
         with:
-          context: server
+          # Repo root, not server/: the image bakes in the site content as
+          # its docroot, so content-only pushes publish a new image too.
+          context: .
+          file: server/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -1,0 +1,14 @@
+# The image build context is the repo root (server/Dockerfile bakes in the
+# site content), so keep VCS data, local state, and build artifacts out.
+.git
+.github
+.gitignore
+.gitattributes
+.dockerignore
+.dev-data
+**/compiled
+**/*~
+server/target
+server/.env
+server/tests
+server/db/data.sql
